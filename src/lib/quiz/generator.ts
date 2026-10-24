@@ -25,14 +25,12 @@ export function generateFlagToCountry(
     id: target.cca3,
     label: target.name.common,
     isCorrect: true,
-    flag: target.flags?.svg || target.flags?.png,
   };
 
   const distractorOptions: QuestionOption[] = distractors.map((d) => ({
     id: d.cca3,
     label: d.name.common,
     isCorrect: false,
-    flag: d.flags?.svg || d.flags?.png,
   }));
 
   const options = shuffle([correctOption, ...distractorOptions], rng);
