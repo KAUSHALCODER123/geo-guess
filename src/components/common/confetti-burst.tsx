@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import confetti from "canvas-confetti";
 
 export interface ConfettiBurstOptions {
   particleCount?: number;
@@ -27,13 +26,16 @@ export function fireConfetti(options?: ConfettiBurstOptions) {
   // Oceanic indigo, sky blue, terracotta, and amber celebration palette
   const defaultColors = ["#0284c7", "#38bdf8", "#ea580c", "#f59e0b", "#10b981"];
 
-  confetti({
-    particleCount: options?.particleCount ?? 80,
-    spread: options?.spread ?? 70,
-    origin: options?.origin ?? { y: 0.6 },
-    colors: options?.colors ?? defaultColors,
-    disableForReducedMotion: true,
-  });
+  // Loaded on demand so canvas-confetti stays out of the initial bundle.
+  void import("canvas-confetti").then(({ default: confetti }) =>
+    confetti({
+      particleCount: options?.particleCount ?? 80,
+      spread: options?.spread ?? 70,
+      origin: options?.origin ?? { y: 0.6 },
+      colors: options?.colors ?? defaultColors,
+      disableForReducedMotion: true,
+    })
+  );
 }
 
 /**

@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import confetti from "canvas-confetti";
 import {
   Trophy,
   Target,
@@ -66,11 +65,13 @@ export function GameOverReview({
     if (accuracy >= 70) {
       playVictorySound();
       try {
-        confetti({
-          particleCount: accuracy === 100 ? 120 : 60,
-          spread: 80,
-          origin: { y: 0.6 },
-        });
+        void import("canvas-confetti").then(({ default: confetti }) =>
+          confetti({
+            particleCount: accuracy === 100 ? 120 : 60,
+            spread: 80,
+            origin: { y: 0.6 },
+          })
+        );
       } catch {
         // Safe fallback
       }

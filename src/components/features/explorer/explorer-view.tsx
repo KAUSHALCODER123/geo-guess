@@ -14,6 +14,8 @@ import { CountryCard } from "./country-card";
 import { CountryListItem } from "./country-list-item";
 import { ExplorerSkeleton } from "./explorer-skeleton";
 
+const PAGE_SIZE = 48;
+
 export function ExplorerView() {
   const { countries, isLoading, isError, error, isOffline, refetch } = useCountries();
 
@@ -28,6 +30,31 @@ export function ExplorerView() {
     totalCount,
     matchCount,
   } = useExplorerFilter({ countries });
+
+  // Render the list progressively so a 250-card grid doesn't block the first paint.
+  const [paging, setPaging] = React.useState({ forState: filterState, count: PAGE_SIZE });
+  if (paging.forState !== filterState) {
+    // New search/filters: start again from the first page (reset during render, no effect).
+    setPaging({ forState: filterState, count: PAGE_SIZE });
+  }
+  const visibleCount = paging.count;
+  const setVisibleCount = (update: (c: number) => number) =>
+    setPaging((p) => ({ ...p, count: update(p.count) }));
+  const visibleCountries = filteredCountries.slice(0, visibleCount);
+  const remaining = filteredCountries.length - visibleCountries.length;
+  const sentinelRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    const node = sentinelRef.current;
+    if (!node || remaining <= 0 || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) setVisibleCount((c) => c + PAGE_SIZE);
+      },
+      { rootMargin: "400px" }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [remaining, visibleCount]);
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl space-y-6 animate-in fade-in-50 duration-300">
@@ -102,15 +129,29 @@ export function ExplorerView() {
         <>
           {filterState.viewMode === "grid" ? (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {filteredCountries.map((country) => (
+              {visibleCountries.map((country) => (
                 <CountryCard key={country.cca3} country={country} />
               ))}
             </div>
           ) : (
             <div className="space-y-3">
-              {filteredCountries.map((country) => (
+              {visibleCountries.map((country) => (
                 <CountryListItem key={country.cca3} country={country} />
               ))}
+            </div>
+          )}
+          {remaining > 0 && (
+            <div ref={sentinelRef} className="flex flex-col items-center gap-2 pt-2">
+              <p className="text-xs text-muted-foreground" aria-live="polite">
+                Showing {visibleCountries.length} of {filteredCountries.length} nations
+              </p>
+              <Button
+                variant="outline"
+                size="md"
+                onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+              >
+                Show {Math.min(PAGE_SIZE, remaining)} more
+              </Button>
             </div>
           )}
         </>

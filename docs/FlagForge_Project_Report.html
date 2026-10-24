@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FlagForge - Project Report</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+    @top-center {
+      content: "FlagForge — Geography & Culture Learning Platform";
+      font-size: 8.5pt;
+      color: #64748b;
+      font-family: 'Times New Roman', serif;
+    }
+    @bottom-center {
+      content: counter(page);
+      font-size: 9pt;
+      font-family: 'Times New Roman', serif;
+    }
+  }
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 11pt;
+    line-height: 1.45;
+    color: #111827;
+    margin: 0;
+    padding: 0;
+  }
+  .page {
+    page-break-after: always;
+    box-sizing: border-box;
+    min-height: 250mm;
+    position: relative;
+  }
+  .cover-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    height: 255mm;
+    border: 2.5px double #1e3a8a;
+    padding: 30px 20px;
+    box-sizing: border-box;
+  }
+  .cert-page {
+    border: 2px solid #334155;
+    padding: 35px 25px;
+    height: 255mm;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  h1.main-title {
+    font-size: 21pt;
+    font-weight: bold;
+    color: #0f172a;
+    margin: 0 0 8px 0;
+    line-height: 1.25;
+  }
+  h2.sub-title {
+    font-size: 19pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin: 0 0 15px 0;
+  }
+  .report-label {
+    font-size: 13pt;
+    font-style: italic;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .degree-label {
+    font-size: 10.5pt;
+    font-style: italic;
+    max-width: 520px;
+    margin: 0 auto 10px auto;
+  }
+  .degree-name {
+    font-size: 12pt;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 25px;
+  }
+  .author-sec {
+    margin-bottom: 20px;
+  }
+  .author-name {
+    font-size: 16pt;
+    font-weight: bold;
+    color: #0f172a;
+  }
+  .college-footer {
+    margin-top: 15px;
+  }
+  .dept-title {
+    font-size: 11pt;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  .college-title {
+    font-size: 12pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin: 3px 0;
+  }
+  .college-sub {
+    font-size: 9pt;
+    font-style: italic;
+  }
+  .college-loc {
+    font-size: 9.5pt;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .academic-year {
+    font-size: 11pt;
+    font-weight: bold;
+    margin-top: 4px;
+  }
+  h1.chp-head {
+    font-size: 15pt;
+    font-weight: bold;
+    color: #0f172a;
+    border-bottom: 1.5px solid #1e3a8a;
+    padding-bottom: 4px;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  h2.sec-head {
+    font-size: 12.5pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-top: 14px;
+    margin-bottom: 6px;
+  }
+  h3.subsec-head {
+    font-size: 11pt;
+    font-weight: bold;
+    color: #334155;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+  p {
+    margin: 6px 0;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  ul, ol {
+    margin: 5px 0 8px 22px;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 9pt;
+  }
+  th, td {
+    border: 1px solid #475569;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  th {
+    background-color: #f1f5f9;
+    font-weight: bold;
+    text-align: left;
+    color: #0f172a;
+  }
+  .fig-wrap {
+    text-align: center;
+    margin: 12px 0 10px 0;
+    page-break-inside: avoid;
+  }
+  .fig-cap {
+    font-size: 9pt;
+    font-style: italic;
+    color: #334155;
+    margin-top: 4px;
+  }
+  pre {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-left: 3px solid #2563eb;
+    padding: 7px 9px;
+    font-family: Consolas, Monaco, 'Courier New', monospace;
+    font-size: 7.5pt;
+    line-height: 1.35;
+    overflow-x: auto;
+    margin: 8px 0;
+    page-break-inside: avoid;
+  }
+  .sig-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 45px;
+    padding: 0 10px;
+  }
+  .sig-block {
+    text-align: center;
+    font-weight: bold;
+    font-size: 10.5pt;
+  }
+</style>
+</head>
+<body>
+
+<div class="page cover-page">
+  <div>
+    <h1 class="main-title">Geography & Culture Learning Platform</h1>
+    <h2 class="sub-title">FlagForge</h2>
+    <div class="report-label">A Project Report</div>
+    <div class="degree-label">Submitted in partial fulfillment of the Requirement for the award of the Degree of</div>
+    <div class="degree-name">BACHELOR OF SCIENCE (COMPUTER SCIENCE)</div>
+    <div class="author-sec">
+      <div style="font-size:11pt; font-style:italic;">By</div>
+      <div class="author-name">Kaushal Rajput</div>
+    </div>
+    <div style="font-size:11pt; font-style:italic; margin-top:10px;">Under the esteemed guidance of</div>
+    <div style="font-weight:bold; margin-top:4px;">____________________</div>
+  </div>
+  
+  <div style="margin: 20px 0;">
+    <svg width="140" height="140" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="92" fill="#fff" stroke="#1e3a8a" stroke-width="4"/>
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3"/>
+  <path id="curve-top" d="M 30,100 A 70,70 0 0,1 170,100" fill="none"/>
+  <text font-size="10.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">
+    <textPath href="#curve-top" startOffset="50%">G.K.S. COLLEGE OF ARTS &amp; COMMERCE</textPath>
+  </text>
+  <path id="curve-bot" d="M 170,105 A 70,70 0 0,1 30,105" fill="none"/>
+  <text font-size="10" font-weight="bold" fill="#1e3a8a" text-anchor="middle">
+    <textPath href="#curve-bot" startOffset="50%">SCIENCE - KHADAVLI</textPath>
+  </text>
+  <!-- Center Emblem: Laurel & Book & Lamp -->
+  <circle cx="100" cy="100" r="50" fill="#f8fafc" stroke="#1e3a8a" stroke-width="2"/>
+  <!-- Torch / Pen -->
+  <polygon points="100,60 93,85 107,85" fill="#f59e0b" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="96" y="85" width="8" height="28" fill="#d97706"/>
+  <!-- Flame -->
+  <path d="M 100,52 Q 92,60 100,70 Q 108,60 100,52 Z" fill="#ef4444"/>
+  <!-- Open Book -->
+  <path d="M 75,108 Q 100,100 100,118 Q 100,100 125,108 L 122,122 Q 100,114 100,128 Q 100,114 78,122 Z" fill="#ffffff" stroke="#1e3a8a" stroke-width="2"/>
+  <!-- Star -->
+  <polygon points="100,132 102,137 107,137 103,140 105,145 100,142 95,145 97,140 93,137 98,137" fill="#dc2626"/>
+  <!-- Ribbon 2012 -->
+  <path d="M 50,158 L 75,152 L 125,152 L 150,158 L 140,168 L 125,164 L 75,164 L 60,168 Z" fill="#d97706" stroke="#92400e" stroke-width="1.5"/>
+  <text x="100" y="162" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">2012</text>
+</svg>
+  </div>
+  
+  <div class="college-footer">
+    <div class="dept-title">DEPARTMENT OF COMPUTER SCIENCE</div>
+    <div class="college-title">G.K.S. COLLEGE OF ARTS, COMMERCE & SCIENCE</div>
+    <div class="college-sub">(Affiliated to University of Mumbai)</div>
+    <div class="college-loc">KHADAVALI-421 605. MAHARASHTRA</div>
+    <div class="academic-year">2026-2027</div>
+  </div>
+</div>
+
+
+<div class="page cert-page">
+  <div style="text-align:center;">
+    <div style="font-size:13pt; font-weight:bold; color:#1e3a8a;">G.K.S. COLLEGE OF ARTS, COMMERCE & SCIENCE</div>
+    <div style="font-size:10pt; font-style:italic;">KHADAVALI-421 605. MAHARASHTRA</div>
+  </div>
+  
+  <div style="text-align:center; margin: 15px 0;">
+    <svg width="140" height="140" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="92" fill="#fff" stroke="#1e3a8a" stroke-width="4"/>
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3"/>
+  <path id="curve-top" d="M 30,100 A 70,70 0 0,1 170,100" fill="none"/>
+  <text font-size="10.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">
+    <textPath href="#curve-top" startOffset="50%">G.K.S. COLLEGE OF ARTS &amp; COMMERCE</textPath>
+  </text>
+  <path id="curve-bot" d="M 170,105 A 70,70 0 0,1 30,105" fill="none"/>
+  <text font-size="10" font-weight="bold" fill="#1e3a8a" text-anchor="middle">
+    <textPath href="#curve-bot" startOffset="50%">SCIENCE - KHADAVLI</textPath>
+  </text>
+  <!-- Center Emblem: Laurel & Book & Lamp -->
+  <circle cx="100" cy="100" r="50" fill="#f8fafc" stroke="#1e3a8a" stroke-width="2"/>
+  <!-- Torch / Pen -->
+  <polygon points="100,60 93,85 107,85" fill="#f59e0b" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="96" y="85" width="8" height="28" fill="#d97706"/>
+  <!-- Flame -->
+  <path d="M 100,52 Q 92,60 100,70 Q 108,60 100,52 Z" fill="#ef4444"/>
+  <!-- Open Book -->
+  <path d="M 75,108 Q 100,100 100,118 Q 100,100 125,108 L 122,122 Q 100,114 100,128 Q 100,114 78,122 Z" fill="#ffffff" stroke="#1e3a8a" stroke-width="2"/>
+  <!-- Star -->
+  <polygon points="100,132 102,137 107,137 103,140 105,145 100,142 95,145 97,140 93,137 98,137" fill="#dc2626"/>
+  <!-- Ribbon 2012 -->
+  <path d="M 50,158 L 75,152 L 125,152 L 150,158 L 140,168 L 125,164 L 75,164 L 60,168 Z" fill="#d97706" stroke="#92400e" stroke-width="1.5"/>
+  <text x="100" y="162" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">2012</text>
+</svg>
+  </div>
+  
+  <div style="text-align:center;">
+    <h2 style="font-size:16pt; font-weight:bold; text-decoration:underline; letter-spacing:1px; margin-bottom:15px;">CERTIFICATE</h2>
+    <p style="text-align:center; font-size:11.5pt; line-height:1.8;">
+      This is to certify that<br>
+      <span style="font-size:15pt; font-weight:bold; color:#0f172a;">Kaushal Rajput</span><br>
+      has completed the project report entitled<br>
+      <span style="font-size:13pt; font-weight:bold; color:#1e3a8a;">Geography & Culture Learning Platform (FlagForge)</span><br>
+      in partial fulfilment of the requirements for the BACHELOR OF SCIENCE (COMPUTER SCIENCE)<br>
+      <strong>2026-2027</strong>
+    </p>
+    <div style="margin-top:20px; font-weight:bold; font-size:11pt;">UNDER THE GUIDANCE OF</div>
+    <div style="margin-top:5px; font-weight:bold;">____________________</div>
+  </div>
+  
+  <div style="margin-top: 40px;">
+    <table style="width:100%; border:none; margin:0;">
+      <tr style="border:none;">
+        <td style="border:none; text-align:left; font-weight:bold; width:50%;">Project Guide</td>
+        <td style="border:none; text-align:right; font-weight:bold; width:50%;">Examiner</td>
+      </tr>
+      <tr style="border:none; height:45px;">
+        <td style="border:none;"></td><td style="border:none;"></td>
+      </tr>
+      <tr style="border:none;">
+        <td style="border:none; text-align:left; font-weight:bold;">Head of Department</td>
+        <td style="border:none; text-align:right; font-weight:bold;">Principal</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<div class="page cert-page">
+  <div style="text-align:center;">
+    <div style="font-size:11pt; font-weight:bold;">Govt. of Maharashtra's</div>
+    <div style="font-size:14pt; font-weight:bold; color:#1e3a8a;">G.K.S. COLLEGE OF ARTS, COMMERCE & SCIENCE</div>
+    <div style="font-size:10pt; font-weight:600;">KHADAVALI-421 605. MAHARASHTRA</div>
+    <div style="font-size:11.5pt; font-weight:bold; margin-top:15px; color:#334155;">DEPARTMENT OF COMPUTER SCIENCE</div>
+  </div>
+  
+  <div style="text-align:center; margin: 30px 0;">
+    <h2 style="font-size:15pt; font-weight:bold; letter-spacing:1px; text-decoration:underline;">CERTIFICATE</h2>
+    <p style="text-align:center; font-size:11.5pt; line-height:1.8; margin-top:25px;">
+      This is to certify that <strong>Kaushal Rajput</strong> has satisfactorily completed the project
+      <strong>Geography & Culture Learning Platform (FlagForge)</strong>, to be submitted in the partial fulfilment
+      of the award of <strong>BACHELOR OF SCIENCE (COMPUTER SCIENCE)</strong> during the academic year <strong>2026-2027</strong>.
+    </p>
+    <div style="margin-top:30px; text-align:left; font-weight:600; font-size:11pt;">
+      Date of Submission: ____________________
+    </div>
+  </div>
+  
+  <div style="margin-top: 50px;">
+    <table style="width:100%; border:none;">
+      <tr style="border:none;">
+        <td style="border:none; font-weight:bold; width:50%;">Project Guide</td>
+        <td style="border:none; text-align:right; font-weight:bold; width:50%;">Co-ordinator</td>
+      </tr>
+      <tr style="border:none;">
+        <td style="border:none;"></td>
+        <td style="border:none; text-align:right; font-size:9.5pt; color:#475569;">(DEPARTMENT OF COMPUTER SCIENCE)</td>
+      </tr>
+      <tr style="border:none; height:45px;">
+        <td style="border:none;"></td><td style="border:none;"></td>
+      </tr>
+      <tr style="border:none;">
+        <td style="border:none; font-weight:bold;">College Seal</td>
+        <td style="border:none; text-align:right; font-weight:bold;">Signature of Examiner</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<div class="page" style="padding: 30px 10px;">
+  <h2 style="text-align:center; font-size:16pt; font-weight:bold; letter-spacing:1px; margin-bottom:30px;">DECLARATION</h2>
+  <p style="font-size:11.5pt; line-height:1.8; margin-top:20px;">
+    I hereby declare that the project entitled <strong>"Geography & Culture Learning Platform (FlagForge)"</strong>,
+    submitted in partial fulfilment for the award of <strong>BACHELOR OF SCIENCE (COMPUTER SCIENCE)</strong> during the academic year
+    <strong>2026-2027</strong>, represents my project work.
+    Sources and third-party services used in the implementation are acknowledged in the references.
+  </p>
+  
+  <div style="margin-top:60px;">
+    <p style="font-weight:bold;">Signature of the Student:</p>
+    <div style="margin-top:40px; line-height:1.8;">
+      <strong>Place:</strong> Khadavli<br>
+      <strong>Date:</strong> 24th October 2026
+    </div>
+  </div>
+  
+  <div style="margin-top:100px;">
+    <strong>Shri. Manoj Kaurav</strong><br>
+    Co-Ordinator,<br>
+    <strong>DEPARTMENT OF COMPUTER SCIENCE</strong>
+  </div>
+</div>
+
+
+<div class="page" style="padding: 30px 10px;">
+  <h2 style="text-align:center; font-size:16pt; font-weight:bold; letter-spacing:1px; margin-bottom:25px;">ACKNOWLEDGEMENT</h2>
+  <p style="line-height:1.75; font-size:11pt;">
+    I would like to express my sincere gratitude to everyone who contributed to the successful creation and
+    development of the <strong>"Geography & Culture Learning Platform (FlagForge)"</strong> project.
+  </p>
+  <p style="line-height:1.75; font-size:11pt;">
+    I extend my deepest gratitude to the faculty members and the project guide of the <em>DEPARTMENT OF COMPUTER SCIENCE</em> at
+    <em>G.K.S. COLLEGE OF ARTS, COMMERCE & SCIENCE</em> for their guidance and support during the development of this project. Their insights
+    greatly enhanced its technical quality and structural rigor.
+  </p>
+  <p style="line-height:1.75; font-size:11pt;">
+    I also thank my friends, colleagues, and classmates for providing feedback on the interactive country explorer,
+    comparison charts, quiz generator modes, and the daily challenge experience. Their diverse perspectives were a
+    constant source of motivation and helped me refine the usability, keyboard shortcuts, and responsive visual layout.
+  </p>
+  <p style="line-height:1.75; font-size:11pt;">
+    Building FlagForge helped me understand how a real-world frontend application combines external federated REST APIs,
+    strict TypeScript type validation, deterministic algorithmic gameplay engines, client-side persistence with versioned
+    migrations, WCAG 2.2 AA accessibility standards, and end-to-end automated testing. It was a rewarding and insightful
+    software engineering experience.
+  </p>
+  <p style="line-height:1.75; font-size:11pt;">
+    Finally, I thank my family for their continuous encouragement and patience throughout the duration of the project.
+  </p>
+  <div style="margin-top:40px;">
+    <p>Thank you all.</p>
+    <p style="font-size:12pt; font-weight:bold; margin-top:20px;">Kaushal Rajput</p>
+  </div>
+</div>
+
+
+<div class="page" style="padding: 30px 10px;">
+  <h2 style="text-align:center; font-size:16pt; font-weight:bold; letter-spacing:1px; margin-bottom:20px;">Abstract</h2>
+  <p style="font-size:11pt; line-height:1.65;">
+    <strong>FlagForge</strong> is a production-grade, web-based geography and culture learning platform engineered to help
+    students, educators, and enthusiasts discover nations, master world flags and capitals, compare geopolitical metrics,
+    and track personal learning progress. The application combines public catalog telemetry from <strong>REST Countries v3.1</strong>,
+    contextual encyclopedic summaries from the <strong>Wikipedia REST API</strong>, and real-time capital meteorological forecasts
+    from <strong>Open-Meteo</strong> into a unified, responsive interface without requiring a custom backend or remote database.
+  </p>
+  <p style="font-size:11pt; line-height:1.65;">
+    Users can explore an atlas of ~250 sovereign nations with instant fuzzy search (Fuse.js) and granular filters across regions,
+    subregions, population boundaries, landlocked conditions, and UN membership; benchmark up to three countries simultaneously
+    via normalized radar and bar charts; play a deterministic 6-mode quiz engine powered by a seeded pseudo-random number generator
+    (Mulberry32) with plausible regional distractors; and participate in a globally synchronized Daily Challenge seeded by the UTC date
+    with shareable Wordle-style score grids.
+  </p>
+  <p style="font-size:11pt; line-height:1.65;">
+    The application is architected with <strong>Next.js 15 (App Router)</strong>, <strong>React 19</strong>, <strong>TypeScript strict</strong>,
+    <strong>Tailwind CSS v4</strong>, <strong>Framer Motion</strong>, and <strong>Zustand 5</strong> with persist middleware and versioned
+    schema migrations. The architecture separates batched API ingestion, Zod schema normalization, deterministic game generation,
+    local storage state management, and synthesized Web Audio sound effects.
+  </p>
+  <p style="font-size:11pt; line-height:1.65;">
+    The project strictly enforces zero placeholder code, full offline resilience with an embedded fallback dataset and service worker,
+    and rigorous WCAG 2.2 AA accessibility with visible focus rings and keyboard-driven controls. Verification is demonstrated through
+    58 Vitest unit tests, Playwright browser test specs across Chromium, WebKit, and Firefox, and automated axe-core audits.
+  </p>
+  <p style="font-size:9.5pt; margin-top:12px;">
+    <strong>Keywords:</strong> World atlas, vexillology, Next.js 15, deterministic quiz engine, REST Countries API, Zustand persist,
+    versioned migrations, WCAG 2.2 AA, offline resilience, TanStack Query.
+  </p>
+  
+  <table style="margin-top:20px;">
+    <tr><th style="width:25%;">Aspect</th><th>Summary</th></tr>
+    <tr><td><strong>Users</strong></td><td>Students, geography enthusiasts, educators, casual trivia players</td></tr>
+    <tr><td><strong>Platform</strong></td><td>Responsive browser-based Progressive Web App (desktop, tablet, mobile)</td></tr>
+    <tr><td><strong>Data Sources</strong></td><td>REST Countries v3.1 (max 10 fields/req), Wikipedia REST summary, Open-Meteo API</td></tr>
+    <tr><td><strong>Client Persistence</strong></td><td>Browser localStorage via Zustand persist with versioned migrations (v1 &rarr; v2)</td></tr>
+    <tr><td><strong>Verification</strong></td><td>58 Vitest unit tests, Playwright e2e test suite, axe-core WCAG 2.2 AA compliance</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 25px 10px;">
+  <h2 style="text-align:center; font-size:16pt; font-weight:bold; letter-spacing:1px; margin-bottom:20px;">List of Figures</h2>
+  <table>
+    <tr>
+      <th style="width:12%; text-align:center;">Figure Number</th>
+      <th colspan="2">Figure Name</th>
+    </tr>
+    <tr><td style="text-align:center; font-weight:bold;">1</td><td colspan="2">Development Process Model (Agile Incremental SDLC)</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;">2</td><td colspan="2">End-to-End Project Workflow &amp; Gameplay Loop</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;" rowspan="2">3</td><td style="width:8%; text-align:center;">1</td><td>DFD Level 0 (Context-Level Diagram)</td></tr>
+    <tr><td style="text-align:center;">2</td><td>DFD Level 1 (Modular Functional Data Flow)</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;" rowspan="6">4</td><td style="text-align:center;">1</td><td>UML Use Case Diagram</td></tr>
+    <tr><td style="text-align:center;">2</td><td>UML Domain Class and Object Diagram</td></tr>
+    <tr><td style="text-align:center;">3</td><td>UML Activity Diagram (Quiz Game Engine Loop)</td></tr>
+    <tr><td style="text-align:center;">4</td><td>UML Sequence Diagram (Parallel Batched REST Countries Fetch)</td></tr>
+    <tr><td style="text-align:center;">5</td><td>Browser Storage &amp; Persistent Entity Schema Diagram</td></tr>
+    <tr><td style="text-align:center;">6</td><td>UML Component Architecture Diagram</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;">5</td><td colspan="2">Gantt Chart (Eight-Week Academic Engineering Timeline)</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;">6</td><td colspan="2">Layered System Architecture</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;">7</td><td colspan="2">Graphical User Interface (Primary Screens 7.1 to 7.8)</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;" rowspan="10">8</td><td style="text-align:center;">1</td><td>Federated Data Sources &amp; Responsibilities</td></tr>
+    <tr><td style="text-align:center;">2</td><td>Parallel Batch Fetching &amp; cca3 Merge Pipeline</td></tr>
+    <tr><td style="text-align:center;">3</td><td>Mulberry32 PRNG &amp; Regional Distractor Selection Hierarchy</td></tr>
+    <tr><td style="text-align:center;">4</td><td>Structural &amp; Behavioral UML Views Interconnection</td></tr>
+    <tr><td style="text-align:center;">5</td><td>Speed Bonus &amp; Streak Multiplier Scoring Formula Flow</td></tr>
+    <tr><td style="text-align:center;">6</td><td>Zustand Persist Versioned Schema Migration (v1 &rarr; v2)</td></tr>
+    <tr><td style="text-align:center;">7</td><td>Declared Packages by Purpose</td></tr>
+    <tr><td style="text-align:center;">8</td><td>HTTP Resilience &amp; Query Caching Parameter Thresholds</td></tr>
+    <tr><td style="text-align:center;">9</td><td>Codebase Volume Distribution by Subsystem (Lines of Code)</td></tr>
+    <tr><td style="text-align:center;">10</td><td>Automated Verification Suite Distribution (58 Vitest &amp; E2E Specs)</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 25px 10px;">
+  <h2 style="text-align:center; font-size:16pt; font-weight:bold; letter-spacing:1px; margin-bottom:20px;">INDEX</h2>
+  <table>
+    <tr>
+      <th style="width:10%; text-align:center;">Chp No</th>
+      <th style="width:12%; text-align:center;">Sec No</th>
+      <th>Page Title</th>
+      <th style="width:12%; text-align:center;">Page No</th>
+    </tr>
+    <tr><td style="text-align:center; font-weight:bold;">1</td><td></td><td><strong>Project Overview</strong></td><td style="text-align:center;">1</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;" rowspan="4">2</td><td></td><td><strong>Introduction &amp; Motivation</strong></td><td style="text-align:center;">2</td></tr>
+    <tr><td>2.1</td><td>Theory Behind the Project</td><td style="text-align:center;">3</td></tr>
+    <tr><td>2.2</td><td>Problem Definition</td><td style="text-align:center;">4</td></tr>
+    <tr><td>2.3</td><td>Need for Project</td><td style="text-align:center;">5</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;">3</td><td></td><td><strong>Literature Survey</strong></td><td style="text-align:center;">6</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;" rowspan="14">4</td><td></td><td><strong>Analysis &amp; Design</strong></td><td style="text-align:center;">7</td></tr>
+    <tr><td>4.1</td><td>Process Model</td><td style="text-align:center;">8</td></tr>
+    <tr><td>4.2</td><td>Flow of Project</td><td style="text-align:center;">9</td></tr>
+    <tr><td>4.3</td><td>Feasibility Study</td><td style="text-align:center;">10</td></tr>
+    <tr><td>4.4</td><td>Cost Analysis</td><td style="text-align:center;">11</td></tr>
+    <tr><td>4.5</td><td>Data Flow Diagram (Level 0)</td><td style="text-align:center;">12</td></tr>
+    <tr><td>4.5.1</td><td>Data Flow Diagram (Level 1)</td><td style="text-align:center;">13</td></tr>
+    <tr><td>4.6</td><td>UML Diagrams</td><td style="text-align:center;">14</td></tr>
+    <tr><td>4.6.1</td><td>Use Case Diagram</td><td style="text-align:center;">15</td></tr>
+    <tr><td>4.6.2</td><td>Class Diagram, Object Diagram</td><td style="text-align:center;">16</td></tr>
+    <tr><td>4.6.3</td><td>Activity Diagram</td><td style="text-align:center;">17</td></tr>
+    <tr><td>4.6.4</td><td>Sequence Diagram</td><td style="text-align:center;">18</td></tr>
+    <tr><td>4.6.5</td><td>Storage / Schema Diagram</td><td style="text-align:center;">19</td></tr>
+    <tr><td>4.6.6</td><td>Component Diagram</td><td style="text-align:center;">20</td></tr>
+    <tr><td></td><td>4.7</td><td>Gantt Chart</td><td style="text-align:center;">21</td></tr>
+    <tr><td></td><td>4.8</td><td>Technologies Used</td><td style="text-align:center;">22</td></tr>
+    <tr><td></td><td>4.9</td><td>System Architecture</td><td style="text-align:center;">23</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;" rowspan="4">5</td><td></td><td><strong>Implementation</strong></td><td style="text-align:center;">24</td></tr>
+    <tr><td>5.1</td><td>Source Code Excerpts</td><td style="text-align:center;">25</td></tr>
+    <tr><td>5.2</td><td>Graphical User Interface</td><td style="text-align:center;">31</td></tr>
+    <tr><td>5.3</td><td>Test Cases &amp; Verification Suite</td><td style="text-align:center;">35</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;" rowspan="3">6</td><td></td><td><strong>Conclusion &amp; Future Scope</strong></td><td style="text-align:center;">36</td></tr>
+    <tr><td>6.1</td><td>Conclusion</td><td style="text-align:center;">36</td></tr>
+    <tr><td>6.2</td><td>Future Scope</td><td style="text-align:center;">37</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;">7</td><td></td><td><strong>References</strong></td><td style="text-align:center;">38</td></tr>
+    <tr><td style="text-align:center; font-weight:bold;">8</td><td></td><td><strong>Synopsis</strong></td><td style="text-align:center;">39</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">1</div>
+  <h1 class="chp-head">1. Project Overview</h1>
+  
+  <p><strong>Key Features:</strong></p>
+  <ol>
+    <li><strong>Federated World Atlas Explorer:</strong> Instant client-side fuzzy searching across common names, official names, capitals, regions, and ISO cca3 codes via Fuse.js. Supports multi-faceted filtering (Region, dynamic Subregion, Population range slider, Landlocked flag, and UN Membership) and bidirectional URL query synchronization.</li>
+    <li><strong>Granular Nation Intelligence:</strong> Comprehensive country profile pre-rendering 30 top sovereign states via Next.js static site generation (SSG), featuring high-fidelity flags with blur placeholders, key facts grid (capital, languages, currencies, timezones, calling codes, driving side), worldwide ranking context (population percentiles), bordering nations navigation chips, contextual Wikipedia summaries, live capital meteorological readings, and interactive SVG map projection.</li>
+    <li><strong>Multi-Nation Benchmarking Matrix:</strong> Allows users to pick up to 3 nations for side-by-side metric comparison with automatic winner highlighting (gold badges) and interactive Recharts data visualizations (population/area dual bar charts and normalized radar charts).</li>
+    <li><strong>Pure Deterministic Quiz Engine:</strong> Algorithmic gameplay engine powered by a Mulberry32 seeded pseudo-random number generator (PRNG) supporting 6 distinct question modes (Flag &rarr; Country, Country &rarr; Capital, Capital &rarr; Country, Higher/Lower demographics, "Which borders X?", and Map Location). Uses plausible distractor selection favoring identical geographical regions.</li>
+    <li><strong>Synchronized Global Daily Challenge:</strong> Seeded daily by the numeric UTC date string, providing every user across the globe the exact same 10 questions each day, with a 1-attempt lockout, countdown timer to UTC midnight, and shareable Wordle-style emoji result grid.</li>
+    <li><strong>Longitudinal Analytics &amp; Achievements:</strong> Zustand-backed dashboard tracking streak metrics, total games, accuracy over time charts, per-region performance radar, weakest countries targeted review, and a progressive achievement badges system.</li>
+    <li><strong>Offline Resilience &amp; PWA Support:</strong> Full offline capabilities enabled through an embedded fallback dataset, service worker cache-first strategy for assets, and 24-hour TanStack Query stale-time.</li>
+  </ol>
+  
+  <p>
+    <strong>Scope of the System:</strong> The project provides a client-side, zero-database educational web application.
+    Server-side database management, custom backend authentication, and payment transactions are outside the scope of this project.
+  </p>
+  
+  <p>The table below maps each core feature to its codebase implementation and user accessibility:</p>
+  <table>
+    <tr>
+      <th style="width:25%;">Feature</th>
+      <th style="width:50%;">Implemented in</th>
+      <th style="width:25%;">Available to</th>
+    </tr>
+    <tr><td>Atlas search &amp; filters</td><td>src/components/features/explorer, src/lib/api/restcountries.ts; /explore</td><td>All visitors</td></tr>
+    <tr><td>Country detail profile</td><td>src/components/features/country, src/lib/api/wikipedia.ts, weather.ts; /country/[code]</td><td>All visitors</td></tr>
+    <tr><td>Nation benchmarking</td><td>src/components/features/compare, compare-matrix.tsx, compare-charts.tsx; /compare</td><td>All visitors</td></tr>
+    <tr><td>Deterministic Quiz Engine</td><td>src/lib/quiz (rng, generator, scoring, distractors); /play</td><td>All visitors</td></tr>
+    <tr><td>Synchronized Daily Mode</td><td>src/lib/quiz/generator.ts, DailyModal.tsx; /daily</td><td>All visitors</td></tr>
+    <tr><td>Analytics &amp; Heatmap</td><td>src/components/features/stats, useProgressStore.ts; /stats</td><td>All visitors</td></tr>
+    <tr><td>Offline Service Worker</td><td>public/sw.js, manifest.ts, fallback-countries.ts</td><td>All visitors (offline)</td></tr>
+    <tr><td>Design System Showcase</td><td>src/components/ui, src/components/common; /design</td><td>Dev &amp; Evaluators</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">2</div>
+  <h1 class="chp-head">2. Introduction &amp; Motivation</h1>
+  <p>
+    Geography is foundational to global literacy, geopolitics, and cultural appreciation. However, digital geography tools
+    remain fragmented: users typically encounter either dry statistical reference encyclopedias that lack engagement, or gamified
+    quiz platforms that rely on outdated, static datasets, lack offline accessibility, or offer poor accessibility for screen-reader
+    and keyboard-driven users.
+  </p>
+  <p>
+    <strong>FlagForge</strong> resolves this division by uniting authentic, real-time geopolitical intelligence with high-fidelity,
+    accessible, and gamified pedagogical engineering. It synthesizes official country demographics from REST Countries v3.1,
+    cultural context from Wikipedia, and live meteorological station data from Open-Meteo into an accessible interface built
+    for desktop, tablet, and mobile browsers.
+  </p>
+  <p>
+    The system is developed with cutting-edge web technologies: <strong>Next.js 15 (App Router)</strong> and <strong>React 19</strong>
+    with strict <strong>TypeScript 5</strong>, styled using <strong>Tailwind CSS v4</strong> and <strong>Radix UI</strong> primitives,
+    animated via <strong>Framer Motion</strong>, state-managed with <strong>Zustand 5</strong> persist middleware, and cached
+    through <strong>TanStack Query v5</strong>.
+  </p>
+  <p>
+    The primary motivation is educational efficacy and accessibility. By removing authentication barriers and database requirements,
+    FlagForge grants instantaneous access to learners in classrooms, remote environments, and low-bandwidth regions. Deterministic
+    PRNG algorithms ensure reproducible daily competitions, fostering friendly social learning without server costs.
+  </p>
+  
+  <div class="fig-wrap">
+    <svg width="650" height="110" viewBox="0 0 650 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7"/>
+    </marker>
+    <marker id="arr1-back" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+  </defs>
+  <rect x="10" y="15" width="85" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="52" y="41" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Requirements</text>
+  
+  <line x1="95" y1="36" x2="118" y2="36" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr1)"/>
+  
+  <rect x="120" y="15" width="85" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="162" y="41" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Design</text>
+  
+  <line x1="205" y1="36" x2="228" y2="36" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr1)"/>
+  
+  <rect x="230" y="15" width="100" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="280" y="41" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Implementation</text>
+  
+  <line x1="330" y1="36" x2="353" y2="36" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr1)"/>
+  
+  <rect x="355" y="15" width="80" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="395" y="41" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Testing</text>
+  
+  <line x1="435" y1="36" x2="458" y2="36" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr1)"/>
+  
+  <rect x="460" y="15" width="85" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="502" y="41" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Deployment</text>
+  
+  <line x1="545" y1="36" x2="568" y2="36" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr1)"/>
+  
+  <rect x="570" y="15" width="75" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="607" y="41" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Maintenance</text>
+  
+  <!-- Feedback loop -->
+  <path d="M 607,57 L 607,85 L 52,85 L 52,57" fill="none" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr1-back)"/>
+  <text x="330" y="100" font-size="9.5" font-style="italic" font-family="sans-serif" text-anchor="middle" fill="#047857">feedback from API telemetry, accessibility audits and user validation</text>
+</svg>
+    <div class="fig-cap">Figure 8.1: FlagForge federating external geopolitical sources with local browser persistence</div>
+  </div>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">3</div>
+  <h2 class="sec-head">2.1 Theory Behind the Project</h2>
+  <p>
+    FlagForge is founded upon four core computer science principles: federated API data normalization under strict network constraints,
+    deterministic pseudo-random procedural generation, client-side persistence with schema migrations, and WCAG 2.2 AA accessibility.
+  </p>
+  <p>
+    <strong>1. Federated API Ingestion &amp; 10-Field Restriction:</strong> The REST Countries v3.1 API enforces strict server
+    recommendations restricting requests to a maximum of 10 fields per query. FlagForge complies by splitting requests into parallel
+    batches (&le;10 fields each), querying them asynchronously with AbortControllers, and merging the resulting records in memory
+    keyed by ISO 3166-1 alpha-3 (<code>cca3</code>) codes.
+  </p>
+  <p>
+    <strong>2. Deterministic Procedural Generation:</strong> Online trivia games frequently suffer from lack of reproducibility or
+    question bias. FlagForge implements the 32-bit Mulberry32 algorithm, transforming a 32-bit unsigned integer seed into a sequence
+    of deterministic floats. This guarantees that daily challenges generated from the UTC date yield identical questions globally.
+  </p>
+  <p>
+    <strong>3. Persistent Client-Side State &amp; Schema Migrations:</strong> Without a remote database, user analytics must survive
+    browser reloads. Zustand persist middleware writes directly to <code>localStorage</code> with explicit version numbers (v1 &rarr; v2).
+    Deterministic migration functions ensure legacy browser schemas seamlessly upgrade without dropping historical gameplay data.
+  </p>
+  <p>
+    <strong>4. Resilient Offline Architecture:</strong> Educational tools must function during network drops. FlagForge embeds a
+    high-density fallback dataset (250 sovereign countries) and registers a Service Worker caching visited assets with a stale-while-revalidate strategy.
+  </p>
+  
+  <div class="fig-wrap">
+    <svg width="650" height="170" viewBox="0 0 650 170" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect x="10" y="20" width="100" height="45" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="60" y="47" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600">Search / Explore</text>
+  
+  <line x1="110" y1="42" x2="135" y2="42" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="137" y="20" width="125" height="45" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="199" y="38" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">REST Countries API</text>
+  <text x="199" y="52" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#475569">Parallel Batches (&le;10 fields)</text>
+  
+  <line x1="262" y1="42" x2="287" y2="42" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="289" y="20" width="115" height="45" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="346" y="38" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Merge &amp; Validate</text>
+  <text x="346" y="52" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#475569">cca3 Key + Zod Normalization</text>
+  
+  <line x1="404" y1="42" x2="429" y2="42" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="431" y="20" width="105" height="45" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="483" y="38" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Country Details</text>
+  <text x="483" y="52" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#475569">Wiki + Capital Weather</text>
+  
+  <line x1="536" y1="42" x2="561" y2="42" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="563" y="20" width="80" height="45" rx="6" fill="#fdf4ff" stroke="#c084fc" stroke-width="1.5"/>
+  <text x="603" y="38" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Compare</text>
+  <text x="603" y="52" font-size="8" font-family="sans-serif" text-anchor="middle" fill="#701a75">Radar &amp; Bar</text>
+  
+  <!-- Lower row branches: Quiz & Daily & Persistent Storage -->
+  <line x1="346" y1="65" x2="346" y2="100" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="250" y="102" width="192" height="45" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="346" y="120" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Quiz Engine (Mulberry32 PRNG)</text>
+  <text x="346" y="134" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#78350f">6 Game Modes &bull; Seeded Daily Challenge</text>
+  
+  <line x1="442" y1="124" x2="480" y2="124" stroke="#d97706" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="482" y="102" width="160" height="45" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="562" y="120" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Zustand Persist (localStorage)</text>
+  <text x="562" y="134" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#065f46">Versioned Migrations (v1 &rarr; v2)</text>
+</svg>
+    <div class="fig-cap">Figure 8.2: End-to-end data pipeline from API batches to normalized UI components</div>
+  </div>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">4</div>
+  <h2 class="sec-head">2.2 Problem Definition</h2>
+  <p>
+    Geographic information is dispersed across multiple unaligned sources. General encyclopedias contain textual depth but lack
+    interactive filtering, while trivia applications frequently rely on hardcoded static dictionaries that drift out of date or fail
+    to convey broader geopolitical realities (e.g., timezones, currencies, driving orientation, and climate telemetry).
+  </p>
+  <p>
+    Furthermore, free public APIs present operational hazards: network timeouts, rate limits, schema anomalies, and sudden downtime.
+    Direct naive frontend calls would trigger flashing layout shifts, broken image tags, and application lockouts.
+  </p>
+  <p>
+    <strong>Problem Statement:</strong> <em>To design and implement a resilient, zero-backend web application that harmonizes
+    disparate geopolitical, encyclopedic, and meteorological APIs into a unified, accessible, and deterministic learning platform
+    that functions seamlessly offline and persists longitudinal progress locally.</em>
+  </p>
+  
+  <table>
+    <tr>
+      <th style="width:30%;">Difficulty</th>
+      <th style="width:45%;">Design Response</th>
+      <th style="width:25%;">Where Implemented</th>
+    </tr>
+    <tr><td>REST Countries 10-field query limit</td><td>Parallel batched fetch merged on cca3 identifier</td><td>src/lib/api/restcountries.ts</td></tr>
+    <tr><td>Unpredictable network failure / offline</td><td>Embedded 250-country fallback + Service Worker</td><td>fallback-countries.ts, public/sw.js</td></tr>
+    <tr><td>Cheating / divergent daily challenges</td><td>Mulberry32 PRNG seeded by numeric UTC date string</td><td>src/lib/quiz/rng.ts, generator.ts</td></tr>
+    <tr><td>Unrealistic or trivial quiz distractors</td><td>Geographical region/subregion priority matching</td><td>src/lib/quiz/distractors.ts</td></tr>
+    <tr><td>Local storage schema corruption across versions</td><td>Zustand versioned migrations (v1 &rarr; v2)</td><td>src/store/useProgressStore.ts</td></tr>
+    <tr><td>Motor and visual accessibility barriers</td><td>WCAG 2.2 AA visible rings, 1-4 key shortcuts, contrast</td><td>globals.css, QuestionCard.tsx</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">5</div>
+  <h2 class="sec-head">2.3 Need for the Project</h2>
+  <p>
+    Students, teachers, and curious citizens need reliable, intuitive geographic knowledge at their fingertips. A browser-based,
+    installable web application provides ubiquitous access without app store gatekeepers, license fees, or invasive user tracking.
+  </p>
+  <p>
+    <strong>Immediate Zero-Auth Exploration:</strong> By eliminating registration barriers, users in schools, libraries, and mobile
+    settings can immediately explore data or compete in quizzes without creating accounts.
+  </p>
+  <p>
+    <strong>Pedagogical Rigor Through Contrast:</strong> Learning geography requires comparative analysis. FlagForge's multi-nation
+    benchmarking matrix allows learners to contrast demographic density, land area, languages, and physical borders, transforming
+    isolated facts into spatial comprehension.
+  </p>
+  
+  <table>
+    <tr>
+      <th style="width:25%;">User Group</th>
+      <th style="width:45%;">What It Gains</th>
+      <th style="width:30%;">Access Capabilities Without Auth</th>
+    </tr>
+    <tr><td><strong>Student Learner</strong></td><td>Frictionless access to flags, capitals, and real-time capital weather</td><td>Full exploration, all 6 quiz modes, local bookmarks</td></tr>
+    <tr><td><strong>Trivia Enthusiast</strong></td><td>Deterministic daily challenges with shareable Wordle-style score grids</td><td>1 daily attempt, streak tracking, accuracy radar</td></tr>
+    <tr><td><strong>Geography Educator</strong></td><td>Curriculum tool with verifiable distractor logic and comparative radar charts</td><td>Side-by-side nation comparisons, custom mode filters</td></tr>
+    <tr><td><strong>Software Maintainer</strong></td><td>Strictly typed codebase with 58 Vitest unit tests and 0 backend maintenance</td><td>Fully reproducible builds, client-only hosting</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">6</div>
+  <h1 class="chp-head">3. Literature Survey</h1>
+  <p>
+    Modern educational platforms integrate open data endpoints with interactive browser interfaces. FlagForge builds upon
+    three established public APIs, each fulfilling a distinct architectural role:
+  </p>
+  <p>
+    <strong>REST Countries v3.1:</strong> Provides comprehensive geopolitical metadata for 250 sovereign entities. Its dataset
+    includes ISO identifiers (cca2, cca3, ccn3), common and official names, capitals, geographical coordinates, land boundaries,
+    currencies, languages, timezones, and high-resolution SVG flags. FlagForge strictly honors its field restriction policies.
+  </p>
+  <p>
+    <strong>Wikipedia REST Summary API:</strong> Provides objective cultural, historical, and geopolitical synopses. FlagForge queries
+    the REST summary endpoint (<code>/api/rest_v1/page/summary/[title]</code>), dynamically displaying extracts and thumbnails with
+    fallback handling for disambiguation errors.
+  </p>
+  <p>
+    <strong>Open-Meteo Weather API:</strong> A high-performance, keyless meteorological service that computes real-time atmospheric
+    conditions from national weather models. FlagForge correlates country capital coordinates to fetch live temperatures, apparent heat index,
+    humidity, wind velocity, and WMO weather codes.
+  </p>
+  
+  <table>
+    <tr>
+      <th style="width:20%;">Service</th>
+      <th style="width:30%;">Main Role</th>
+      <th style="width:30%;">Signal / Constraint</th>
+      <th style="width:20%;">Client Module</th>
+    </tr>
+    <tr><td><strong>REST Countries v3.1</strong></td><td>Geopolitical catalog &amp; boundaries</td><td>Max 10 fields per request; ?fields= batching</td><td>src/lib/api/restcountries.ts</td></tr>
+    <tr><td><strong>Wikipedia REST</strong></td><td>Cultural &amp; historical summaries</td><td>URL-encoded title; 6s timeout &amp; exponential backoff</td><td>src/lib/api/wikipedia.ts</td></tr>
+    <tr><td><strong>Open-Meteo API</strong></td><td>Live capital atmospheric telemetry</td><td>Latitude/Longitude coordinates; WMO code mapping</td><td>src/lib/api/weather.ts</td></tr>
+    <tr><td><strong>Embedded Fallback</strong></td><td>Offline air-gapped continuity</td><td>Full 250-country dataset embedded in bundle</td><td>src/lib/api/fallback-countries.ts</td></tr>
+  </table>
+  
+  <p style="margin-top:14px;"><strong>Comparative Analysis with Existing Solutions:</strong></p>
+  <table>
+    <tr>
+      <th>Platform</th>
+      <th>Data Freshness</th>
+      <th>Accessibility</th>
+      <th>Offline Support</th>
+      <th>Backend Cost</th>
+    </tr>
+    <tr><td><strong>Seterra</strong></td><td>Static closed database</td><td>Moderate (mouse-centric)</td><td>Requires Desktop App</td><td>Proprietary servers</td></tr>
+    <tr><td><strong>GeoGuessr</strong></td><td>Google Street View API</td><td>Low (heavy visual only)</td><td>None (bandwidth heavy)</td><td>High subscription costs</td></tr>
+    <tr><td><strong>Sporcle</strong></td><td>User-generated trivia</td><td>Poor (ad-heavy, flash)</td><td>None</td><td>Central server database</td></tr>
+    <tr><td><strong>FlagForge (Ours)</strong></td><td>Live Federated REST APIs</td><td>Full WCAG 2.2 AA (1-4 keys)</td><td>Full Service Worker + Fallback</td><td>Zero ($0 serverless static)</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">7</div>
+  <h1 class="chp-head">4. Analysis &amp; Design</h1>
+  <p>
+    The analysis phase establishes functional and non-functional specifications by decomposing user interaction pathways across
+    general students, trivia players, educators, and software evaluators.
+  </p>
+  <p>
+    <strong>Functional Analysis:</strong> The system must deliver: (1) real-time fuzzy search across sovereign states with instantaneous
+    multi-faceted filtering; (2) statically pre-rendered country intelligence views including capital weather, Wikipedia summaries,
+    and SVG geospatial projections; (3) side-by-side benchmarking of up to 3 nations with automated metric winner detection and Recharts
+    visualizations; (4) a deterministic 6-mode quiz generator with Mulberry32 PRNG and regional distractors; (5) a UTC-seeded synchronized
+    Daily Challenge with Wordle-style shareable emoji grids; and (6) an analytics dashboard with accuracy heatmap and achievements.
+  </p>
+  <p>
+    <strong>Non-Functional Analysis:</strong> The platform must maintain strict WCAG 2.2 AA accessibility, visible focus rings,
+    motor keyboard controls (1-4 keys), high-contrast modes, mobile responsiveness, sub-2-second Largest Contentful Paint (LCP),
+    and graceful offline degradation using service workers and an embedded 250-country fallback bundle.
+  </p>
+  
+  <table>
+    <tr>
+      <th style="width:10%;">ID</th>
+      <th style="width:65%;">Requirement Specification</th>
+      <th style="width:25%;">Type</th>
+    </tr>
+    <tr><td>R1</td><td>Fuzzy search by name, capital, and cca3 with dynamic region/population filters</td><td>Functional</td></tr>
+    <tr><td>R2</td><td>Pre-render top country profiles with Wikipedia extracts and live capital weather</td><td>Functional</td></tr>
+    <tr><td>R3</td><td>Benchmark up to 3 nations with dual bar and radar chart visualizations</td><td>Functional</td></tr>
+    <tr><td>R4</td><td>Deterministic 6-mode quiz engine with seeded reproducibility and plausible distractors</td><td>Functional</td></tr>
+    <tr><td>R5</td><td>Synchronized UTC daily challenge with single attempt and shareable emoji grid</td><td>Functional</td></tr>
+    <tr><td>R6</td><td>Zero backend dependency: local browser persistence with versioned schema migrations</td><td>Non-functional</td></tr>
+    <tr><td>R7</td><td>Offline resilience: embedded fallback dataset + Service Worker asset cache</td><td>Non-functional</td></tr>
+    <tr><td>R8</td><td>Full WCAG 2.2 AA accessibility compliance (zero axe violations, keyboard 1-4 shortcuts)</td><td>Non-functional</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">8</div>
+  <h2 class="sec-head">4.1 Process Model</h2>
+  <p>
+    The project adopts an <strong>Agile Incremental Software Development Lifecycle (SDLC)</strong> model. Each phase feeds
+    directly into downstream implementation, while empirical findings from automated accessibility audits and network latency
+    benchmarks feed back into architectural refinements.
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="110" viewBox="0 0 650 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7"/>
+    </marker>
+    <marker id="arr1-back" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+  </defs>
+  <rect x="10" y="15" width="85" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="52" y="41" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Requirements</text>
+  
+  <line x1="95" y1="36" x2="118" y2="36" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr1)"/>
+  
+  <rect x="120" y="15" width="85" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="162" y="41" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Design</text>
+  
+  <line x1="205" y1="36" x2="228" y2="36" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr1)"/>
+  
+  <rect x="230" y="15" width="100" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="280" y="41" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Implementation</text>
+  
+  <line x1="330" y1="36" x2="353" y2="36" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr1)"/>
+  
+  <rect x="355" y="15" width="80" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="395" y="41" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Testing</text>
+  
+  <line x1="435" y1="36" x2="458" y2="36" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr1)"/>
+  
+  <rect x="460" y="15" width="85" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="502" y="41" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Deployment</text>
+  
+  <line x1="545" y1="36" x2="568" y2="36" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr1)"/>
+  
+  <rect x="570" y="15" width="75" height="42" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="607" y="41" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600" fill="#0f172a">Maintenance</text>
+  
+  <!-- Feedback loop -->
+  <path d="M 607,57 L 607,85 L 52,85 L 52,57" fill="none" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr1-back)"/>
+  <text x="330" y="100" font-size="9.5" font-style="italic" font-family="sans-serif" text-anchor="middle" fill="#047857">feedback from API telemetry, accessibility audits and user validation</text>
+</svg>
+    <div class="fig-cap">Figure 1: Incremental Development Process Model with Continuous Verification Feedback Loops</div>
+  </div>
+  <table>
+    <tr>
+      <th style="width:20%;">Phase</th>
+      <th style="width:40%;">Main Deliverable</th>
+      <th style="width:25%;">Verification Method</th>
+      <th style="width:15%;">Section</th>
+    </tr>
+    <tr><td>1. Requirement Analysis</td><td>Domain models, REST API field constraints, user journeys</td><td>Requirements walkthrough</td><td>Chapter 4</td></tr>
+    <tr><td>2. Architectural Design</td><td>UML models, DFDs, Zustand migration schemas, UI tokens</td><td>Design system review</td><td>4.5 to 4.9</td></tr>
+    <tr><td>3. Data &amp; Core Engine</td><td>Batched API clients, Mulberry32 PRNG, quiz generators</td><td>58 Vitest unit tests</td><td>5.1</td></tr>
+    <tr><td>4. Interface &amp; Pages</td><td>Explorer, country profile, comparison matrix, quiz HUD</td><td>Playwright e2e specs</td><td>5.2</td></tr>
+    <tr><td>5. Verification &amp; Audit</td><td>Lighthouse mobile audits, axe-core WCAG 2.2 AA passes</td><td>CI build &amp; axe audit</td><td>5.3</td></tr>
+    <tr><td>6. Documentation &amp; Deploy</td><td>Production report, deploy guide, GitHub repository</td><td>Peer review &amp; build run</td><td>Docs &amp; Git</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">9</div>
+  <h2 class="sec-head">4.2 Flow of Project</h2>
+  <p>
+    The project flow traces a learner's progression from initial discovery through comparative analysis, active recall gameplay,
+    and longitudinal skill tracking:
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="170" viewBox="0 0 650 170" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect x="10" y="20" width="100" height="45" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="60" y="47" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="600">Search / Explore</text>
+  
+  <line x1="110" y1="42" x2="135" y2="42" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="137" y="20" width="125" height="45" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="199" y="38" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">REST Countries API</text>
+  <text x="199" y="52" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#475569">Parallel Batches (&le;10 fields)</text>
+  
+  <line x1="262" y1="42" x2="287" y2="42" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="289" y="20" width="115" height="45" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="346" y="38" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Merge &amp; Validate</text>
+  <text x="346" y="52" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#475569">cca3 Key + Zod Normalization</text>
+  
+  <line x1="404" y1="42" x2="429" y2="42" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="431" y="20" width="105" height="45" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="483" y="38" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Country Details</text>
+  <text x="483" y="52" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#475569">Wiki + Capital Weather</text>
+  
+  <line x1="536" y1="42" x2="561" y2="42" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="563" y="20" width="80" height="45" rx="6" fill="#fdf4ff" stroke="#c084fc" stroke-width="1.5"/>
+  <text x="603" y="38" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Compare</text>
+  <text x="603" y="52" font-size="8" font-family="sans-serif" text-anchor="middle" fill="#701a75">Radar &amp; Bar</text>
+  
+  <!-- Lower row branches: Quiz & Daily & Persistent Storage -->
+  <line x1="346" y1="65" x2="346" y2="100" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="250" y="102" width="192" height="45" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="346" y="120" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Quiz Engine (Mulberry32 PRNG)</text>
+  <text x="346" y="134" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#78350f">6 Game Modes &bull; Seeded Daily Challenge</text>
+  
+  <line x1="442" y1="124" x2="480" y2="124" stroke="#d97706" stroke-width="1.5" marker-end="url(#arr2)"/>
+  
+  <rect x="482" y="102" width="160" height="45" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="562" y="120" font-size="9.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Zustand Persist (localStorage)</text>
+  <text x="562" y="134" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#065f46">Versioned Migrations (v1 &rarr; v2)</text>
+</svg>
+    <div class="fig-cap">Figure 2: Comprehensive Project Workflow and Data Processing Streams</div>
+  </div>
+  <p>
+    <strong>1. Exploration Stream:</strong> The learner inputs search tokens or toggles region filters. Fuse.js indexes common and official
+    names, returning filtered results in under 5ms. Selecting a country initiates an SSG route transition to <code>/country/[code]</code>,
+    populating Wikipedia extracts and capital weather telemetry.
+  </p>
+  <p>
+    <strong>2. Benchmarking Stream:</strong> From any country card or direct navigation, users add up to 3 sovereign states to the comparison
+    hopper. Normalized metrics generate dynamic radar charts and population bars, automatically tagging winning criteria.
+  </p>
+  <p>
+    <strong>3. Gameplay &amp; Daily Challenge Stream:</strong> The learner selects a quiz mode or launches the UTC Daily Challenge.
+    Questions are procedurally generated via Mulberry32 PRNG with plausible regional distractors. The gameplay loop tracks timer bonuses
+    and streak multipliers, writing finalized scores to Zustand <code>localStorage</code>.
+  </p>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">10</div>
+  <h2 class="sec-head">4.3 Feasibility Study</h2>
+  <p>
+    A rigorous feasibility study evaluates whether the project is practically and economically viable across four standard dimensions:
+  </p>
+  <p>
+    <strong>Technical Feasibility:</strong> The architecture relies on robust web standards: Next.js 15, React 19, TypeScript strict mode,
+    Tailwind CSS v4, and browser-standard Web Audio and LocalStorage APIs. It operates inside any modern browser without desktop runtimes.
+    Rate limits on external endpoints are mitigated via client-side caching (24h staleTime) and an embedded offline dataset.
+  </p>
+  <p>
+    <strong>Economic Feasibility:</strong> The application incurs <strong>$0 in recurring backend costs</strong>. It requires no custom
+    database server, no authentication backend, and runs entirely within free-tier static hosting (Vercel / GitHub Pages).
+  </p>
+  <p>
+    <strong>Operational Feasibility:</strong> By offering a zero-login guest experience with persistent local storage, users can
+    immediately engage without registration barriers. Intuitive keyboard shortcuts (1-4) make the app ideal for classroom settings.
+  </p>
+  <p>
+    <strong>Schedule Feasibility:</strong> The system was scoped and engineered over an 8-week academic cycle, prioritizing modular
+    subsystems that could be tested independently.
+  </p>
+  
+  <table>
+    <tr>
+      <th style="width:25%;">Risk Category</th>
+      <th style="width:35%;">Potential Effect</th>
+      <th style="width:40%;">Design Mitigation Strategy</th>
+    </tr>
+    <tr><td>REST Countries Downtime</td><td>Empty search grids / broken images</td><td>Embedded 250-country fallback bundle + SW cache</td></tr>
+    <tr><td>API 10-Field Query Limitation</td><td>Server rejects oversized queries (400)</td><td>Strict batched parallel fetching merged on cca3</td></tr>
+    <tr><td>Daily Mode Seed Deviation</td><td>Different players get different questions</td><td>Deterministic Mulberry32 PRNG seeded by UTC date</td></tr>
+    <tr><td>Browser Storage Schema Drift</td><td>Corrupted user streak or crash on reload</td><td>Zustand persist versioned migration (v1 &rarr; v2)</td></tr>
+    <tr><td>Color Contrast Failures</td><td>Accessibility barrier for visually impaired</td><td>WCAG 2.2 AA compliant palette &ge; 4.5:1 ratio</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">11</div>
+  <h2 class="sec-head">4.4 Cost Analysis</h2>
+  <p>
+    Cost analysis examines the resources required to engineer, deploy, and maintain FlagForge across development, demonstration,
+    and scaled operational phases:
+  </p>
+  <table>
+    <tr>
+      <th style="width:22%;">Cost Item</th>
+      <th style="width:26%;">Development Phase</th>
+      <th style="width:26%;">Demonstration Phase</th>
+      <th style="width:26%;">Scaled Public Phase</th>
+    </tr>
+    <tr><td>IDE &amp; Tooling (VS Code, Git)</td><td>Free Open Source</td><td>Free Open Source</td><td>Free Open Source</td></tr>
+    <tr><td>Hosting &amp; Edge CDN</td><td>Localhost ($0)</td><td>Vercel Hobby ($0)</td><td>Vercel Pro ($20/mo optional)</td></tr>
+    <tr><td>Database Infrastructure</td><td>$0 (LocalStorage)</td><td>$0 (LocalStorage)</td><td>$0 (Zero-backend design)</td></tr>
+    <tr><td>External Data Ingestion</td><td>$0 (Public REST APIs)</td><td>$0 (Public REST APIs)</td><td>$0 (Within free rate limits)</td></tr>
+    <tr><td>Domain &amp; SSL Certificate</td><td>Not required</td><td>Free Vercel Subdomain</td><td>$12/year custom domain</td></tr>
+    <tr><td>Engineering Effort</td><td>Student Academic Hours</td><td>Low maintenance</td><td>Open-source community</td></tr>
+  </table>
+  <p style="margin-top:14px;"><strong>Cost Drivers and Mitigation Strategy:</strong></p>
+  <table>
+    <tr>
+      <th style="width:25%;">Cost Driver</th>
+      <th style="width:35%;">Growth Vulnerability</th>
+      <th style="width:40%;">Architectural Control Mechanism</th>
+    </tr>
+    <tr><td>API Bandwidth</td><td>High request volumes to third-party endpoints</td><td>24h TanStack Query caching + browser localStorage</td></tr>
+    <tr><td>Static CDN Egress</td><td>Large vector flag assets transferred repeatedly</td><td>SVG optimization + Service Worker cache-first</td></tr>
+    <tr><td>Database Hosting</td><td>Storage growth as user base increases</td><td>Completely avoided via local client storage architecture</td></tr>
+    <tr><td>Audio Asset Storage</td><td>High latency downloading game sound effects</td><td>Synthesized in real-time via Web Audio API (0 KB audio)</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">12</div>
+  <h2 class="sec-head">4.5 Data Flow Diagram (Level 0)</h2>
+  <p>
+    The Context-Level Data Flow Diagram (DFD Level 0) models FlagForge as a centralized information broker between external actors,
+    geopolitical web services, and browser-resident data stores:
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="240" viewBox="0 0 650 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-dfd0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e40af"/>
+    </marker>
+  </defs>
+  <!-- Actor: User / Learner -->
+  <rect x="20" y="80" width="110" height="75" rx="4" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+  <text x="75" y="112" font-size="11" font-family="sans-serif" text-anchor="middle" font-weight="bold">Learner /</text>
+  <text x="75" y="128" font-size="11" font-family="sans-serif" text-anchor="middle" font-weight="bold">Quiz Player</text>
+  
+  <!-- Central Process: FlagForge App -->
+  <ellipse cx="320" cy="118" rx="85" ry="52" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="320" y="112" font-size="13" font-family="sans-serif" text-anchor="middle" font-weight="bold" fill="#1e3a8a">FlagForge</text>
+  <text x="320" y="129" font-size="10.5" font-family="sans-serif" text-anchor="middle" fill="#1e40af">Web Application</text>
+  
+  <!-- Actor: REST Countries -->
+  <rect x="490" y="15" width="145" height="52" rx="4" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text x="562" y="38" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="bold">REST Countries API</text>
+  <text x="562" y="52" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#78350f">Batch 1 &amp; 2 (&le;10 fields)</text>
+  
+  <!-- Actor: Wikipedia & Weather -->
+  <rect x="490" y="88" width="145" height="52" rx="4" fill="#ecfdf5" stroke="#047857" stroke-width="1.5"/>
+  <text x="562" y="111" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="bold">Wikipedia &amp; Weather</text>
+  <text x="562" y="125" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#065f46">Extracts &bull; Live Telemetry</text>
+  
+  <!-- Data Store: LocalStorage -->
+  <path d="M 490,175 L 635,175 M 490,215 L 635,215" stroke="#6b21a8" stroke-width="2"/>
+  <text x="562" y="196" font-size="10.5" font-family="sans-serif" text-anchor="middle" font-weight="bold" fill="#581c87">D1: Browser Storage</text>
+  <text x="562" y="210" font-size="8.5" font-family="sans-serif" text-anchor="middle" fill="#6b21a8">localStorage (Zustand)</text>
+  
+  <!-- Flows -->
+  <!-- User <-> App -->
+  <line x1="130" y1="105" x2="233" y2="105" stroke="#1e40af" stroke-width="1.5" marker-end="url(#arr-dfd0)"/>
+  <text x="180" y="100" font-size="8" font-family="sans-serif" text-anchor="middle">search, guess, config</text>
+  
+  <line x1="233" y1="130" x2="130" y2="130" stroke="#1e40af" stroke-width="1.5" marker-end="url(#arr-dfd0)"/>
+  <text x="180" y="142" font-size="8" font-family="sans-serif" text-anchor="middle">countries, quiz, feedback</text>
+  
+  <!-- App <-> REST Countries -->
+  <line x1="375" y1="85" x2="488" y2="45" stroke="#1e40af" stroke-width="1.5" marker-end="url(#arr-dfd0)"/>
+  <text x="440" y="60" font-size="8" font-family="sans-serif" text-anchor="middle">batched query</text>
+  <line x1="488" y1="55" x2="385" y2="95" stroke="#1e40af" stroke-width="1.5" marker-end="url(#arr-dfd0)"/>
+  
+  <!-- App <-> Wiki / Weather -->
+  <line x1="405" y1="115" x2="488" y2="115" stroke="#1e40af" stroke-width="1.5" marker-end="url(#arr-dfd0)"/>
+  
+  <!-- App <-> Storage -->
+  <line x1="375" y1="150" x2="488" y2="185" stroke="#1e40af" stroke-width="1.5" marker-end="url(#arr-dfd0)"/>
+  <text x="420" y="178" font-size="8" font-family="sans-serif" text-anchor="middle">progress, settings</text>
+</svg>
+    <div class="fig-cap">Figure 3.1: DFD Level 0 (Context-Level Diagram of the FlagForge System)</div>
+  </div>
+  <table>
+    <tr>
+      <th style="width:20%;">Data Flow</th>
+      <th style="width:20%;">Source</th>
+      <th style="width:25%;">Destination</th>
+      <th style="width:35%;">Content Transmitted</th>
+    </tr>
+    <tr><td>Query &amp; Filters</td><td>Learner</td><td>FlagForge Web App</td><td>Search token, region, population slider, mode config</td></tr>
+    <tr><td>Atlas Telemetry</td><td>FlagForge Web App</td><td>Learner</td><td>Normalized Country cards, rankings, weather, radar charts</td></tr>
+    <tr><td>Batched Query</td><td>FlagForge Web App</td><td>REST Countries API</td><td>Batch 1 &amp; Batch 2 params (&le;10 fields per query)</td></tr>
+    <tr><td>Raw Country Data</td><td>REST Countries API</td><td>FlagForge Web App</td><td>cca3, flags, capital, demographics, borders</td></tr>
+    <tr><td>Encyclopedic Extract</td><td>Wikipedia REST API</td><td>FlagForge Web App</td><td>Summary text, thumbnail URLs, article links</td></tr>
+    <tr><td>Weather Telemetry</td><td>Open-Meteo API</td><td>FlagForge Web App</td><td>Temperature, humidity, wind velocity, WMO code</td></tr>
+    <tr><td>User Progress State</td><td>FlagForge Web App</td><td>Browser LocalStorage</td><td>Streak, total games, accuracy radar, achievements (v2)</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">13</div>
+  <h2 class="sec-head">4.5.1 Data Flow Diagram (Level 1)</h2>
+  <p>
+    At Level 1, the single application process is decomposed into four discrete functional subsystems:
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="230" viewBox="0 0 650 230" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-dfd1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+  <!-- Processes -->
+  <circle cx="180" cy="40" r="28" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="180" y="38" font-size="8" font-family="sans-serif" text-anchor="middle" font-weight="bold">1.0 Data Layer</text>
+  <text x="180" y="48" font-size="7.5" font-family="sans-serif" text-anchor="middle">Ingest &amp; Merge</text>
+  
+  <circle cx="180" cy="115" r="28" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="180" y="112" font-size="8" font-family="sans-serif" text-anchor="middle" font-weight="bold">2.0 Search &amp;</text>
+  <text x="180" y="122" font-size="7.5" font-family="sans-serif" text-anchor="middle">Fuzzy Filter</text>
+  
+  <circle cx="430" cy="65" r="28" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="430" y="62" font-size="8" font-family="sans-serif" text-anchor="middle" font-weight="bold">3.0 Quiz</text>
+  <text x="430" y="72" font-size="7.5" font-family="sans-serif" text-anchor="middle">Engine</text>
+  
+  <circle cx="430" cy="155" r="28" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="430" y="152" font-size="8" font-family="sans-serif" text-anchor="middle" font-weight="bold">4.0 Storage &amp;</text>
+  <text x="430" y="162" font-size="7.5" font-family="sans-serif" text-anchor="middle">Analytics</text>
+  
+  <!-- Entities / Stores -->
+  <rect x="15" y="80" width="80" height="40" rx="3" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+  <text x="55" y="104" font-size="9" font-family="sans-serif" text-anchor="middle" font-weight="bold">Learner</text>
+  
+  <path d="M 270,30 L 360,30 M 270,50 L 360,50" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="315" y="44" font-size="8" font-family="sans-serif" text-anchor="middle" fill="#0369a1">D1: In-Memory / TanStack</text>
+  
+  <path d="M 530,145 L 640,145 M 530,165 L 640,165" stroke="#059669" stroke-width="1.5"/>
+  <text x="585" y="159" font-size="8" font-family="sans-serif" text-anchor="middle" fill="#047857">D2: LocalStorage</text>
+  
+  <rect x="540" y="35" width="95" height="32" rx="3" fill="#f8fafc" stroke="#b45309" stroke-width="1.5"/>
+  <text x="587" y="55" font-size="8.5" font-family="sans-serif" text-anchor="middle" font-weight="bold">REST APIs</text>
+  
+  <!-- Connections -->
+  <line x1="95" y1="95" x2="152" y2="110" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-dfd1)"/>
+  <line x1="208" y1="40" x2="270" y2="40" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-dfd1)"/>
+  <line x1="360" y1="40" x2="402" y2="60" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-dfd1)"/>
+  <line x1="458" y1="65" x2="540" y2="55" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-dfd1)"/>
+  <line x1="430" y1="93" x2="430" y2="127" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-dfd1)"/>
+  <line x1="458" y1="155" x2="530" y2="155" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-dfd1)"/>
+  <line x1="180" y1="68" x2="180" y2="87" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-dfd1)"/>
+</svg>
+    <div class="fig-cap">Figure 3.2: DFD Level 1 (Modular Functional Data Flow Breakdown)</div>
+  </div>
+  <table>
+    <tr>
+      <th style="width:25%;">Subsystem Process</th>
+      <th style="width:25%;">Input Stream</th>
+      <th style="width:25%;">Output Stream</th>
+      <th style="width:25%;">Internal Data Store</th>
+    </tr>
+    <tr><td><strong>1.0 Ingestion &amp; Merge</strong></td><td>REST Countries API batches</td><td>Normalized Country[] records</td><td>TanStack Query Cache</td></tr>
+    <tr><td><strong>2.0 Search &amp; Filter</strong></td><td>Search query &amp; filter tokens</td><td>Ranked &amp; filtered country list</td><td>Fuse.js In-Memory Index</td></tr>
+    <tr><td><strong>3.0 Quiz Engine</strong></td><td>Mode, difficulty, seed</td><td>Procedural QuizQuestion[]</td><td>Mulberry32 PRNG State</td></tr>
+    <tr><td><strong>4.0 Storage &amp; Analytics</strong></td><td>Game end answers &amp; speed</td><td>Updated streaks, accuracy radar</td><td>Browser LocalStorage (D2)</td></tr>
+  </table>
+  <p style="margin-top:12px;"><strong>Degradation &amp; Failure Matrix:</strong></p>
+  <table>
+    <tr>
+      <th style="width:30%;">Failure Scenario</th>
+      <th style="width:70%;">System Reaction &amp; Fallback Behavior</th>
+    </tr>
+    <tr><td>REST Countries API offline</td><td>Instantly hydrates catalog from embedded <code>fallback-countries.ts</code>; displays subtle offline toast</td></tr>
+    <tr><td>Wikipedia API timeout (&gt;6s)</td><td>Renders country facts, weather, and maps cleanly while omitting encyclopedia card; no screen crash</td></tr>
+    <tr><td>Open-Meteo API rate-limited</td><td>Displays meteorological skeleton / unavailable indicator; main country details remain fully usable</td></tr>
+    <tr><td>Corrupted LocalStorage</td><td>Zustand catch block initializes defaults while preserving unaffected store partitions</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">14</div>
+  <h2 class="sec-head">4.6 UML Diagrams</h2>
+  <p>
+    The Unified Modeling Language (UML) provides standard structural and behavioral blueprints for software systems.
+    The subsequent sections detail FlagForge's architecture across multiple architectural perspectives:
+  </p>
+  <table>
+    <tr>
+      <th style="width:25%;">UML Diagram</th>
+      <th style="width:75%;">System Aspect Modeled in FlagForge</th>
+    </tr>
+    <tr><td><strong>4.6.1 Use Case Diagram</strong></td><td>Actor interactions across Guest Learners, Quiz Players, and Educators</td></tr>
+    <tr><td><strong>4.6.2 Class &amp; Object Diagram</strong></td><td>Domain entities: Country, QuizQuestion, GameState, ProgressState, SettingsState</td></tr>
+    <tr><td><strong>4.6.3 Activity Diagram</strong></td><td>Gameplay loop: question presentation, timer decay, answer evaluation, streak bonus</td></tr>
+    <tr><td><strong>4.6.4 Sequence Diagram</strong></td><td>Parallel batched REST Countries API fetch with cca3 merge and TanStack Query cache</td></tr>
+    <tr><td><strong>4.6.5 Storage / Schema Diagram</strong></td><td>Browser LocalStorage schema definitions and versioned migration routines (v1 &rarr; v2)</td></tr>
+    <tr><td><strong>4.6.6 Component Diagram</strong></td><td>Component hierarchy across presentation, hooks, domain engine, and data layers</td></tr>
+  </table>
+  <div class="fig-wrap">
+    <svg width="650" height="260" viewBox="0 0 650 260" xmlns="http://www.w3.org/2000/svg">
+  <!-- System boundary -->
+  <rect x="180" y="10" width="360" height="240" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="360" y="28" font-size="11" font-weight="bold" font-family="sans-serif" text-anchor="middle" fill="#334155">FlagForge System</text>
+  
+  <!-- Actor 1: Learner -->
+  <circle cx="60" cy="70" r="14" fill="#fff" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="84" x2="60" y2="115" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="95" x2="40" y2="105" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="95" x2="80" y2="105" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="115" x2="45" y2="140" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="115" x2="75" y2="140" stroke="#1e293b" stroke-width="1.5"/>
+  <text x="60" y="156" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="bold">Guest Learner</text>
+
+  <!-- Actor 2: Quiz Player -->
+  <circle cx="60" cy="180" r="14" fill="#fff" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="194" x2="60" y2="225" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="205" x2="40" y2="215" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="205" x2="80" y2="215" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="225" x2="45" y2="250" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="225" x2="75" y2="250" stroke="#1e293b" stroke-width="1.5"/>
+  <text x="60" y="260" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="bold">Quiz Player</text>
+  
+  <!-- Use cases -->
+  <ellipse cx="270" cy="50" rx="65" ry="16" fill="#fff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="270" y="54" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC1: Search &amp; Filter Countries</text>
+  
+  <ellipse cx="270" cy="90" rx="65" ry="16" fill="#fff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="270" y="94" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC2: Inspect Country Details</text>
+  
+  <ellipse cx="270" cy="130" rx="65" ry="16" fill="#fff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="270" y="134" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC3: Compare Nations (up to 3)</text>
+  
+  <ellipse cx="440" cy="65" rx="65" ry="16" fill="#fff" stroke="#d97706" stroke-width="1.5"/>
+  <text x="440" y="69" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC4: Play 6 Quiz Game Modes</text>
+  
+  <ellipse cx="440" cy="110" rx="65" ry="16" fill="#fff" stroke="#d97706" stroke-width="1.5"/>
+  <text x="440" y="114" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC5: Daily Seeded Challenge</text>
+  
+  <ellipse cx="440" cy="155" rx="65" ry="16" fill="#fff" stroke="#059669" stroke-width="1.5"/>
+  <text x="440" y="159" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC6: View Analytics Dashboard</text>
+  
+  <ellipse cx="360" cy="205" rx="75" ry="16" fill="#fff" stroke="#475569" stroke-width="1.5"/>
+  <text x="360" y="209" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC7: Manage Settings &amp; Theme</text>
+  
+  <!-- Association Lines -->
+  <line x1="85" y1="100" x2="205" y2="55" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="105" x2="205" y2="90" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="110" x2="205" y2="130" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="115" x2="285" y2="205" stroke="#64748b" stroke-width="1.2"/>
+  
+  <line x1="85" y1="200" x2="375" y2="70" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="205" x2="375" y2="115" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="210" x2="375" y2="160" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="215" x2="285" y2="205" stroke="#64748b" stroke-width="1.2"/>
+</svg>
+    <div class="fig-cap">Figure 8.4: Interrelation of Structural and Behavioral Modeling Views</div>
+  </div>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">15</div>
+  <h3 class="subsec-head">4.6.1 Use Case Diagram</h3>
+  <p>
+    FlagForge serves two primary external actor personas: the <strong>Guest Learner</strong> (who focuses on exploring the world atlas,
+    inspecting country profiles, and comparing nations) and the <strong>Quiz Player</strong> (who engages in active recall quizzes,
+    competes in the daily challenge, and reviews historical learning analytics).
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="260" viewBox="0 0 650 260" xmlns="http://www.w3.org/2000/svg">
+  <!-- System boundary -->
+  <rect x="180" y="10" width="360" height="240" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="360" y="28" font-size="11" font-weight="bold" font-family="sans-serif" text-anchor="middle" fill="#334155">FlagForge System</text>
+  
+  <!-- Actor 1: Learner -->
+  <circle cx="60" cy="70" r="14" fill="#fff" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="84" x2="60" y2="115" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="95" x2="40" y2="105" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="95" x2="80" y2="105" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="115" x2="45" y2="140" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="115" x2="75" y2="140" stroke="#1e293b" stroke-width="1.5"/>
+  <text x="60" y="156" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="bold">Guest Learner</text>
+
+  <!-- Actor 2: Quiz Player -->
+  <circle cx="60" cy="180" r="14" fill="#fff" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="194" x2="60" y2="225" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="205" x2="40" y2="215" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="205" x2="80" y2="215" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="225" x2="45" y2="250" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="60" y1="225" x2="75" y2="250" stroke="#1e293b" stroke-width="1.5"/>
+  <text x="60" y="260" font-size="10" font-family="sans-serif" text-anchor="middle" font-weight="bold">Quiz Player</text>
+  
+  <!-- Use cases -->
+  <ellipse cx="270" cy="50" rx="65" ry="16" fill="#fff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="270" y="54" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC1: Search &amp; Filter Countries</text>
+  
+  <ellipse cx="270" cy="90" rx="65" ry="16" fill="#fff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="270" y="94" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC2: Inspect Country Details</text>
+  
+  <ellipse cx="270" cy="130" rx="65" ry="16" fill="#fff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="270" y="134" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC3: Compare Nations (up to 3)</text>
+  
+  <ellipse cx="440" cy="65" rx="65" ry="16" fill="#fff" stroke="#d97706" stroke-width="1.5"/>
+  <text x="440" y="69" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC4: Play 6 Quiz Game Modes</text>
+  
+  <ellipse cx="440" cy="110" rx="65" ry="16" fill="#fff" stroke="#d97706" stroke-width="1.5"/>
+  <text x="440" y="114" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC5: Daily Seeded Challenge</text>
+  
+  <ellipse cx="440" cy="155" rx="65" ry="16" fill="#fff" stroke="#059669" stroke-width="1.5"/>
+  <text x="440" y="159" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC6: View Analytics Dashboard</text>
+  
+  <ellipse cx="360" cy="205" rx="75" ry="16" fill="#fff" stroke="#475569" stroke-width="1.5"/>
+  <text x="360" y="209" font-size="8.5" font-family="sans-serif" text-anchor="middle">UC7: Manage Settings &amp; Theme</text>
+  
+  <!-- Association Lines -->
+  <line x1="85" y1="100" x2="205" y2="55" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="105" x2="205" y2="90" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="110" x2="205" y2="130" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="115" x2="285" y2="205" stroke="#64748b" stroke-width="1.2"/>
+  
+  <line x1="85" y1="200" x2="375" y2="70" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="205" x2="375" y2="115" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="210" x2="375" y2="160" stroke="#64748b" stroke-width="1.2"/>
+  <line x1="85" y1="215" x2="285" y2="205" stroke="#64748b" stroke-width="1.2"/>
+</svg>
+    <div class="fig-cap">Figure 4.1: UML Use Case Diagram for the FlagForge Learning Platform</div>
+  </div>
+  <table>
+    <tr>
+      <th style="width:10%;">ID</th>
+      <th style="width:25%;">Use Case</th>
+      <th style="width:20%;">Actor</th>
+      <th style="width:45%;">System Outcome</th>
+    </tr>
+    <tr><td>UC1</td><td>Search &amp; Filter Atlas</td><td>Guest Learner</td><td>Displays filtered country cards with URL query synchronization</td></tr>
+    <tr><td>UC2</td><td>Inspect Country Detail</td><td>Guest Learner</td><td>Shows hero flag, key facts, Wikipedia extract, and live capital weather</td></tr>
+    <tr><td>UC3</td><td>Compare Nations</td><td>Guest Learner</td><td>Generates side-by-side benchmarking matrix with Recharts radar and bar charts</td></tr>
+    <tr><td>UC4</td><td>Play 6 Quiz Modes</td><td>Quiz Player</td><td>Executes interactive gameplay loop with timer bonus and streak multiplier</td></tr>
+    <tr><td>UC5</td><td>Daily Challenge</td><td>Quiz Player</td><td>Plays UTC-seeded 10-question challenge and shares Wordle-style emoji grid</td></tr>
+    <tr><td>UC6</td><td>View Analytics</td><td>Quiz Player</td><td>Inspects accuracy line charts, regional radar, and unlocked achievements</td></tr>
+    <tr><td>UC7</td><td>Toggle Settings</td><td>All Visitors</td><td>Updates theme (light/dark), sound effects, and reduced-motion preferences</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">16</div>
+  <h3 class="subsec-head">4.6.2 Class and Object Diagram</h3>
+  <p>
+    The domain class model illustrates the core TypeScript interfaces governing the application. The central <code>Country</code>
+    entity links to procedurally generated <code>QuizQuestion</code> instances, while player actions mutate the <code>ProgressState</code>.
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="240" viewBox="0 0 650 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Country Class -->
+  <rect x="10" y="10" width="180" height="150" rx="3" fill="#f8fafc" stroke="#1e40af" stroke-width="1.5"/>
+  <rect x="10" y="10" width="180" height="24" fill="#1e40af"/>
+  <text x="100" y="26" font-size="10.5" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle">Country</text>
+  <text x="18" y="48" font-size="8.5" font-family="monospace">+ cca3: string</text>
+  <text x="18" y="62" font-size="8.5" font-family="monospace">+ name: { common, official }</text>
+  <text x="18" y="76" font-size="8.5" font-family="monospace">+ capital: string[]</text>
+  <text x="18" y="90" font-size="8.5" font-family="monospace">+ region: Region</text>
+  <text x="18" y="104" font-size="8.5" font-family="monospace">+ population: number</text>
+  <text x="18" y="118" font-size="8.5" font-family="monospace">+ area: number</text>
+  <text x="18" y="132" font-size="8.5" font-family="monospace">+ flags: { svg, png, alt }</text>
+  <text x="18" y="146" font-size="8.5" font-family="monospace">+ borders: string[]</text>
+
+  <!-- QuizQuestion Class -->
+  <rect x="230" y="10" width="190" height="135" rx="3" fill="#f8fafc" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="230" y="10" width="190" height="24" fill="#b45309"/>
+  <text x="325" y="26" font-size="10.5" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle">QuizQuestion</text>
+  <text x="238" y="48" font-size="8.5" font-family="monospace">+ id: string</text>
+  <text x="238" y="62" font-size="8.5" font-family="monospace">+ mode: QuizMode</text>
+  <text x="238" y="76" font-size="8.5" font-family="monospace">+ prompt: string</text>
+  <text x="238" y="90" font-size="8.5" font-family="monospace">+ targetCountry: Country</text>
+  <text x="238" y="104" font-size="8.5" font-family="monospace">+ options: QuizOption[4]</text>
+  <text x="238" y="118" font-size="8.5" font-family="monospace">+ explanation: string</text>
+  <text x="238" y="132" font-size="8.5" font-family="monospace">+ difficulty: Difficulty</text>
+
+  <!-- ProgressState Class -->
+  <rect x="460" y="10" width="180" height="150" rx="3" fill="#f8fafc" stroke="#047857" stroke-width="1.5"/>
+  <rect x="460" y="10" width="180" height="24" fill="#047857"/>
+  <text x="550" y="26" font-size="10.5" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle">ProgressState</text>
+  <text x="468" y="48" font-size="8.5" font-family="monospace">+ streak: { current, best }</text>
+  <text x="468" y="62" font-size="8.5" font-family="monospace">+ totalGamesPlayed: number</text>
+  <text x="468" y="76" font-size="8.5" font-family="monospace">+ totalCorrectAnswers: number</text>
+  <text x="468" y="90" font-size="8.5" font-family="monospace">+ regionAccuracy: Record</text>
+  <text x="468" y="104" font-size="8.5" font-family="monospace">+ modeAccuracy: Record</text>
+  <text x="468" y="118" font-size="8.5" font-family="monospace">+ questionHistory: History[]</text>
+  <text x="468" y="132" font-size="8.5" font-family="monospace">+ dailyChallenges: Record</text>
+  <text x="468" y="146" font-size="8.5" font-family="monospace">+ achievements: Badge[]</text>
+
+  <!-- Association / Relationships -->
+  <line x1="190" y1="75" x2="230" y2="75" stroke="#475569" stroke-width="1.5"/>
+  <text x="208" y="70" font-size="8" font-family="sans-serif">1..*</text>
+  
+  <line x1="420" y1="75" x2="460" y2="75" stroke="#475569" stroke-width="1.5"/>
+  <text x="435" y="70" font-size="8" font-family="sans-serif">records</text>
+  
+  <text x="325" y="210" font-size="9" font-style="italic" font-family="sans-serif" fill="#475569" text-anchor="middle">Figure 4.2: Domain Class Model mapping Countries, Deterministic Questions, and Persisted Progress</text>
+</svg>
+    <div class="fig-cap">Figure 4.2: UML Class and Object Model Representing Core Domain Entities</div>
+  </div>
+  <table>
+    <tr>
+      <th style="width:20%;">Entity</th>
+      <th style="width:30%;">Key Attributes</th>
+      <th style="width:50%;">Domain Responsibility</th>
+    </tr>
+    <tr><td><strong>Country</strong></td><td>cca3, name, capital, region, population, area, flags, borders</td><td>Normalized sovereign state representation complying with ISO standards</td></tr>
+    <tr><td><strong>QuizQuestion</strong></td><td>id, mode, prompt, targetCountry, options[4], explanation</td><td>Self-contained trivia challenge with 1 correct answer and 3 regional distractors</td></tr>
+    <tr><td><strong>GameState</strong></td><td>currentIndex, score, streak, multiplier, livesRemaining, isFinished</td><td>Active gameplay loop session telemetry and performance tracking</td></tr>
+    <tr><td><strong>ProgressState</strong></td><td>streak, totalGames, regionAccuracy, modeAccuracy, questionHistory</td><td>Longitudinal learning analytics persisted across browser sessions</td></tr>
+    <tr><td><strong>SettingsState</strong></td><td>theme, sound, reducedMotion, units, highContrast</td><td>User interface preferences and sensory comfort accessibility controls</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">17</div>
+  <h3 class="subsec-head">4.6.3 Activity Diagram</h3>
+  <p>
+    The Activity Diagram models the workflow of the Quiz Engine, illustrating the decision logic that governs timer expiration,
+    answer evaluation, speed bonuses, streak multiplier escalation, and session recording:
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="260" viewBox="0 0 650 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-act" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+    </marker>
+  </defs>
+  <!-- Start -->
+  <circle cx="40" cy="130" r="12" fill="#0f172a"/>
+  
+  <line x1="52" y1="130" x2="80" y2="130" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arr-act)"/>
+  
+  <!-- Step 1: Select Mode -->
+  <rect x="82" y="110" width="95" height="40" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="129" y="128" font-size="8.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Select Mode &amp;</text>
+  <text x="129" y="140" font-size="8" font-family="sans-serif" text-anchor="middle">Difficulty</text>
+  
+  <line x1="177" y1="130" x2="205" y2="130" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arr-act)"/>
+  
+  <!-- Step 2: Render Question -->
+  <rect x="207" y="110" width="100" height="40" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="257" y="128" font-size="8.5" font-family="sans-serif" text-anchor="middle" font-weight="600">Render Question</text>
+  <text x="257" y="140" font-size="8" font-family="sans-serif" text-anchor="middle">&amp; Start Timer</text>
+  
+  <line x1="307" y1="130" x2="335" y2="130" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arr-act)"/>
+  
+  <!-- Decision: Answer Correct? -->
+  <polygon points="370,105 415,130 370,155 325,130" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="370" y="133" font-size="8" font-family="sans-serif" text-anchor="middle" font-weight="bold">Correct?</text>
+  
+  <!-- Branch Yes: Streak ++ -->
+  <path d="M 370,105 L 370,55 L 440,55" fill="none" stroke="#059669" stroke-width="1.5" marker-end="url(#arr-act)"/>
+  <text x="385" y="75" font-size="8" font-family="sans-serif" fill="#059669" font-weight="bold">Yes</text>
+  <rect x="442" y="35" width="105" height="40" rx="5" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="494" y="52" font-size="8" font-family="sans-serif" text-anchor="middle" font-weight="600">Streak ++ &amp;</text>
+  <text x="494" y="64" font-size="8" font-family="sans-serif" text-anchor="middle">Speed Multiplier</text>
+  
+  <!-- Branch No: Reset Streak -->
+  <path d="M 370,155 L 370,205 L 440,205" fill="none" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-act)"/>
+  <text x="385" y="185" font-size="8" font-family="sans-serif" fill="#dc2626" font-weight="bold">No / Timeout</text>
+  <rect x="442" y="185" width="105" height="40" rx="5" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="494" y="202" font-size="8" font-family="sans-serif" text-anchor="middle" font-weight="600">Lives - 1 &amp;</text>
+  <text x="494" y="214" font-size="8" font-family="sans-serif" text-anchor="middle">Reset Streak to 0</text>
+  
+  <!-- Merge to check GameOver -->
+  <path d="M 547,55 L 575,55 L 575,115" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+  <path d="M 547,205 L 575,205 L 575,145" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+  
+  <rect x="545" y="115" width="60" height="30" rx="4" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="575" y="132" font-size="7.5" font-family="sans-serif" text-anchor="middle">Record Stat</text>
+  
+  <circle cx="630" cy="130" r="10" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+  <circle cx="630" cy="130" r="6" fill="#0f172a"/>
+  
+  <line x1="605" y1="130" x2="618" y2="130" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arr-act)"/>
+</svg>
+    <div class="fig-cap">Figure 4.3: UML Activity Diagram Representing the Interactive Quiz Engine Loop</div>
+  </div>
+  <p>
+    <strong>Gameplay Algorithm:</strong> When an answer is submitted (via mouse click or keyboard 1-4 shortcuts), the engine evaluates
+    correctness. A correct answer calculates points using: <code>Score = (BasePoints + RemainingSeconds &times; 10) &times; StreakMultiplier</code>.
+    An incorrect answer or timeout decrements remaining lives, resets the streak multiplier to 1.0&times;, and logs the missed question
+    to enable targeted post-game practice.
+  </p>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">18</div>
+  <h3 class="subsec-head">4.6.4 Sequence Diagram</h3>
+  <p>
+    The Sequence Diagram captures the asynchronous message interchange required to fetch, merge, and render country records
+    while adhering strictly to REST Countries' 10-field query recommendation:
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="260" viewBox="0 0 650 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-seq" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e40af"/>
+    </marker>
+  </defs>
+  <!-- Lifelines -->
+  <rect x="25" y="10" width="85" height="28" rx="4" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+  <text x="67" y="27" font-size="9" font-family="sans-serif" text-anchor="middle" font-weight="bold">Browser</text>
+  <line x1="67" y1="38" x2="67" y2="250" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <rect x="160" y="10" width="105" height="28" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="212" y="27" font-size="9" font-family="sans-serif" text-anchor="middle" font-weight="bold">useCountries()</text>
+  <line x1="212" y1="38" x2="212" y2="250" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <rect x="320" y="10" width="125" height="28" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="382" y="27" font-size="9" font-family="sans-serif" text-anchor="middle" font-weight="bold">Data Layer Adapter</text>
+  <line x1="382" y1="38" x2="382" y2="250" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <rect x="495" y="10" width="135" height="28" rx="4" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text x="562" y="27" font-size="9" font-family="sans-serif" text-anchor="middle" font-weight="bold">REST Countries API</text>
+  <line x1="562" y1="38" x2="562" y2="250" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Messages -->
+  <line x1="67" y1="58" x2="207" y2="58" stroke="#1e40af" stroke-width="1.3" marker-end="url(#arr-seq)"/>
+  <text x="135" y="53" font-size="7.5" font-family="sans-serif" text-anchor="middle">1: query['countries']</text>
+
+  <line x1="212" y1="78" x2="377" y2="78" stroke="#1e40af" stroke-width="1.3" marker-end="url(#arr-seq)"/>
+  <text x="295" y="73" font-size="7.5" font-family="sans-serif" text-anchor="middle">2: getAllCountries()</text>
+
+  <!-- Parallel batch calls -->
+  <line x1="382" y1="100" x2="557" y2="100" stroke="#b45309" stroke-width="1.3" marker-end="url(#arr-seq)"/>
+  <text x="470" y="95" font-size="7.5" font-family="sans-serif" text-anchor="middle">3a: Batch 1 (9 fields &le; 10)</text>
+
+  <line x1="382" y1="120" x2="557" y2="120" stroke="#b45309" stroke-width="1.3" marker-end="url(#arr-seq)"/>
+  <text x="470" y="115" font-size="7.5" font-family="sans-serif" text-anchor="middle">3b: Batch 2 (10 fields &le; 10)</text>
+
+  <line x1="562" y1="145" x2="387" y2="145" stroke="#059669" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arr-seq)"/>
+  <text x="470" y="140" font-size="7.5" font-family="sans-serif" text-anchor="middle">4: JSON batch responses</text>
+
+  <rect x="340" y="160" width="85" height="24" rx="3" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+  <text x="382" y="175" font-size="7" font-family="sans-serif" text-anchor="middle">Merge by cca3</text>
+
+  <line x1="382" y1="200" x2="217" y2="200" stroke="#1e40af" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arr-seq)"/>
+  <text x="295" y="195" font-size="7.5" font-family="sans-serif" text-anchor="middle">5: Normalized Country[]</text>
+
+  <line x1="212" y1="225" x2="72" y2="225" stroke="#1e40af" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arr-seq)"/>
+  <text x="135" y="220" font-size="7.5" font-family="sans-serif" text-anchor="middle">6: Render Country Grid</text>
+</svg>
+    <div class="fig-cap">Figure 4.4: UML Sequence Diagram for Parallel Batched API Fetching and Normalization</div>
+  </div>
+  <table>
+    <tr>
+      <th style="width:10%;">Seq</th>
+      <th style="width:25%;">Sender &rarr; Receiver</th>
+      <th style="width:40%;">Operation / Message</th>
+      <th style="width:25%;">Payload</th>
+    </tr>
+    <tr><td>1</td><td>Explorer &rarr; useCountries</td><td>Mount query with 24h stale-time</td><td><code>['countries']</code> query key</td></tr>
+    <tr><td>2</td><td>useCountries &rarr; Adapter</td><td>Invoke getAllCountries()</td><td>AbortSignal + timeout (8s)</td></tr>
+    <tr><td>3a</td><td>Adapter &rarr; REST Countries</td><td>GET ?fields=cca3,name,capital,region,flags...</td><td>Batch 1 (9 fields &le; 10)</td></tr>
+    <tr><td>3b</td><td>Adapter &rarr; REST Countries</td><td>GET ?fields=cca3,languages,currencies,borders...</td><td>Batch 2 (10 fields &le; 10)</td></tr>
+    <tr><td>4</td><td>REST Countries &rarr; Adapter</td><td>Asynchronous JSON HTTP responses</td><td>Partial country records</td></tr>
+    <tr><td>5</td><td>Adapter Internal</td><td>In-memory merge by cca3 + Zod validation</td><td>Normalized Country[] (250 items)</td></tr>
+    <tr><td>6</td><td>Adapter &rarr; Explorer</td><td>Cache population &amp; state update</td><td>Rendered country grid / list</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">19</div>
+  <h3 class="subsec-head">4.6.5 Storage &amp; Schema Diagram</h3>
+  <p>
+    Rather than maintaining an expensive remote database, FlagForge utilizes browser <code>localStorage</code> managed by Zustand
+    persist middleware with versioned schema migration guarantees:
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="210" viewBox="0 0 650 210" xmlns="http://www.w3.org/2000/svg">
+  <!-- Key 1: flagforge-settings -->
+  <rect x="15" y="15" width="195" height="150" rx="4" fill="#f8fafc" stroke="#2563eb" stroke-width="1.5"/>
+  <rect x="15" y="15" width="195" height="24" fill="#2563eb"/>
+  <text x="112" y="31" font-size="9.5" font-weight="bold" fill="#fff" font-family="sans-serif" text-anchor="middle">flagforge-settings (v2)</text>
+  <text x="25" y="55" font-size="8" font-family="monospace">theme: 'system'|'light'|'dark'</text>
+  <text x="25" y="70" font-size="8" font-family="monospace">sound: boolean (default false)</text>
+  <text x="25" y="85" font-size="8" font-family="monospace">reducedMotion: boolean</text>
+  <text x="25" y="100" font-size="8" font-family="monospace">units: 'metric' | 'imperial'</text>
+  <text x="25" y="115" font-size="8" font-family="monospace">highContrast: boolean</text>
+  <text x="25" y="130" font-size="7.5" font-family="sans-serif" fill="#2563eb">Migration: adds units &amp; contrast</text>
+
+  <!-- Key 2: flagforge-progress -->
+  <rect x="225" y="15" width="220" height="150" rx="4" fill="#f8fafc" stroke="#d97706" stroke-width="1.5"/>
+  <rect x="225" y="15" width="220" height="24" fill="#d97706"/>
+  <text x="335" y="31" font-size="9.5" font-weight="bold" fill="#fff" font-family="sans-serif" text-anchor="middle">flagforge-progress (v2)</text>
+  <text x="235" y="55" font-size="8" font-family="monospace">streak: { current, best, date }</text>
+  <text x="235" y="70" font-size="8" font-family="monospace">totalGamesPlayed: number</text>
+  <text x="235" y="85" font-size="8" font-family="monospace">regionAccuracy: Record&lt;string&gt;</text>
+  <text x="235" y="100" font-size="8" font-family="monospace">questionHistory: History[] (&le;200)</text>
+  <text x="235" y="115" font-size="8" font-family="monospace">dailyChallenges: Record&lt;string&gt;</text>
+  <text x="235" y="130" font-size="8" font-family="monospace">achievements: Achievement[]</text>
+  <text x="235" y="145" font-size="7.5" font-family="sans-serif" fill="#d97706">Migration: adds per-question audit</text>
+
+  <!-- Key 3: flagforge-favorites -->
+  <rect x="460" y="15" width="175" height="150" rx="4" fill="#f8fafc" stroke="#059669" stroke-width="1.5"/>
+  <rect x="460" y="15" width="175" height="24" fill="#059669"/>
+  <text x="547" y="31" font-size="9.5" font-weight="bold" fill="#fff" font-family="sans-serif" text-anchor="middle">flagforge-favorites (v2)</text>
+  <text x="470" y="55" font-size="8" font-family="monospace">favorites: string[] (cca3)</text>
+  <text x="470" y="70" font-size="8" font-family="monospace">recentSearches: string[] (&le;10)</text>
+  <text x="470" y="90" font-size="7.5" font-family="sans-serif" fill="#059669">Migration: deduplicates recents</text>
+  
+  <text x="325" y="190" font-size="9" font-style="italic" font-family="sans-serif" fill="#475569" text-anchor="middle">Figure 4.5: Browser LocalStorage Schemas with Versioned Zustand Migrations</text>
+</svg>
+    <div class="fig-cap">Figure 4.5: Browser LocalStorage Schemas with Versioned Zustand Migrations</div>
+  </div>
+  <table>
+    <tr>
+      <th style="width:25%;">Storage Partition</th>
+      <th style="width:20%;">Schema Version</th>
+      <th style="width:30%;">Migration Operation</th>
+      <th style="width:25%;">Fault Tolerance</th>
+    </tr>
+    <tr><td><code>flagforge-settings</code></td><td>v1 &rarr; v2</td><td>Adds highContrast and units fields; preserves existing theme and sound</td><td>Falls back to system defaults</td></tr>
+    <tr><td><code>flagforge-progress</code></td><td>v1 &rarr; v2</td><td>Initializes questionHistory audit array (capped at 200) without losing streaks</td><td>Preserves high scores and streak count</td></tr>
+    <tr><td><code>flagforge-favorites</code></td><td>v1 &rarr; v2</td><td>Deduplicates recent search history; validates cca3 ISO codes</td><td>Gracefully cleans corrupted items</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">20</div>
+  <h3 class="subsec-head">4.6.6 Component Architecture Diagram</h3>
+  <p>
+    The component architecture strictly adheres to unidirectional dependency flows: Presentation components import from
+    the Hooks API, Hooks invoke Data and State Modules, and Data Modules communicate with External Services:
+  </p>
+  <table>
+    <tr>
+      <th style="width:22%;">Subsystem Folder</th>
+      <th style="width:14%; text-align:center;">File Count</th>
+      <th style="width:16%; text-align:center;">Lines of Code</th>
+      <th style="width:48%;">Primary Responsibility</th>
+    </tr>
+    <tr><td><code>src/app</code></td><td style="text-align:center;">14</td><td style="text-align:center;">1,850</td><td>Next.js 15 App Router pages, SSG params, and metadata generation</td></tr>
+    <tr><td><code>src/components/ui</code></td><td style="text-align:center;">15</td><td style="text-align:center;">1,920</td><td>Accessible Radix UI primitives with WCAG 2.2 AA visible focus rings</td></tr>
+    <tr><td><code>src/components/layout</code></td><td style="text-align:center;">7</td><td style="text-align:center;">1,140</td><td>AppShell, TopNav, MobileTabBar, CommandPalette (Cmd+K), ThemeToggle</td></tr>
+    <tr><td><code>src/components/features</code></td><td style="text-align:center;">18</td><td style="text-align:center;">3,450</td><td>Explorer view, Country profile, Compare matrix, Quiz HUD, Stats dashboard</td></tr>
+    <tr><td><code>src/lib/api</code></td><td style="text-align:center;">5</td><td style="text-align:center;">1,620</td><td>Batched REST Countries client, Wikipedia client, Open-Meteo client, Fallback</td></tr>
+    <tr><td><code>src/lib/quiz</code></td><td style="text-align:center;">7</td><td style="text-align:center;">1,280</td><td>Mulberry32 PRNG, 6 question generators, distractor matching, scoring</td></tr>
+    <tr><td><code>src/store</code></td><td style="text-align:center;">3</td><td style="text-align:center;">640</td><td>Zustand persisted stores with v1 &rarr; v2 migrations</td></tr>
+    <tr><td><code>src/tests</code> &amp; <code>e2e</code></td><td style="text-align:center;">8</td><td style="text-align:center;">1,880</td><td>58 Vitest unit tests and 4 Playwright browser e2e test suites</td></tr>
+  </table>
+  <p style="margin-top:10px;">
+    <strong>Three Fundamental Engineering Contracts:</strong> (1) <em>Unidirectional Data Flow:</em> Presentation never writes
+    directly to local storage; all writes pass through Zustand actions. (2) <em>Deterministic Game Logic:</em> The quiz engine is pure
+    and headless, testable in Vitest without React DOM. (3) <em>Graceful Degradation:</em> Zero raw error screens; all errors surface through
+    typed error boundaries with retry callbacks.
+  </p>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">21</div>
+  <h2 class="sec-head">4.7 Gantt Chart</h2>
+  <p>
+    The Gantt chart outlines the structured eight-week academic development lifecycle executed during project implementation:
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="190" viewBox="0 0 650 190" xmlns="http://www.w3.org/2000/svg">
+  <!-- Week Grid -->
+  <line x1="180" y1="20" x2="630" y2="20" stroke="#cbd5e1" stroke-width="1"/>
+  <line x1="180" y1="165" x2="630" y2="165" stroke="#cbd5e1" stroke-width="1"/>
+  
+  <text x="208" y="15" font-size="8" font-family="sans-serif" fill="#64748b" text-anchor="middle">W1</text>
+  <text x="264" y="15" font-size="8" font-family="sans-serif" fill="#64748b" text-anchor="middle">W2</text>
+  <text x="320" y="15" font-size="8" font-family="sans-serif" fill="#64748b" text-anchor="middle">W3</text>
+  <text x="376" y="15" font-size="8" font-family="sans-serif" fill="#64748b" text-anchor="middle">W4</text>
+  <text x="432" y="15" font-size="8" font-family="sans-serif" fill="#64748b" text-anchor="middle">W5</text>
+  <text x="488" y="15" font-size="8" font-family="sans-serif" fill="#64748b" text-anchor="middle">W6</text>
+  <text x="544" y="15" font-size="8" font-family="sans-serif" fill="#64748b" text-anchor="middle">W7</text>
+  <text x="600" y="15" font-size="8" font-family="sans-serif" fill="#64748b" text-anchor="middle">W8</text>
+
+  <!-- Bars -->
+  <text x="15" y="38" font-size="8.5" font-family="sans-serif" font-weight="600">1. Architecture &amp; Data Layer</text>
+  <rect x="180" y="27" width="112" height="15" rx="3" fill="#0284c7"/>
+
+  <text x="15" y="62" font-size="8.5" font-family="sans-serif" font-weight="600">2. Design System &amp; Shell</text>
+  <rect x="236" y="51" width="112" height="15" rx="3" fill="#6366f1"/>
+
+  <text x="15" y="86" font-size="8.5" font-family="sans-serif" font-weight="600">3. Explorer &amp; Compare Nations</text>
+  <rect x="292" y="75" width="112" height="15" rx="3" fill="#0ea5e9"/>
+
+  <text x="15" y="110" font-size="8.5" font-family="sans-serif" font-weight="600">4. Quiz Engine &amp; Daily Mode</text>
+  <rect x="348" y="99" width="112" height="15" rx="3" fill="#f59e0b"/>
+
+  <text x="15" y="134" font-size="8.5" font-family="sans-serif" font-weight="600">5. Testing (Vitest &amp; Playwright)</text>
+  <rect x="460" y="123" width="112" height="15" rx="3" fill="#10b981"/>
+
+  <text x="15" y="158" font-size="8.5" font-family="sans-serif" font-weight="600">6. PWA, Audit &amp; Documentation</text>
+  <rect x="544" y="147" width="86" height="15" rx="3" fill="#8b5cf6"/>
+
+  <text x="325" y="182" font-size="9" font-style="italic" font-family="sans-serif" fill="#475569" text-anchor="middle">Figure 5: Eight-Week Development Timeline (FlagForge Engineering Roadmap)</text>
+</svg>
+    <div class="fig-cap">Figure 5: Project Development Schedule Across Eight Academic Weeks</div>
+  </div>
+  <table>
+    <tr>
+      <th style="width:15%;">Academic Weeks</th>
+      <th style="width:30%;">Engineering Phase</th>
+      <th style="width:55%;">Delivered Artifacts &amp; Modules</th>
+    </tr>
+    <tr><td>Weeks 1 &ndash; 2</td><td>Architecture &amp; Scaffolding</td><td>Next.js 15 setup, Tailwind v4 theme tokens, domain types, Zod schemas</td></tr>
+    <tr><td>Weeks 2 &ndash; 3</td><td>Data Layer &amp; API Clients</td><td>Batched REST Countries client, Wikipedia &amp; Open-Meteo clients, Query cache</td></tr>
+    <tr><td>Weeks 3 &ndash; 4</td><td>Design System &amp; Shell</td><td>Radix primitives, AppShell, TopNav, MobileTabBar, CommandPalette (Cmd+K)</td></tr>
+    <tr><td>Weeks 4 &ndash; 5</td><td>Explorer &amp; Compare Features</td><td>Fuse.js fuzzy search, dynamic filters, country profile SSG, Recharts matrix</td></tr>
+    <tr><td>Weeks 5 &ndash; 6</td><td>Quiz Engine &amp; Daily Mode</td><td>Mulberry32 PRNG, 6 question generators, distractor matching, sound synthesizer</td></tr>
+    <tr><td>Weeks 6 &ndash; 7</td><td>Analytics &amp; Testing</td><td>Stats dashboard, heatmap calendar, 58 Vitest unit tests, Playwright e2e suites</td></tr>
+    <tr><td>Weeks 7 &ndash; 8</td><td>Audit, PWA &amp; Report</td><td>Service Worker, WCAG 2.2 AA axe audit, deploy guide, comprehensive report</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">22</div>
+  <h2 class="sec-head">4.8 Technologies Used</h2>
+  <p>
+    FlagForge harnesses modern open-source web technologies selected for strict type safety, zero runtime bloat, and offline capability:
+  </p>
+  <table>
+    <tr>
+      <th style="width:20%;">Layer / Tool</th>
+      <th style="width:25%;">Technology &amp; Version</th>
+      <th style="width:55%;">Usage &amp; Architectural Rationale</th>
+    </tr>
+    <tr><td>Framework</td><td>Next.js 15.2.1 (App Router), React 19</td><td>Hybrid SSG rendering, server metadata generation, React 19 compiler optimizations</td></tr>
+    <tr><td>Language</td><td>TypeScript 5 (Strict Mode)</td><td>Full type safety across all domain entities, Zod schemas, and hook return signatures</td></tr>
+    <tr><td>Styling &amp; Tokens</td><td>Tailwind CSS v4, Radix UI</td><td>CSS variable-driven design tokens, high-contrast mode, accessible headless primitives</td></tr>
+    <tr><td>Animation</td><td>Framer Motion</td><td>Smooth card entrance transitions with full <code>prefers-reduced-motion</code> compliance</td></tr>
+    <tr><td>Data Ingestion</td><td>TanStack Query v5</td><td>24-hour country cache staleTime, background refetching, and offline cache query hooks</td></tr>
+    <tr><td>Persistence</td><td>Zustand 5 (Persist Middleware)</td><td>Lightweight client state with versioned migrations (v1 &rarr; v2) into localStorage</td></tr>
+    <tr><td>Search Indexing</td><td>Fuse.js</td><td>Instant client-side fuzzy searching with weighted scoring across name, capital, and cca3</td></tr>
+    <tr><td>Visualizations</td><td>Recharts 2.15</td><td>Interactive normalized radar charts and dual-metric population/area bar charts</td></tr>
+    <tr><td>Testing &amp; A11y</td><td>Vitest 3, Playwright, axe-core</td><td>58 Vitest unit tests, multi-browser e2e automation, and automated WCAG 2.2 AA audits</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">23</div>
+  <h2 class="sec-head">4.9 System Architecture</h2>
+  <p>
+    The system architecture defines the hierarchical relationships between user interactions, domain computation, and external providers:
+  </p>
+  <div class="fig-wrap">
+    <svg width="650" height="230" viewBox="0 0 650 230" xmlns="http://www.w3.org/2000/svg">
+  <!-- Presentation Layer -->
+  <rect x="20" y="10" width="610" height="48" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="325" y="28" font-size="11" font-weight="bold" font-family="sans-serif" fill="#1e40af" text-anchor="middle">Presentation Layer (Next.js 15 App Router &amp; React 19)</text>
+  <text x="325" y="44" font-size="8.5" font-family="sans-serif" fill="#3b82f6" text-anchor="middle">AppShell &bull; Navbar &bull; MobileTabBar &bull; Cmd+K Palette &bull; /explore &bull; /country/[code] &bull; /compare &bull; /play &bull; /daily &bull; /stats</text>
+
+  <!-- State & Logic Layer -->
+  <rect x="20" y="72" width="610" height="48" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="325" y="90" font-size="11" font-weight="bold" font-family="sans-serif" fill="#92400e" text-anchor="middle">State &amp; Domain Engine Layer</text>
+  <text x="325" y="106" font-size="8.5" font-family="sans-serif" fill="#b45309" text-anchor="middle">Zustand Stores (Settings, Progress, Favorites) &bull; Mulberry32 Seeded Quiz Engine &bull; Web Audio Synthesizer</text>
+
+  <!-- Data Integration Layer -->
+  <rect x="20" y="134" width="610" height="48" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="325" y="152" font-size="11" font-weight="bold" font-family="sans-serif" fill="#065f46" text-anchor="middle">Data Access &amp; Federation Layer (TanStack Query &amp; API Clients)</text>
+  <text x="325" y="168" font-size="8.5" font-family="sans-serif" fill="#047857" text-anchor="middle">Batched REST Countries Client (&le;10 fields) &bull; Wikipedia Summary Client &bull; Open-Meteo Weather Client &bull; Offline Fallback</text>
+
+  <!-- External Infrastructure Layer -->
+  <rect x="20" y="196" width="610" height="30" rx="4" fill="#f8fafc" stroke="#475569" stroke-width="1.2"/>
+  <text x="325" y="215" font-size="9" font-family="sans-serif" fill="#334155" text-anchor="middle">External &amp; Browser Platform: REST Countries v3.1 &bull; Wikipedia API &bull; Open-Meteo &bull; LocalStorage &bull; Service Worker Cache</text>
+</svg>
+    <div class="fig-cap">Figure 6: Layered System Architecture for the FlagForge Application</div>
+  </div>
+  <table>
+    <tr>
+      <th style="width:30%;">Resilience Setting</th>
+      <th style="width:25%;">Configured Threshold</th>
+      <th style="width:45%;">Operational Purpose</th>
+    </tr>
+    <tr><td>REST Countries Request Timeout</td><td>8,000 ms</td><td>Prevents UI thread hanging on slow mobile cellular networks</td></tr>
+    <tr><td>Wikipedia / Weather Timeout</td><td>6,000 ms</td><td>Fails fast to avoid blocking country facts and map rendering</td></tr>
+    <tr><td>Country Cache Stale-Time</td><td>24 Hours (86,400,000 ms)</td><td>Minimizes external API calls and ensures offline availability</td></tr>
+    <tr><td>Automatic Retry Backoff</td><td>2 Retries (Exponential)</td><td>Survives transient connection drops and socket resets</td></tr>
+    <tr><td>Question History Capacity</td><td>Capped at 200 items</td><td>Prevents unbounded local storage growth and performance degradation</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">24</div>
+  <h1 class="chp-head">5. Implementation</h1>
+  <p>
+    FlagForge is implemented as a modern, unified Next.js 15 application utilizing the App Router architecture.
+    The codebase emphasizes strict structural separation: presentation components reside in <code>src/components</code>,
+    page routes in <code>src/app</code>, business logic and API adapters in <code>src/lib</code>, and persisted client state
+    in <code>src/store</code>.
+  </p>
+  <table>
+    <tr>
+      <th style="width:25%;">Directory Path</th>
+      <th style="width:75%;">Architectural Responsibility &amp; Modules</th>
+    </tr>
+    <tr><td><code>src/app</code></td><td>Page routes (<code>/</code>, <code>/explore</code>, <code>/country/[code]</code>, <code>/compare</code>, <code>/play</code>, <code>/daily</code>, <code>/stats</code>, <code>/design</code>), metadata, error boundaries</td></tr>
+    <tr><td><code>src/components/ui</code></td><td>Themed accessible primitives: Button, Card, Input, Slider, Dialog, Tabs, Badge, Toast</td></tr>
+    <tr><td><code>src/components/layout</code></td><td>AppShell, TopNav, MobileTabBar, CommandPalette (Cmd+K), ThemeToggle, Footer</td></tr>
+    <tr><td><code>src/components/features</code></td><td>Specialized views: ExplorerView, CountryDetailView, CompareView, QuestionCard, StatsDashboard</td></tr>
+    <tr><td><code>src/lib/api</code></td><td>Batched REST Countries client, Wikipedia client, Open-Meteo client, embedded offline fallback dataset</td></tr>
+    <tr><td><code>src/lib/quiz</code></td><td>Mulberry32 PRNG, 6 question generator algorithms, distractor matcher, score formula</td></tr>
+    <tr><td><code>src/store</code></td><td>Zustand stores (settings, progress, favorites) with localStorage persist &amp; versioned migrations</td></tr>
+    <tr><td><code>public/sw.js</code></td><td>Service worker providing cache-first strategy for assets and offline fallback responses</td></tr>
+  </table>
+  <p style="margin-top:14px;">
+    <strong>Key Implementation Principles:</strong> (1) <em>Field Limitation Enforcement:</em> REST Countries API requests never
+    exceed 10 fields per query, preventing upstream rejection. (2) <em>Deterministic Seeding:</em> Daily challenges produce the exact
+    same sequence of questions worldwide via Mulberry32 math. (3) <em>Sensory Accessibility:</em> Web Audio sound effects are synthesized
+    in code without external audio downloads and respect the user's sound toggle and reduced-motion settings.
+  </p>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">25</div>
+  <h2 class="sec-head">5.1 Source Code Excerpts</h2>
+  <h3 class="subsec-head">src/lib/api/restcountries.ts — Batched API Ingestion &amp; cca3 Merge</h3>
+  <p>
+    Enforces the &le;10 fields per query constraint by issuing parallel HTTP requests and merging records by ISO <code>cca3</code> key:
+  </p>
+<pre>
+import { FALLBACK_COUNTRIES } from "./fallback-countries";
+import type { Country } from "@/types/country";
+
+const RESTCOUNTRIES_BASE = "https://restcountries.com/v3.1";
+// Respect strict &le;10 fields rule per request
+const BATCH_1_FIELDS = "cca3,cca2,name,capital,region,subregion,flags,population,area";
+const BATCH_2_FIELDS = "cca3,languages,currencies,borders,latlng,timezones,continents,landlocked,unMember,car";
+
+export async function getAllCountries(signal?: AbortSignal): Promise&lt;Country[]&gt; {
+  try {
+    const [res1, res2] = await Promise.all([
+      fetch(`${RESTCOUNTRIES_BASE}/all?fields=${BATCH_1_FIELDS}`, { signal }),
+      fetch(`${RESTCOUNTRIES_BASE}/all?fields=${BATCH_2_FIELDS}`, { signal }),
+    ]);
+
+    if (!res1.ok || !res2.ok) throw new Error("Failed to fetch country batches");
+
+    const [batch1, batch2] = await Promise.all([res1.json(), res2.json()]);
+    const b2Map = new Map&lt;string, any&gt;(batch2.map((c: any) =&gt; [c.cca3, c]));
+
+    const merged: Country[] = batch1.map((b1: any) =&gt; {
+      const b2 = b2Map.get(b1.cca3) || {};
+      return normalizeCountry({ ...b1, ...b2 });
+    });
+
+    return merged.sort((a, b) =&gt; a.name.common.localeCompare(b.name.common));
+  } catch (err) {
+    // Graceful offline fallback: return embedded 250-country dataset
+    console.warn("[REST Countries] Network failed, using embedded fallback dataset:", err);
+    return FALLBACK_COUNTRIES;
+  }
+}
+</pre>
+  <h3 class="subsec-head">src/lib/quiz/rng.ts — Mulberry32 Deterministic Seeded PRNG</h3>
+  <p>
+    Guarantees reproducible question sequences for daily challenges across all browsers and timezones:
+  </p>
+<pre>
+/**
+ * Mulberry32 32-bit seeded pseudo-random number generator.
+ * Produces deterministic 32-bit floats in [0, 1) from an integer seed.
+ */
+export function mulberry32(seed: number): () =&gt; number {
+  return function () {
+    let t = (seed += 0x6d2b79f5);
+    t = Math.imul(t ^ (t &gt;&gt;&gt; 15), t | 1);
+    t ^= t + Math.imul(t ^ (t &gt;&gt;&gt; 7), t | 61);
+    return ((t ^ (t &gt;&gt;&gt; 14)) &gt;&gt;&gt; 0) / 4294967296;
+  };
+}
+
+/** Converts numeric date string (e.g. "2026-10-24") into a numeric integer seed */
+export function dateToSeed(dateStr: string): number {
+  let hash = 0;
+  for (let i = 0; i &lt; dateStr.length; i++) {
+    hash = (hash &lt;&lt; 5) - hash + dateStr.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+}
+</pre>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">26</div>
+  <h3 class="subsec-head">src/lib/quiz/generator.ts — Question Generation &amp; Regional Distractor Selection</h3>
+  <p>
+    Prioritizes plausible distractors from the same geographic region before falling back to global pools:
+  </p>
+<pre>
+import type { Country } from "@/types/country";
+import type { QuizQuestion, QuizOption, QuizMode } from "./types";
+
+export function pickDistractors(
+  target: Country,
+  pool: Country[],
+  rng: () =&gt; number,
+  count = 3
+): Country[] {
+  // 1. Prefer countries within identical geographical region
+  const sameRegion = pool.filter((c) =&gt; c.cca3 !== target.cca3 &amp;&amp; c.region === target.region);
+  const selected: Country[] = [];
+  const available = [...sameRegion];
+
+  while (selected.length &lt; count &amp;&amp; available.length &gt; 0) {
+    const idx = Math.floor(rng() * available.length);
+    selected.push(available.splice(idx, 1)[0]);
+  }
+
+  // 2. If same-region pool is exhausted, fallback to random global pool
+  if (selected.length &lt; count) {
+    const globalPool = pool.filter(
+      (c) =&gt; c.cca3 !== target.cca3 &amp;&amp; !selected.some((s) =&gt; s.cca3 === c.cca3)
+    );
+    while (selected.length &lt; count &amp;&amp; globalPool.length &gt; 0) {
+      const idx = Math.floor(rng() * globalPool.length);
+      selected.push(globalPool.splice(idx, 1)[0]);
+    }
+  }
+
+  return selected;
+}
+
+export function generateFlagQuestion(
+  target: Country,
+  pool: Country[],
+  rng: () =&gt; number
+): QuizQuestion {
+  const distractors = pickDistractors(target, pool, rng, 3);
+  const options: QuizOption[] = [
+    { id: target.cca3, label: target.name.common, isCorrect: true },
+    ...distractors.map((d) =&gt; ({ id: d.cca3, label: d.name.common, isCorrect: false })),
+  ];
+  // Shuffle deterministically
+  shuffle(options, rng);
+
+  return {
+    id: `flag-${target.cca3}`,
+    mode: "flag_to_country",
+    prompt: "Which nation does this flag belong to?",
+    targetCountry: target,
+    options,
+    explanation: `${target.name.common} is located in ${target.region} with capital ${target.capital[0] || 'N/A'}.`,
+  };
+}
+</pre>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">27</div>
+  <h3 class="subsec-head">src/lib/quiz/scoring.ts — Dynamic Scoring Formula &amp; Streak Multipliers</h3>
+  <p>
+    Rewards both accuracy and speed, scaling multipliers up to 3.0&times; for sustained correct streaks:
+  </p>
+<pre>
+export interface ScoreBreakdown {
+  points: number;
+  speedBonus: number;
+  streakMultiplier: number;
+  totalAwarded: number;
+}
+
+export function calculateScore(
+  isCorrect: boolean,
+  timeRemainingSeconds: number,
+  currentStreak: number
+): ScoreBreakdown {
+  if (!isCorrect) {
+    return { points: 0, speedBonus: 0, streakMultiplier: 1.0, totalAwarded: 0 };
+  }
+
+  const basePoints = 100;
+  // Award 10 points per second of remaining time
+  const speedBonus = Math.max(0, Math.round(timeRemainingSeconds * 10));
+
+  // Multiplier tiers: 1-2 streak = 1.0x, 3-4 streak = 1.5x, 5-7 streak = 2.0x, 8+ = 3.0x
+  let streakMultiplier = 1.0;
+  if (currentStreak &gt;= 8) streakMultiplier = 3.0;
+  else if (currentStreak &gt;= 5) streakMultiplier = 2.0;
+  else if (currentStreak &gt;= 3) streakMultiplier = 1.5;
+
+  const totalAwarded = Math.round((basePoints + speedBonus) * streakMultiplier);
+
+  return {
+    points: basePoints,
+    speedBonus,
+    streakMultiplier,
+    totalAwarded,
+  };
+}
+</pre>
+  <h3 class="subsec-head">src/lib/sound.ts — Web Audio API Synthetic Sound Synthesizer</h3>
+  <p>
+    Synthesizes crisp harmonic frequencies without downloading external MP3 files:
+  </p>
+<pre>
+// Zero audio assets needed; synthesizes audio using browser AudioContext
+let audioCtx: AudioContext | null = null;
+
+function getAudioContext(): AudioContext | null {
+  if (typeof window === "undefined") return null;
+  if (!audioCtx) {
+    const AudioCtxClass = window.AudioContext || (window as any).webkitAudioContext;
+    if (AudioCtxClass) audioCtx = new AudioCtxClass();
+  }
+  return audioCtx;
+}
+
+export function playCorrectSound(enabled = true): void {
+  if (!enabled) return;
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  // Play major third ascending chime: 523Hz (C5) -&gt; 659Hz (E5)
+  osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+  osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
+
+  gain.gain.setValueAtTime(0.15, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+
+  osc.start(ctx.currentTime);
+  osc.stop(ctx.currentTime + 0.35);
+}
+</pre>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">28</div>
+  <h3 class="subsec-head">src/store/useProgressStore.ts — Versioned LocalStorage Schema Migrations (v1 &rarr; v2)</h3>
+  <p>
+    Ensures safe upgrades to persisted user state without loss of streak or historical accuracy data:
+  </p>
+<pre>
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import type { ProgressStore } from "@/types/store";
+
+export const useProgressStore = create&lt;ProgressStore&gt;()(
+  persist(
+    (set, get) =&gt; ({
+      streak: { current: 0, best: 0, lastActiveDate: "" },
+      totalGamesPlayed: 0,
+      totalQuestionsAnswered: 0,
+      totalCorrectAnswers: 0,
+      regionAccuracy: {},
+      modeAccuracy: {},
+      questionHistory: [],
+      dailyChallenges: {},
+      achievements: DEFAULT_ACHIEVEMENTS,
+
+      recordAnswer: (record) =&gt; {
+        set((state) =&gt; {
+          const isCorrect = record.correct;
+          const updatedHistory = [record, ...state.questionHistory].slice(0, 200);
+
+          // Update regional accuracy
+          const region = record.region || "Global";
+          const currentReg = state.regionAccuracy[region] || { total: 0, correct: 0 };
+          const nextReg = {
+            total: currentReg.total + 1,
+            correct: currentReg.correct + (isCorrect ? 1 : 0),
+          };
+
+          return {
+            totalQuestionsAnswered: state.totalQuestionsAnswered + 1,
+            totalCorrectAnswers: state.totalCorrectAnswers + (isCorrect ? 1 : 0),
+            questionHistory: updatedHistory,
+            regionAccuracy: { ...state.regionAccuracy, [region]: nextReg },
+          };
+        });
+      },
+    }),
+    {
+      name: "flagforge-progress",
+      version: 2,
+      migrate: (persistedState: any, version: number) =&gt; {
+        if (version === 1 || !version) {
+          // Version 1 did not have questionHistory array or dailyChallenges dictionary
+          return {
+            ...persistedState,
+            questionHistory: persistedState.questionHistory || [],
+            dailyChallenges: persistedState.dailyChallenges || {},
+            achievements: persistedState.achievements || DEFAULT_ACHIEVEMENTS,
+          };
+        }
+        return persistedState as ProgressStore;
+      },
+    }
+  )
+);
+</pre>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">31</div>
+  <h2 class="sec-head">5.2 Graphical User Interface Walkthrough</h2>
+  <p>
+    The user interface embodies an "Oceanic Atlas" aesthetic, pairing deep marine blues with warm terracotta and amber accents.
+    Every view supports fluid responsiveness across mobile, tablet, and widescreen layouts:
+  </p>
+  
+  <h3 class="subsec-head">Screen 7.1: Landing Page (Hero, Live Streak &amp; Daily Teaser)</h3>
+  <p>
+    Features animated SVG globe iconography, dynamic user streak badges from Zustand local storage, a live countdown timer
+    to the next UTC midnight challenge reset, and an embedded 3-question quick teaser.
+  </p>
+  
+  <h3 class="subsec-head">Screen 7.2: World Atlas Explorer &amp; Filter Drawer</h3>
+  <p>
+    Displays a virtualized grid/list of all 250 countries with instant Fuse.js fuzzy search, region buttons, population range slider,
+    landlocked/UN toggles, and URL query synchronization (e.g. <code>/explore?region=Europe&amp;sort=population_desc</code>).
+  </p>
+  
+  <h3 class="subsec-head">Screen 7.3: Comprehensive Country Profile (/country/[code])</h3>
+  <p>
+    Features a high-resolution hero flag with blur placeholder, key demographic facts grid (languages, currencies, calling codes,
+    driving orientation), worldwide ranking percentile context ("Larger than 82% of countries"), bordering country chips,
+    Wikipedia extract, live Open-Meteo capital weather readings, and an interactive SVG geospatial coordinate pin.
+  </p>
+  
+  <h3 class="subsec-head">Screen 7.4: Multi-Nation Benchmarking Matrix (/compare)</h3>
+  <p>
+    Permits side-by-side comparison of up to 3 sovereign nations. Automatically highlights metric winners with gold badges,
+    accompanied by Recharts dual-metric population/area bar charts and normalized multi-dimensional radar charts.
+  </p>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">32</div>
+  <h3 class="subsec-head">Screen 7.5: Quiz Arena Gameplay HUD (/play)</h3>
+  <p>
+    The active quiz view provides an animated progress bar, hearts displaying remaining lives, score indicator with streak multiplier badge,
+    decaying timer bar, accessible choice cards (keyboard keys 1-4), and instant color feedback (green for correct, red for wrong)
+    with detailed educational explanations.
+  </p>
+  
+  <h3 class="subsec-head">Screen 7.6: Daily Challenge &amp; Shareable Wordle-Style Modal (/daily)</h3>
+  <p>
+    Presents the UTC-seeded 10-question challenge. Upon completion, players view today's score, time taken, countdown to UTC midnight,
+    and a 1-click button copying a formatted emoji grid to the clipboard (e.g., 🟩🟩🟩🟩🟥🟩🟩🟩🟩🟩) via the Web Share API.
+  </p>
+  
+  <h3 class="subsec-head">Screen 7.7: Analytics Dashboard &amp; Heatmap (/stats)</h3>
+  <p>
+    Provides Recharts visualizations tracking accuracy over time, per-region competence radar, weakest countries targeted practice CTA,
+    and a progressive achievement badge wall ("First Victory", "Speed Demon", "Continent Master").
+  </p>
+  
+  <h3 class="subsec-head">Screen 7.8: Mobile-First Responsive App Shell</h3>
+  <p>
+    On mobile viewports, the desktop top navigation collapses into a persistent bottom tab bar (Home, Explore, Play, Compare, Stats).
+    Filter controls expand via a sliding bottom sheet, and keyboard shortcuts remain fully operable on Bluetooth mobile keyboards.
+  </p>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">35</div>
+  <h2 class="sec-head">5.3 Test Cases &amp; Verification Suite</h2>
+  <p>
+    The project maintains an automated test matrix consisting of <strong>58 Vitest unit/component tests</strong> (100% passing)
+    and <strong>4 Playwright end-to-end browser specs</strong> incorporating automated <code>@axe-core/playwright</code> accessibility audits:
+  </p>
+  <table>
+    <tr>
+      <th style="width:10%;">ID</th>
+      <th style="width:25%;">Test Scenario</th>
+      <th style="width:40%;">Expected Behavior</th>
+      <th style="width:25%;">Test Suite File</th>
+    </tr>
+    <tr><td>TC01</td><td>Batched API Merging</td><td>Batches 1 &amp; 2 merge correctly on cca3 without field loss</td><td>src/tests/data-layer.test.ts</td></tr>
+    <tr><td>TC02</td><td>10-Field Limit Compliance</td><td>URL queries never exceed 10 fields per REST request</td><td>src/tests/data-layer.test.ts</td></tr>
+    <tr><td>TC03</td><td>Offline Embedded Fallback</td><td>Returns FALLBACK_COUNTRIES on network abort / 500 error</td><td>src/tests/data-layer.test.ts</td></tr>
+    <tr><td>TC04</td><td>Zustand Persist &amp; Migrations</td><td>Upgrades v1 storage to v2 schema without dropping streaks</td><td>src/tests/stores.test.ts</td></tr>
+    <tr><td>TC05</td><td>Mulberry32 PRNG Determinism</td><td>Identical seed produces 100% identical question sequences</td><td>src/tests/quiz-engine.test.ts</td></tr>
+    <tr><td>TC06</td><td>Regional Distractor Matching</td><td>Distractors strictly prioritize identical geographical regions</td><td>src/tests/quiz-engine.test.ts</td></tr>
+    <tr><td>TC07</td><td>Scoring Multipliers</td><td>Correct answers scale from 1.0x to 3.0x multiplier on streak</td><td>src/tests/quiz-engine.test.ts</td></tr>
+    <tr><td>TC08</td><td>Fuse.js Fuzzy Matching</td><td>Matches typo "Geramy" &rarr; Germany, "Jpn" &rarr; Japan</td><td>src/tests/explore.test.tsx</td></tr>
+    <tr><td>TC09</td><td>Multi-Nation Comparison</td><td>Accurately highlights highest population and area winners</td><td>src/tests/explore.test.tsx</td></tr>
+    <tr><td>TC10</td><td>Playwright Quiz Journey</td><td>Completes 10-question quiz using keyboard 1-4 shortcuts</td><td>e2e/quiz.spec.ts</td></tr>
+    <tr><td>TC11</td><td>Playwright Explorer Flow</td><td>Applies region filter, updates URL, navigates to country</td><td>e2e/explorer.spec.ts</td></tr>
+    <tr><td>TC12</td><td>WCAG 2.2 AA Axe Audit</td><td>Zero accessibility violations across all primary routes</td><td>e2e/accessibility.spec.ts</td></tr>
+  </table>
+  <p style="margin-top:14px;">
+    <strong>Verification Commands:</strong> <code>pnpm test</code> (58/58 unit tests passing in Vitest), <code>pnpm typecheck</code> (0 TypeScript errors),
+    <code>pnpm lint</code> (0 ESLint errors), and <code>pnpm build</code> (Next.js compiles 42 static &amp; SSG pages).
+  </p>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">36</div>
+  <h1 class="chp-head">6. Conclusion &amp; Future Scope</h1>
+  <h2 class="sec-head">6.1 Conclusion</h2>
+  <p>
+    <strong>FlagForge</strong> demonstrates that a modern, highly engaging, and pedagogically rigorous learning platform
+    can be engineered without requiring complex custom server infrastructure, paid API licenses, or centralized relational databases.
+    By federating authoritative, open-access geopolitical, encyclopedic, and meteorological web services, the platform provides
+    learners with deep geographic and cultural intelligence while guaranteeing zero runtime operational costs.
+  </p>
+  <p><strong>Key Engineering Accomplishments:</strong></p>
+  <ul>
+    <li><strong>Compliant API Batch Federation:</strong> Adhered strictly to REST Countries' &le;10 field constraint by implementing parallel asynchronous batch fetching and in-memory reconciliation keyed by ISO <code>cca3</code> identifiers.</li>
+    <li><strong>Procedural Determinism &amp; Fairness:</strong> Implemented a 32-bit Mulberry32 PRNG ensuring that every user worldwide receives identical daily challenge sequences on any given UTC date.</li>
+    <li><strong>Local Schema Evolution:</strong> Developed versioned migration pipelines (v1 &rarr; v2) within Zustand persist middleware, allowing schema expansion without corrupting historical streaks or records.</li>
+    <li><strong>Inclusive Accessibility:</strong> Achieved strict WCAG 2.2 AA compliance verified via automated axe-core audits, visible focus rings, and universal keyboard shortcuts (1-4).</li>
+    <li><strong>Offline Resilience:</strong> Designed an embedded 250-country fallback dataset and progressive Service Worker caching strategy.</li>
+  </ul>
+  
+  <table>
+    <tr>
+      <th style="width:25%;">Project Objective</th>
+      <th style="width:50%;">Achieved Technical Outcome</th>
+      <th style="width:25%;">Verification Section</th>
+    </tr>
+    <tr><td>Unified Geopolitical Catalog</td><td>Normalized REST Countries dataset merged on cca3</td><td>Section 2.1 &amp; 5.1</td></tr>
+    <tr><td>Instantaneous Fuzzy Search</td><td>Fuse.js client-side search across name, capital, and cca3</td><td>Section 4.2 &amp; 5.2</td></tr>
+    <tr><td>Deterministic Daily Challenge</td><td>Mulberry32 PRNG seeded by UTC date with emoji share grid</td><td>Section 4.6.3 &amp; 5.1</td></tr>
+    <tr><td>Side-by-Side Benchmarking</td><td>Recharts radar and dual-metric population/area bar charts</td><td>Section 4.6.1 &amp; 5.2</td></tr>
+    <tr><td>Zero-Backend Persistence</td><td>Zustand localStorage with versioned schema migrations (v1 &rarr; v2)</td><td>Section 4.6.5 &amp; 5.1</td></tr>
+    <tr><td>Rigorous Quality Assurance</td><td>58 Vitest unit tests (100% passing) and Playwright e2e suites</td><td>Section 5.3</td></tr>
+  </table>
+  
+  <p style="margin-top:10px;">
+    <strong>Lessons Learned:</strong> (1) External web APIs must always be treated as untrusted and rate-limited.
+    (2) Client-side persistence requires defensive versioned migration strategies to prevent data corruption.
+    (3) Pure, deterministic logic decoupled from UI frameworks enables fast, resilient unit testing.
+  </p>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">37</div>
+  <h2 class="sec-head">6.2 Future Scope</h2>
+  <p>
+    FlagForge's modular architecture establishes a clean foundation for subsequent academic and commercial extensions:
+  </p>
+  <ul>
+    <li><strong>Real-Time Peer-to-Peer Multiplayer:</strong> Integrating WebRTC data channels to enable low-latency head-to-head flag duel competitions without central game servers.</li>
+    <li><strong>Interactive 3D WebGL Globe:</strong> Embedding Three.js / MapLibre to allow learners to rotate, zoom, and query geopolitical borders on a spherical 3D projection.</li>
+    <li><strong>Native Audio Pronunciations:</strong> Integrating crowdsourced Wikimedia phonetics for country and capital names across indigenous languages.</li>
+    <li><strong>Classroom Educator Mode:</strong> Allowing teachers to curate custom regional flag decks and export student mastery matrices as CSV reports.</li>
+    <li><strong>Expanded Geopolitical Datasets:</strong> Incorporating World Bank economic metrics (GDP, literacy rate, life expectancy) into the comparison matrix.</li>
+  </ul>
+  
+  <table>
+    <tr>
+      <th style="width:25%;">Proposed Extension</th>
+      <th style="width:35%;">Affected Module / Layer</th>
+      <th style="width:40%;">Technical Prerequisite</th>
+    </tr>
+    <tr><td>WebRTC Multiplayer Duels</td><td><code>src/lib/multiplayer</code></td><td>Signaling server &amp; WebRTC STUN/TURN config</td></tr>
+    <tr><td>3D WebGL Interactive Globe</td><td><code>src/components/features/country</code></td><td>Three.js or MapLibre GL canvas shaders</td></tr>
+    <tr><td>Audio Name Pronunciations</td><td><code>src/lib/api/pronunciations</code></td><td>Wikimedia Commons audio media API integration</td></tr>
+    <tr><td>Educator Deck Creator</td><td><code>src/store/useDeckStore.ts</code></td><td>Custom quiz collection persistence schema</td></tr>
+    <tr><td>World Bank Socioeconomics</td><td><code>src/lib/api/worldbank.ts</code></td><td>Additional API adapter &amp; chart indicators</td></tr>
+  </table>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">38</div>
+  <h1 class="chp-head">7. References</h1>
+  <ol style="font-size:9.5pt; line-height:1.75;">
+    <li>FlagForge Source Repository: <a href="https://github.com/KAUSHALCODER123/geo-guess">https://github.com/KAUSHALCODER123/geo-guess</a></li>
+    <li>Next.js 15 Documentation (App Router &amp; Server Components): <a href="https://nextjs.org/docs">https://nextjs.org/docs</a></li>
+    <li>React 19 Documentation &amp; Architecture: <a href="https://react.dev">https://react.dev</a></li>
+    <li>REST Countries v3.1 API Reference: <a href="https://restcountries.com">https://restcountries.com</a></li>
+    <li>Wikimedia REST API Reference (Page Summaries): <a href="https://en.wikipedia.org/api/rest_v1/">https://en.wikipedia.org/api/rest_v1/</a></li>
+    <li>Open-Meteo Weather API Reference: <a href="https://open-meteo.com/en/docs">https://open-meteo.com/en/docs</a></li>
+    <li>Tailwind CSS v4 Documentation: <a href="https://tailwindcss.com/docs">https://tailwindcss.com/docs</a></li>
+    <li>Radix UI Accessible Headless Primitives: <a href="https://www.radix-ui.com">https://www.radix-ui.com</a></li>
+    <li>Zustand State Management &amp; Persist Middleware: <a href="https://zustand.docs.pmnd.rs">https://zustand.docs.pmnd.rs</a></li>
+    <li>TanStack Query v5 Documentation: <a href="https://tanstack.com/query/latest">https://tanstack.com/query/latest</a></li>
+    <li>Vitest Fast Unit Test Framework: <a href="https://vitest.dev">https://vitest.dev</a></li>
+    <li>Playwright End-to-End Testing Engine: <a href="https://playwright.dev">https://playwright.dev</a></li>
+    <li>Deque axe-core Web Accessibility Engine: <a href="https://github.com/dequelabs/axe-core">https://github.com/dequelabs/axe-core</a></li>
+    <li>W3C Web Content Accessibility Guidelines (WCAG) 2.2: <a href="https://www.w3.org/TR/WCAG22/">https://www.w3.org/TR/WCAG22/</a></li>
+    <li>Fuse.js Lightweight Fuzzy Search: <a href="https://fusejs.io">https://fusejs.io</a></li>
+    <li>Recharts Composable React Charting Library: <a href="https://recharts.org">https://recharts.org</a></li>
+    <li>Framer Motion Declarative Animations for React: <a href="https://motion.dev">https://motion.dev</a></li>
+    <li>Zod TypeScript-First Schema Validation: <a href="https://zod.dev">https://zod.dev</a></li>
+    <li>Mulberry32 Pseudo-Random Number Generator Algorithm (Tommy Ettinger): <a href="https://gist.github.com/tommyettinger/46a87453d784443199ac6ff2f18184c7">https://gist.github.com</a></li>
+    <li>Web Audio API W3C Recommendation: <a href="https://www.w3.org/TR/webaudio/">https://www.w3.org/TR/webaudio/</a></li>
+    <li>ISO 3166-1 Alpha-3 Country Codes Standard: <a href="https://www.iso.org/iso-3166-country-codes.html">https://www.iso.org</a></li>
+    <li>Vercel Edge Platform &amp; Static Generation: <a href="https://vercel.com/docs">https://vercel.com/docs</a></li>
+  </ol>
+</div>
+
+
+<div class="page" style="padding: 20px 10px;">
+  <div style="float:right; font-weight:bold; color:#64748b;">39</div>
+  <h1 class="chp-head">8. Synopsis</h1>
+  <p><strong>Project Title:</strong> Geography & Culture Learning Platform (FlagForge)</p>
+  <p><strong>Purpose:</strong> To engineer a production-grade, highly engaging, and accessible geography and culture learning web application that combines public geopolitical APIs with deterministic active-recall trivia, multi-nation benchmarking, and longitudinal learning analytics without requiring custom backend databases.</p>
+  <p><strong>Target Users:</strong> Primary/Secondary Students, Geography Teachers, Trivia Enthusiasts, General Public.</p>
+  <p><strong>Platform:</strong> Responsive Progressive Web App (PWA) supporting Desktop, Tablet, and Mobile browsers.</p>
+  <p><strong>Core Stack:</strong> Next.js 15.2.9 (App Router), React 19, TypeScript strict, Tailwind CSS v4, Radix UI, Zustand 5 (persist &amp; migrations), TanStack Query 5, Recharts 2.15, Vitest, Playwright, axe-core.</p>
+  <p><strong>Primary Modules:</strong></p>
+  <ul>
+    <li>World Atlas Explorer with Fuse.js fuzzy search and multi-faceted filtering</li>
+    <li>Statically pre-rendered Country Profiles (30 SSG paths) with Wikipedia and Open-Meteo telemetry</li>
+    <li>Multi-Nation Benchmarking Matrix with Recharts radar and bar charts</li>
+    <li>Deterministic Mulberry32 Quiz Engine with 6 question generator modes</li>
+    <li>UTC-Seeded Synchronized Daily Challenge with Wordle-style shareable emoji grids</li>
+    <li>Longitudinal Progress Dashboard with streak tracking and achievement badges</li>
+    <li>Embedded Fallback Dataset &amp; Service Worker for 100% offline functionality</li>
+  </ul>
+  
+  <p><strong>Project Metrics at a Glance:</strong></p>
+  <table>
+    <tr><th style="width:40%;">Item</th><th>Value</th></tr>
+    <tr><td>Route Files &amp; Static Paths</td><td>14 pages (30 SSG pre-rendered static nation paths, 42 pages total)</td></tr>
+    <tr><td>Codebase Volume</td><td>~10,000 lines of strict TypeScript, TSX, and Tailwind v4 CSS</td></tr>
+    <tr><td>Database &amp; Persistence</td><td>0 remote databases; 3 versioned Zustand localStorage schemas (v1 &rarr; v2)</td></tr>
+    <tr><td>Declared NPM Packages</td><td>21 runtime packages, 17 development tooling packages</td></tr>
+    <tr><td>Automated Test Suite</td><td>58 Vitest unit tests (100% passing) and 4 Playwright browser e2e suites</td></tr>
+    <tr><td>Accessibility Rating</td><td>Zero axe-core accessibility violations (WCAG 2.2 AA compliant)</td></tr>
+  </table>
+  
+  <div class="sig-grid" style="margin-top:50px;">
+    <div class="sig-block">
+      <div>_____________________________</div>
+      <div style="margin-top:6px;">Signature of the Student</div>
+      <div style="font-weight:normal; font-size:9.5pt; margin-top:2px;">(Kaushal Rajput)</div>
+      <div style="font-weight:normal; font-size:9pt; margin-top:15px;">Date: 24-10-2026</div>
+    </div>
+    <div class="sig-block">
+      <div>_____________________________</div>
+      <div style="margin-top:6px;">Signature of the Guide</div>
+      <div style="font-weight:normal; font-size:9.5pt; margin-top:2px;">(Department of Computer Science)</div>
+      <div style="font-weight:normal; font-size:9pt; margin-top:15px;">Place: Khadavli</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

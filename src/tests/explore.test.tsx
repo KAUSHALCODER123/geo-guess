@@ -1,11 +1,12 @@
 import React from "react";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Fuse from "fuse.js";
 import { FALLBACK_COUNTRIES } from "@/lib/api/fallback-countries";
 import { CountryCard } from "@/components/features/explorer/country-card";
 import { CountryListItem } from "@/components/features/explorer/country-list-item";
 import { CompareMatrix } from "@/components/features/compare/compare-matrix";
+import { useFavoritesStore } from "@/store/useFavoritesStore";
 
 // Mock next/navigation
 vi.mock("next/navigation", () => ({
@@ -19,19 +20,12 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(),
 }));
 
-// Mock useFavorites
-vi.mock("@/hooks/useFavorites", () => ({
-  useFavorites: () => ({
-    favorites: ["FRA"],
-    isFavorite: (code: string) => code.toUpperCase() === "FRA",
-    toggleFavorite: vi.fn(),
-    recentSearches: [],
-    addRecentSearch: vi.fn(),
-    clearRecentSearches: vi.fn(),
-  }),
-}));
-
 describe("Explore & Compare Feature Logic Tests", () => {
+  beforeEach(() => {
+    // Cards read the favorites store directly; France is the favorite in these tests.
+    useFavoritesStore.setState({ favorites: ["FRA"] });
+  });
+
   const sampleCountries = FALLBACK_COUNTRIES;
 
   describe("1. Fuzzy Search matching with Fuse.js", () => {

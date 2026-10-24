@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, CheckCircle2, XCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -59,14 +58,10 @@ export function QuestionCard({
   const isCorrect = selectedOption?.isCorrect ?? false;
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
+    // CSS entrance animation (replaces framer-motion; disabled for reduced motion).
+    <div
         key={question.id}
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -14 }}
-        transition={{ duration: 0.22, ease: "easeOut" }}
-        className="w-full"
+        className="w-full animate-ff-rise motion-reduce:animate-none"
       >
         <Card className="overflow-hidden border-border bg-card shadow-sm">
           <div className="p-6 md:p-8 space-y-6">
@@ -162,11 +157,7 @@ export function QuestionCard({
 
             {/* Post-answer explanation feedback bar */}
             {isAnswered && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                transition={{ duration: 0.2 }}
-                className="pt-2 border-t border-border space-y-4"
+              <div className="pt-2 border-t border-border space-y-4 animate-ff-fade motion-reduce:animate-none"
               >
                 <div
                   className={`flex items-start gap-3 p-4 rounded-xl border text-sm ${
@@ -202,11 +193,10 @@ export function QuestionCard({
                     {isLastQuestion ? "View Results" : "Next Question"}
                   </Button>
                 </div>
-              </motion.div>
+              </div>
             )}
           </div>
         </Card>
-      </motion.div>
-    </AnimatePresence>
+      </div>
   );
 }

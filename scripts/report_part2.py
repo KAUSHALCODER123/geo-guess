@@ -1,3 +1,4 @@
+from report_data import *
 
 PAGE_FIGURES = f"""
 <div class="page" style="padding: 25px 10px;">

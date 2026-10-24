@@ -11,7 +11,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useCountries } from "@/hooks/useCountries";
 import { ComparePicker } from "./compare-picker";
 import { CompareMatrix } from "./compare-matrix";
-import { CompareCharts } from "./compare-charts";
+import dynamic from "next/dynamic";
+
+// Recharts is heavy: load it only once two or more countries are selected.
+const CompareCharts = dynamic(() => import("./compare-charts").then((m) => m.CompareCharts), {
+  ssr: false,
+  loading: () => <Skeleton className="h-80 w-full rounded-xl" />,
+});
 
 export function CompareView() {
   const router = useRouter();

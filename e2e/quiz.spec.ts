@@ -5,9 +5,10 @@ test.describe("Quiz Arena & Daily Challenge Journeys", () => {
     await page.goto("/play");
     await page.waitForLoadState("domcontentloaded");
 
-    // Start quiz
+    // Wait for countries to load and start button to be enabled
     const startButton = page.getByRole("button", { name: /start quiz/i });
-    await expect(startButton).toBeVisible({ timeout: 10000 });
+    await expect(startButton).toBeVisible({ timeout: 30000 });
+    await expect(startButton).toBeEnabled({ timeout: 30000 });
     await startButton.click();
 
     // Verify game starts and first question renders
@@ -40,7 +41,8 @@ test.describe("Quiz Arena & Daily Challenge Journeys", () => {
     }
 
     const startButton = page.getByRole("button", { name: /start quiz/i });
-    await expect(startButton).toBeVisible({ timeout: 10000 });
+    await expect(startButton).toBeVisible({ timeout: 30000 });
+    await expect(startButton).toBeEnabled({ timeout: 30000 });
     await startButton.click();
 
     // Answer questions until game over screen is reached
@@ -70,6 +72,13 @@ test.describe("Quiz Arena & Daily Challenge Journeys", () => {
   });
 
   test("launches and plays daily challenge", async ({ page }) => {
+    await page.addInitScript(() => {
+      try {
+        window.localStorage.clear();
+      } catch {
+        // ignore
+      }
+    });
     await page.goto("/daily");
     await page.waitForLoadState("domcontentloaded");
 
@@ -82,6 +91,7 @@ test.describe("Quiz Arena & Daily Challenge Journeys", () => {
       name: /begin today's challenge|start daily challenge/i,
     });
     await expect(startDailyBtn).toBeVisible({ timeout: 10000 });
+    await expect(startDailyBtn).toBeEnabled({ timeout: 10000 });
     await startDailyBtn.click();
 
     // Check first question loads

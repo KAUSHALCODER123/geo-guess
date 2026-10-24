@@ -6,16 +6,17 @@ import { Heart, Users, MapPin } from "lucide-react";
 import type { Country } from "@/types";
 import { FlagImage } from "@/components/common/flag-image";
 import { Badge } from "@/components/ui/badge";
-import { useFavorites } from "@/hooks/useFavorites";
+import { useFavoritesStore } from "@/store/useFavoritesStore";
 import { cn } from "@/lib/utils";
 
 export interface CountryCardProps {
   country: Country;
 }
 
-export function CountryCard({ country }: CountryCardProps) {
-  const { isFavorite, toggleFavorite } = useFavorites();
-  const favorite = isFavorite(country.cca3);
+function CountryCardBase({ country }: CountryCardProps) {
+  // Narrow selectors: only this card re-renders when its own favorite state changes.
+  const favorite = useFavoritesStore((state) => state.favorites.includes(country.cca3));
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -110,3 +111,5 @@ export function CountryCard({ country }: CountryCardProps) {
     </div>
   );
 }
+
+export const CountryCard = React.memo(CountryCardBase);

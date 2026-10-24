@@ -16,8 +16,19 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useProgressStore } from "@/store/useProgressStore";
-import { AccuracyChart } from "./AccuracyChart";
-import { RegionRadar } from "./RegionRadar";
+import dynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Recharts is heavy: load it only when the dashboard renders, not in the route's first bundle.
+const chartFallback = () => <Skeleton className="h-80 w-full rounded-xl" />;
+const AccuracyChart = dynamic(() => import("./AccuracyChart").then((m) => m.AccuracyChart), {
+  ssr: false,
+  loading: chartFallback,
+});
+const RegionRadar = dynamic(() => import("./RegionRadar").then((m) => m.RegionRadar), {
+  ssr: false,
+  loading: chartFallback,
+});
 import { HeatmapCalendar } from "./HeatmapCalendar";
 import { AchievementList } from "./AchievementList";
 import { WeakestCountries } from "./WeakestCountries";

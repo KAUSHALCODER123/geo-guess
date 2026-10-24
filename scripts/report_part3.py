@@ -1,3 +1,4 @@
+from report_data import *
 
 CHP4_ANALYSIS = f"""
 <div class="page" style="padding: 20px 10px;">

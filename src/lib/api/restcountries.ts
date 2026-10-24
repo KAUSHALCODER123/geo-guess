@@ -10,8 +10,8 @@ import {
 import { FALLBACK_COUNTRIES } from "./fallback-countries";
 
 const REST_COUNTRIES_BASE_URL = "https://restcountries.com/v3.1";
-const DEFAULT_TIMEOUT_MS = 8000;
-const MAX_RETRIES = 2;
+const DEFAULT_TIMEOUT_MS = 4000;
+const MAX_RETRIES = 1;
 
 // In compliance with REST Countries guidelines: MAX 10 fields per request
 export const BATCH_1_FIELDS = [

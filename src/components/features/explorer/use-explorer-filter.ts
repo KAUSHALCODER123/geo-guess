@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import Fuse from "fuse.js";
+import type Fuse from "fuse.js";
 import type { Country } from "@/types";
 import {
   type ExplorerFilterState,
@@ -136,9 +136,24 @@ export function useExplorerFilter({ countries }: UseExplorerFilterOptions) {
     updateURL(resetState);
   }, [filterState.viewMode, updateURL]);
 
+  // Fuse.js is loaded on the first search keystroke so it stays out of the initial bundle.
+  const [FuseClass, setFuseClass] = useState<typeof Fuse | null>(null);
+  const wantsSearch = filterState.searchQuery.trim().length > 0;
+  useEffect(() => {
+    if (!wantsSearch || FuseClass) return;
+    let cancelled = false;
+    void import("fuse.js").then((m) => {
+      if (!cancelled) setFuseClass(() => m.default);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [wantsSearch, FuseClass]);
+
   // Configure Fuse.js for instant fuzzy searching
   const fuse = useMemo(() => {
-    return new Fuse(countries, {
+    if (!FuseClass) return null;
+    return new FuseClass(countries, {
       keys: [
         { name: "name.common", weight: 0.4 },
         { name: "name.official", weight: 0.25 },
@@ -151,7 +166,7 @@ export function useExplorerFilter({ countries }: UseExplorerFilterOptions) {
       ignoreLocation: true,
       minMatchCharLength: 1,
     });
-  }, [countries]);
+  }, [countries, FuseClass]);
 
   // Derived available regions
   const availableRegions = useMemo(() => {
@@ -183,7 +198,19 @@ export function useExplorerFilter({ countries }: UseExplorerFilterOptions) {
     // 1. Fuzzy Search
     const query = filterState.searchQuery.trim();
     if (query) {
-      result = fuse.search(query).map((res) => res.item);
+      if (fuse) {
+        result = fuse.search(query).map((res) => res.item);
+      } else {
+        // Interim substring match while the fuzzy-search chunk is still loading.
+        const q = query.toLowerCase();
+        result = result.filter(
+          (c) =>
+            c.name.common.toLowerCase().includes(q) ||
+            c.name.official.toLowerCase().includes(q) ||
+            c.cca3.toLowerCase() === q ||
+            c.capital?.some((cap) => cap.toLowerCase().includes(q))
+        );
+      }
     }
 
     // 2. Filter by Region

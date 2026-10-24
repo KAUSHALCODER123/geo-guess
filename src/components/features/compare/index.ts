@@ -1,5 +1,5 @@
 export * from "./types";
 export * from "./compare-picker";
 export * from "./compare-matrix";
-export * from "./compare-charts";
+// compare-charts (Recharts) is imported lazily by compare-view.
 export * from "./compare-view";
