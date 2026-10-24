@@ -15,10 +15,13 @@ test.describe("Accessibility Compliance (WCAG 2.2 AA)", () => {
       page,
     }) => {
       await page.goto(route.path);
-      await page.waitForLoadState("networkidle");
+      await page.waitForLoadState("domcontentloaded");
+      await page.locator("main").waitFor({ state: "visible" });
+      await page.waitForTimeout(600);
 
       const accessibilityScanResults = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+        .exclude("nextjs-portal")
         .analyze();
 
       if (accessibilityScanResults.violations.length > 0) {

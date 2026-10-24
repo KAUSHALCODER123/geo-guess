@@ -31,9 +31,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: process.platform === "win32" ? "cmd /c pnpm run dev" : "pnpm run dev",
+    command: process.platform === "win32" ? "cmd /c pnpm run start" : "pnpm run start",
     url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 120 * 1000,
   },
 });

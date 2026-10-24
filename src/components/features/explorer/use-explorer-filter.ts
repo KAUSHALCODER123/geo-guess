@@ -50,13 +50,15 @@ export function useExplorerFilter({ countries }: UseExplorerFilterOptions) {
   }, [searchParams]);
 
   const [filterState, setFilterState] = useState<ExplorerFilterState>(initialState);
+  const isInternalUpdateRef = useRef(false);
 
   // Sync internal state when URL changes externally (e.g. Back/Forward button)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setFilterState(initialState);
-    }, 0);
-    return () => clearTimeout(timer);
+    if (isInternalUpdateRef.current) {
+      isInternalUpdateRef.current = false;
+      return;
+    }
+    setFilterState(initialState);
   }, [initialState]);
 
   // Debounced URL update
@@ -110,6 +112,7 @@ export function useExplorerFilter({ countries }: UseExplorerFilterOptions) {
 
   const updateFilter = useCallback(
     <K extends keyof ExplorerFilterState>(key: K, value: ExplorerFilterState[K]) => {
+      isInternalUpdateRef.current = true;
       setFilterState((prev) => {
         const next = { ...prev, [key]: value };
         // If region changed, reset subregion to "all" if the current subregion does not belong to new region
@@ -124,6 +127,7 @@ export function useExplorerFilter({ countries }: UseExplorerFilterOptions) {
   );
 
   const clearFilters = useCallback(() => {
+    isInternalUpdateRef.current = true;
     const resetState: ExplorerFilterState = {
       ...DEFAULT_FILTER_STATE,
       viewMode: filterState.viewMode, // retain chosen view mode

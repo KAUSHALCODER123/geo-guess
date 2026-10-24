@@ -4,19 +4,19 @@ test.describe("World Atlas Explorer Journey", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/explore");
     await page.waitForLoadState("domcontentloaded");
+    // Ensure country dataset has hydrated into the explorer view
+    await expect(page.locator('a[href^="/country/"]').first()).toBeVisible({ timeout: 10000 });
   });
 
   test("renders explorer page header and search input", async ({ page }) => {
-    await expect(page.getByRole("heading", { name: "World Explorer" })).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(page.getByRole("heading", { name: "World Explorer" })).toBeVisible();
     const searchInput = page.locator('input[aria-label="Search countries"]');
-    await expect(searchInput).toBeVisible({ timeout: 10000 });
+    await expect(searchInput).toBeVisible();
   });
 
   test("filters countries by search query", async ({ page }) => {
     const searchInput = page.locator('input[aria-label="Search countries"]');
-    await expect(searchInput).toBeVisible({ timeout: 10000 });
+    await expect(searchInput).toBeVisible();
     await searchInput.fill("Canada");
 
     // Wait for filtered result
@@ -25,16 +25,16 @@ test.describe("World Atlas Explorer Journey", () => {
 
     // Other countries like France shouldn't be visible in matched results
     const franceHeading = page.getByRole("heading", { name: "France", exact: true });
-    await expect(franceHeading).not.toBeVisible();
+    await expect(franceHeading).not.toBeVisible({ timeout: 5000 });
   });
 
   test("filters countries by geographic region", async ({ page }) => {
     // Open region selector
     const regionTrigger = page.getByRole("combobox", { name: "Filter by Region" });
-    await expect(regionTrigger).toBeVisible({ timeout: 10000 });
+    await expect(regionTrigger).toBeVisible();
     await regionTrigger.click();
 
-    // Select Europe
+    // Select Europe from dropdown
     const europeOption = page.getByRole("option", { name: "Europe" });
     await expect(europeOption).toBeVisible({ timeout: 5000 });
     await europeOption.click();
@@ -46,7 +46,6 @@ test.describe("World Atlas Explorer Journey", () => {
   });
 
   test("toggles country favorite status", async ({ page }) => {
-    // Wait for countries to load
     const firstFavoriteBtn = page.locator('button[aria-label*="favorites"]').first();
     await expect(firstFavoriteBtn).toBeVisible({ timeout: 10000 });
 
@@ -59,11 +58,7 @@ test.describe("World Atlas Explorer Journey", () => {
   });
 
   test("navigates to country detail page on card click", async ({ page }) => {
-    const searchInput = page.locator('input[aria-label="Search countries"]');
-    await expect(searchInput).toBeVisible({ timeout: 10000 });
-    await searchInput.fill("France");
-
-    const franceLink = page.locator('a[href="/country/fra"]').first();
+    const franceLink = page.getByRole("link", { name: "France", exact: true }).first();
     await expect(franceLink).toBeVisible({ timeout: 10000 });
     await franceLink.click();
 

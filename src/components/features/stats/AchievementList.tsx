@@ -46,7 +46,7 @@ export function AchievementList({ achievements }: AchievementListProps) {
               className={`flex items-start gap-3.5 p-4 rounded-xl border transition-all ${
                 isUnlocked
                   ? "border-amber-500/30 bg-amber-500/5 shadow-xs"
-                  : "border-border/60 bg-muted/20 opacity-70"
+                  : "border-border/60 bg-muted/20"
               }`}
             >
               <div

@@ -609,7 +609,7 @@ export default function HomePage() {
               <CardFooter className="pt-0">
                 <Link
                   href="/explore"
-                  className="text-xs font-semibold text-emerald-500 hover:underline inline-flex items-center gap-1"
+                  className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:underline inline-flex items-center gap-1"
                 >
                   Explore Frontiers <ArrowRight className="h-3 w-3" />
                 </Link>

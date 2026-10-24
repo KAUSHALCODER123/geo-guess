@@ -64,8 +64,8 @@ export function CountryDetailHero({ country }: CountryDetailHeroProps) {
             aria-pressed={favorite}
             aria-label={
               favorite
-                ? `Remove ${country.name.common} from favorites`
-                : `Add ${country.name.common} to favorites`
+                ? `Favorited: ${country.name.common}`
+                : `Add Favorite: ${country.name.common}`
             }
             leftIcon={
               <Heart
