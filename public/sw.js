@@ -111,8 +111,9 @@ self.addEventListener("fetch", (event) => {
           }
           return networkResponse;
         } catch (fetchErr) {
-          // If network failed and not in cache, try offline icon placeholder
-          return caches.match("/icons/icon.svg");
+          // Network failed and nothing cached: return a real error so the page can try its
+          // next flag source or show its own fallback tile (never the app icon as a "flag").
+          return Response.error();
         }
       })
     );

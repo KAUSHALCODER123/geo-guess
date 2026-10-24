@@ -101,8 +101,8 @@ export function RegionRadar({ regionAccuracy }: RegionRadarProps) {
             <Radar
               name="Mastery"
               dataKey="accuracy"
-              stroke="var(--primary, #3b82f6)"
-              fill="var(--primary, #3b82f6)"
+              stroke="var(--chart-1)"
+              fill="var(--chart-1)"
               fillOpacity={0.4}
             />
           </RadarChart>

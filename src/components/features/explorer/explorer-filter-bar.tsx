@@ -81,7 +81,7 @@ export function ExplorerFilterBar({
   };
 
   return (
-    <div className="space-y-4 rounded-xl border border-border bg-card p-4 sm:p-5 shadow-xs">
+    <div className="space-y-4 rounded-xl border border-border bg-card/95 p-4 shadow-sm backdrop-blur-md sm:p-5 lg:sticky lg:top-20 lg:z-20">
       {/* Primary Row: Search Bar, Region, Sort, and View Mode */}
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
         {/* Search Input */}

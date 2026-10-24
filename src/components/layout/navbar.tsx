@@ -38,7 +38,7 @@ export function Navbar({ onOpenCommandPalette }: { onOpenCommandPalette: () => v
               <Compass className="h-5 w-5 transition-transform duration-500 group-hover:rotate-45" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-extrabold tracking-tight bg-gradient-to-r from-sky-400 via-primary to-amber-500 bg-clip-text text-transparent">
+              <span className="text-lg font-extrabold tracking-tight text-gradient-brand">
                 FlagForge
               </span>
               <span className="text-[10px] tracking-widest uppercase font-mono text-muted-foreground -mt-1 hidden sm:block">

@@ -13,11 +13,32 @@ export function PwaPrompt() {
   const [isOffline, setIsOffline] = React.useState(false);
   const [installPrompt, setInstallPrompt] = React.useState<BeforeInstallPromptEvent | null>(null);
   const [isDismissed, setIsDismissed] = React.useState(false);
+  // Don't show the install banner immediately: let people see the page first.
+  const [bannerReady, setBannerReady] = React.useState(false);
+  React.useEffect(() => {
+    let dismissed = false;
+    try {
+      dismissed = sessionStorage.getItem("flagforge-install-dismissed") === "1";
+    } catch {
+      // storage unavailable: ignore
+    }
+    if (dismissed) return;
+    const timer = window.setTimeout(() => setBannerReady(true), 15000);
+    return () => window.clearTimeout(timer);
+  }, []);
+  const dismissBanner = () => {
+    setIsDismissed(true);
+    try {
+      sessionStorage.setItem("flagforge-install-dismissed", "1");
+    } catch {
+      // storage unavailable: ignore
+    }
+  };
 
   // Register Service Worker
   React.useEffect(() => {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
+      const registerWorker = () => {
         navigator.serviceWorker
           .register("/sw.js")
           .then((reg) => {
@@ -36,7 +57,10 @@ export function PwaPrompt() {
           .catch((err) => {
             console.warn("[SW] Registration error:", err);
           });
-      });
+      };
+      // This component is loaded lazily, so the window "load" event may already have fired.
+      if (document.readyState === "complete") registerWorker();
+      else window.addEventListener("load", registerWorker, { once: true });
     }
 
     // Network connectivity tracking
@@ -92,7 +116,7 @@ export function PwaPrompt() {
       )}
 
       {/* PWA Install Banner */}
-      {installPrompt && !isDismissed && !isOffline && (
+      {installPrompt && bannerReady && !isDismissed && !isOffline && (
         <aside
           role="dialog"
           aria-label="Install application prompt"
@@ -121,7 +145,7 @@ export function PwaPrompt() {
               variant="ghost"
               className="h-8 w-8 p-0 text-muted-foreground hover:text-foreground"
               aria-label="Dismiss install banner"
-              onClick={() => setIsDismissed(true)}
+              onClick={dismissBanner}
             >
               <X className="h-4 w-4" />
             </Button>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Image from "next/image";
+import { FlagFill } from "@/components/common/flag-image";
 import { ArrowRight, CheckCircle2, XCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -69,7 +69,7 @@ export function QuestionCard({
             {question.mode === "flag_to_country" && question.imageUrl && (
               <div className="flex justify-center">
                 <div className="relative w-64 h-40 sm:w-72 sm:h-44 rounded-xl overflow-hidden shadow-md border border-border/80 bg-muted/40">
-                  <Image
+                  <FlagFill
                     src={question.imageUrl}
                     alt="Country Flag"
                     fill
@@ -86,7 +86,7 @@ export function QuestionCard({
               <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
                 <div className="flex flex-col items-center gap-2 p-3 rounded-xl border border-border bg-muted/30">
                   <div className="relative w-28 h-18 rounded-md overflow-hidden shadow-xs border border-border">
-                    <Image
+                    <FlagFill
                       src={question.targetCountry.flags.svg || question.targetCountry.flags.png}
                       alt={question.targetCountry.name.common}
                       fill
@@ -101,7 +101,7 @@ export function QuestionCard({
 
                 <div className="flex flex-col items-center gap-2 p-3 rounded-xl border border-border bg-muted/30">
                   <div className="relative w-28 h-18 rounded-md overflow-hidden shadow-xs border border-border">
-                    <Image
+                    <FlagFill
                       src={
                         question.comparisonCountry.flags.svg ||
                         question.comparisonCountry.flags.png

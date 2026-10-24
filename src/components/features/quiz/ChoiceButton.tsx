@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import { FlagFill } from "@/components/common/flag-image";
 import { Check, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -72,7 +72,7 @@ export function ChoiceButton({
 
         {flag && (
           <div className="relative w-7 h-5 shrink-0 overflow-hidden rounded shadow-xs border border-border/40">
-            <Image
+            <FlagFill
               src={flag}
               alt=""
               fill

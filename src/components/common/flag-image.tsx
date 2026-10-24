@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import { Compass } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useFlagSource } from "@/lib/flags";
 
 export interface FlagImageProps {
   src?: string;
@@ -28,17 +29,13 @@ export function FlagImage({
   className,
   aspectRatio = "3/2",
 }: FlagImageProps) {
-  const [hasError, setHasError] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  // Derive flagcdn source if src is missing but 2-letter country code is given
-  const resolvedSrc = React.useMemo(() => {
-    if (src) return src;
-    if (countryCode && countryCode.length === 2) {
-      return `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
-    }
-    return "";
-  }, [src, countryCode]);
+  // Real flag from /public/flags first, then the remote URL; falls back to a tile if both fail.
+  const { src: resolvedSrc, failed: hasError, onError: advanceSource } = useFlagSource(
+    src,
+    countryCode
+  );
+  const [loadedSrc, setLoadedSrc] = React.useState<string | null>(null);
+  const isLoading = loadedSrc !== resolvedSrc;
 
   const resolvedAlt =
     alt || (countryName ? `Flag of ${countryName}` : `National flag ${countryCode || ""}`);
@@ -76,11 +73,8 @@ export function FlagImage({
           width={width}
           height={height}
           priority={priority}
-          onLoad={() => setIsLoading(false)}
-          onError={() => {
-            setIsLoading(false);
-            setHasError(true);
-          }}
+          onLoad={() => setLoadedSrc(resolvedSrc)}
+          onError={advanceSource}
           className={cn(
             "h-full w-full object-cover transition-opacity duration-300",
             isLoading ? "opacity-0" : "opacity-100"
@@ -107,4 +101,18 @@ export function FlagImage({
       )}
     </div>
   );
+}
+
+/**
+ * Fill-style flag for small thumbnails inside a positioned parent (quiz answers, review list).
+ * Tries the bundled flag first, then the remote URL; renders nothing if both fail.
+ */
+export function FlagFill({
+  src,
+  ...props
+}: Omit<React.ComponentProps<typeof Image>, "src" | "onError"> & { src?: string }) {
+  const { src: resolved, failed, onError } = useFlagSource(src);
+  if (failed || !resolved) return null;
+  // eslint-disable-next-line jsx-a11y/alt-text -- alt is supplied by the caller via props
+  return <Image {...props} src={resolved} unoptimized onError={onError} />;
 }

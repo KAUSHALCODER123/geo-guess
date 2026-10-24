@@ -78,8 +78,8 @@ export function AccuracyChart({ history }: AccuracyChartProps) {
           <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="accuracyGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="var(--primary, #3b82f6)" stopOpacity={0.35} />
-                <stop offset="95%" stopColor="var(--primary, #3b82f6)" stopOpacity={0} />
+                <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.35} />
+                <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
@@ -107,7 +107,7 @@ export function AccuracyChart({ history }: AccuracyChartProps) {
             <Area
               type="monotone"
               dataKey="accuracy"
-              stroke="var(--primary, #3b82f6)"
+              stroke="var(--chart-1)"
               strokeWidth={2.5}
               fillOpacity={1}
               fill="url(#accuracyGradient)"

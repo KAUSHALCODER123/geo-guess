@@ -23,7 +23,7 @@ export interface CompareChartsProps {
   countries: Country[];
 }
 
-const COUNTRY_COLORS = ["#3b82f6", "#10b981", "#f59e0b"];
+const COUNTRY_COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)"];
 
 export function CompareCharts({ countries }: CompareChartsProps) {
   // Bar Chart Data (Population & Area)
@@ -125,9 +125,9 @@ export function CompareCharts({ countries }: CompareChartsProps) {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={barData} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} />
+                <XAxis dataKey="name" stroke="var(--muted-foreground)" fontSize={12} tickLine={false} />
                 <YAxis
-                  stroke="#888888"
+                  stroke="var(--muted-foreground)"
                   fontSize={12}
                   tickLine={false}
                   tickFormatter={formatPopTicks}
@@ -141,7 +141,7 @@ export function CompareCharts({ countries }: CompareChartsProps) {
                     color: "var(--foreground)",
                   }}
                 />
-                <Bar dataKey="population" fill="#3b82f6" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="population" fill="var(--chart-1)" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -156,9 +156,9 @@ export function CompareCharts({ countries }: CompareChartsProps) {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={barData} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} />
+                <XAxis dataKey="name" stroke="var(--muted-foreground)" fontSize={12} tickLine={false} />
                 <YAxis
-                  stroke="#888888"
+                  stroke="var(--muted-foreground)"
                   fontSize={12}
                   tickLine={false}
                   tickFormatter={formatAreaTicks}
@@ -172,7 +172,7 @@ export function CompareCharts({ countries }: CompareChartsProps) {
                     color: "var(--foreground)",
                   }}
                 />
-                <Bar dataKey="area" fill="#10b981" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="area" fill="var(--chart-2)" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -194,9 +194,9 @@ export function CompareCharts({ countries }: CompareChartsProps) {
         <div className="h-80 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart data={radarData} outerRadius="75%">
-              <PolarGrid stroke="#888888" opacity={0.25} />
-              <PolarAngleAxis dataKey="subject" stroke="#888888" fontSize={12} />
-              <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="#888888" opacity={0.3} />
+              <PolarGrid stroke="var(--muted-foreground)" opacity={0.25} />
+              <PolarAngleAxis dataKey="subject" stroke="var(--muted-foreground)" fontSize={12} />
+              <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="var(--muted-foreground)" opacity={0.3} />
               {countries.map((c, i) => (
                 <Radar
                   key={c.cca3}

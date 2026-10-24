@@ -54,11 +54,11 @@ export function HeatmapCalendar({ history, weeksToShow = 14 }: HeatmapCalendarPr
   }, [countsByDate, weeksToShow]);
 
   const getColorClass = (count: number) => {
-    if (count === 0) return "bg-muted/40 hover:ring-1 hover:ring-border";
-    if (count < 5) return "bg-emerald-500/30 hover:bg-emerald-500/40";
-    if (count < 10) return "bg-emerald-500/60 hover:bg-emerald-500/70";
-    if (count < 20) return "bg-emerald-500/80 hover:bg-emerald-500/90";
-    return "bg-emerald-500 hover:opacity-90";
+    if (count === 0) return "bg-muted ring-1 ring-inset ring-border/60 hover:ring-primary/40";
+    if (count < 5) return "bg-primary/25 hover:bg-primary/35";
+    if (count < 10) return "bg-primary/50 hover:bg-primary/60";
+    if (count < 20) return "bg-primary/75 hover:bg-primary/85";
+    return "bg-primary hover:opacity-90";
   };
 
   return (
@@ -107,11 +107,11 @@ export function HeatmapCalendar({ history, weeksToShow = 14 }: HeatmapCalendarPr
       {/* Legend */}
       <div className="flex items-center justify-end gap-1.5 text-xs text-muted-foreground pt-1">
         <span>Less</span>
-        <div className="w-3 h-3 rounded-xs bg-muted/40" />
-        <div className="w-3 h-3 rounded-xs bg-emerald-500/30" />
-        <div className="w-3 h-3 rounded-xs bg-emerald-500/60" />
-        <div className="w-3 h-3 rounded-xs bg-emerald-500/80" />
-        <div className="w-3 h-3 rounded-xs bg-emerald-500" />
+        <div className="w-3 h-3 rounded-xs bg-muted ring-1 ring-inset ring-border/60" />
+        <div className="w-3 h-3 rounded-xs bg-primary/25" />
+        <div className="w-3 h-3 rounded-xs bg-primary/50" />
+        <div className="w-3 h-3 rounded-xs bg-primary/75" />
+        <div className="w-3 h-3 rounded-xs bg-primary" />
         <span>More</span>
       </div>
     </Card>

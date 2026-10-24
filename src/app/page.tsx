@@ -149,6 +149,7 @@ export default function HomePage() {
     <div className="relative min-h-screen bg-atlas-grid">
       {/* Background Compass Glow */}
       <div className="pointer-events-none absolute inset-0 bg-compass-radial opacity-70" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[32rem] bg-brand-wash" />
 
       {/* Main Container */}
       <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-16">
@@ -165,7 +166,7 @@ export default function HomePage() {
           {/* Headline */}
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground max-w-4xl mx-auto leading-[1.1]">
             Forge your world knowledge with{" "}
-            <span className="bg-gradient-to-r from-sky-400 via-primary to-amber-500 bg-clip-text text-transparent">
+            <span className="text-gradient-brand">
               every flag.
             </span>
           </h1>

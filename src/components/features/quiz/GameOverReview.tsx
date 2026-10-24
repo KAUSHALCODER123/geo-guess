@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Image from "next/image";
+import { FlagFill } from "@/components/common/flag-image";
 import Link from "next/link";
 import {
   Trophy,
@@ -229,7 +229,7 @@ export function GameOverReview({
                         </span>
                         {q.imageUrl && (
                           <div className="relative w-6 h-4 rounded overflow-hidden border border-border shrink-0">
-                            <Image
+                            <FlagFill
                               src={q.imageUrl}
                               alt=""
                               fill

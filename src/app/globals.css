@@ -2,59 +2,78 @@
 
 @layer base {
   :root {
-    /* Prestigious Editorial & Cartographic Atlas Palette (Light) */
-    --background: hsl(42 28% 97%);
-    --foreground: hsl(220 25% 12%);
+    /* FlagForge palette (Light): cool paper background, ocean-blue brand, coral accent */
+    --background: hsl(210 40% 98%);
+    --foreground: hsl(222 47% 11%);
     --card: hsl(0 0% 100%);
-    --card-foreground: hsl(220 25% 12%);
+    --card-foreground: hsl(222 47% 11%);
     --popover: hsl(0 0% 100%);
-    --popover-foreground: hsl(220 25% 12%);
-    --primary: hsl(212 48% 22%);
-    --primary-foreground: hsl(42 28% 97%);
-    --secondary: hsl(38 18% 92%);
-    --secondary-foreground: hsl(220 25% 14%);
-    --muted: hsl(38 18% 93%);
-    --muted-foreground: hsl(218 14% 38%);
-    --accent: hsl(18 68% 46%);
+    --popover-foreground: hsl(222 47% 11%);
+    --primary: hsl(221 83% 45%);
+    --primary-foreground: hsl(0 0% 100%);
+    --secondary: hsl(214 32% 94%);
+    --secondary-foreground: hsl(222 47% 14%);
+    --muted: hsl(214 32% 94%);
+    --muted-foreground: hsl(215 18% 38%);
+    --accent: hsl(16 85% 40%);
     --accent-foreground: #ffffff;
     --destructive: hsl(0 72% 44%);
-    --destructive-foreground: hsl(42 28% 97%);
-    --success: hsl(152 68% 28%);
-    --success-foreground: hsl(42 28% 97%);
-    --warning: hsl(35 85% 36%);
+    --destructive-foreground: hsl(0 0% 100%);
+    --success: hsl(152 70% 26%);
+    --success-foreground: hsl(0 0% 100%);
+    --warning: hsl(30 90% 33%);
     --warning-foreground: #ffffff;
-    --border: hsl(38 14% 86%);
-    --input: hsl(38 14% 86%);
-    --ring: hsl(212 48% 22%);
-    --radius: 0.5rem;
+    --border: hsl(214 25% 87%);
+    --input: hsl(214 25% 87%);
+    --ring: hsl(221 83% 45%);
+    --radius: 0.625rem;
+
+    /* Brand gradient stops and data-viz colours (all distinguishable, AA on white) */
+    --brand-from: hsl(199 89% 40%);
+    --brand-via: hsl(221 83% 45%);
+    --brand-to: hsl(262 70% 50%);
+    --chart-1: hsl(221 83% 45%);
+    --chart-2: hsl(160 84% 32%);
+    --chart-3: hsl(30 92% 42%);
+    --chart-4: hsl(262 70% 50%);
+    --chart-5: hsl(340 75% 48%);
   }
 
   .dark {
-    /* Obsidian Cartography Palette (Dark) */
-    --background: hsl(222 28% 7%);
-    --foreground: hsl(215 20% 95%);
-    --card: hsl(222 24% 11%);
-    --card-foreground: hsl(215 20% 95%);
-    --popover: hsl(222 24% 11%);
-    --popover-foreground: hsl(215 20% 95%);
-    --primary: hsl(210 68% 58%);
-    --primary-foreground: hsl(222 28% 7%);
-    --secondary: hsl(222 18% 16%);
-    --secondary-foreground: hsl(215 20% 95%);
-    --muted: hsl(222 18% 15%);
-    --muted-foreground: hsl(218 14% 65%);
-    --accent: hsl(20 75% 54%);
-    --accent-foreground: #ffffff;
-    --destructive: hsl(0 70% 55%);
-    --destructive-foreground: #ffffff;
-    --success: hsl(152 62% 42%);
-    --success-foreground: hsl(222 28% 7%);
-    --warning: hsl(38 88% 54%);
-    --warning-foreground: hsl(222 28% 7%);
-    --border: hsl(222 16% 18%);
-    --input: hsl(222 16% 18%);
-    --ring: hsl(210 68% 58%);
-    --radius: 0.5rem;
+    /* FlagForge palette (Dark): deep navy, bright ocean blue, warm coral */
+    --background: hsl(224 40% 8%);
+    --foreground: hsl(214 32% 95%);
+    --card: hsl(224 34% 12%);
+    --card-foreground: hsl(214 32% 95%);
+    --popover: hsl(224 34% 12%);
+    --popover-foreground: hsl(214 32% 95%);
+    --primary: hsl(213 94% 64%);
+    --primary-foreground: hsl(224 40% 8%);
+    --secondary: hsl(224 28% 17%);
+    --secondary-foreground: hsl(214 32% 95%);
+    --muted: hsl(224 28% 16%);
+    --muted-foreground: hsl(218 16% 68%);
+    --accent: hsl(16 92% 58%);
+    --accent-foreground: hsl(224 40% 8%);
+    --destructive: hsl(0 78% 62%);
+    --destructive-foreground: hsl(224 40% 8%);
+    --success: hsl(152 60% 48%);
+    --success-foreground: hsl(224 40% 8%);
+    --warning: hsl(38 92% 56%);
+    --warning-foreground: hsl(224 40% 8%);
+    --border: hsl(224 24% 20%);
+    --input: hsl(224 24% 20%);
+    --ring: hsl(213 94% 64%);
+    --radius: 0.625rem;
+
+    --brand-from: hsl(199 95% 62%);
+    --brand-via: hsl(213 94% 68%);
+    --brand-to: hsl(262 85% 76%);
+    --chart-1: hsl(213 94% 64%);
+    --chart-2: hsl(160 70% 50%);
+    --chart-3: hsl(38 92% 56%);
+    --chart-4: hsl(262 85% 72%);
+    --chart-5: hsl(340 85% 66%);
   }
 
   .contrast-high {
@@ -154,6 +173,11 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -259,4 +283,32 @@ body {
       opacity: 1;
     }
   }
+}
+
+
+/* Brand gradient text (headline accent, logo). */
+.text-gradient-brand {
+  background-image: linear-gradient(
+    90deg,
+    var(--brand-from),
+    var(--brand-via) 55%,
+    var(--brand-to)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Soft brand glow behind page heroes. */
+.bg-brand-wash {
+  background-image:
+    radial-gradient(60% 50% at 15% 0%, color-mix(in srgb, var(--brand-from) 14%, transparent), transparent 70%),
+    radial-gradient(50% 45% at 90% 5%, color-mix(in srgb, var(--brand-to) 12%, transparent), transparent 70%);
+}
+
+/* Selected / active surface used by option cards and chips. */
+.surface-selected {
+  border-color: var(--primary);
+  background-color: color-mix(in srgb, var(--primary) 9%, var(--card));
+  box-shadow: 0 0 0 1px var(--primary);
 }
