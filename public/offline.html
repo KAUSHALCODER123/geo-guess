@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Offline | FlagForge</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #111827;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --border: #1f2937;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2.5rem 2rem;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+    }
+    .icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--primary);
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.75rem;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+    }
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease-in-out;
+      border: none;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <div class="icon" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="1" y1="1" x2="23" y2="23"></line>
+        <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+        <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+        <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+        <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+        <line x1="12" y1="20" x2="12.01" y2="20"></line>
+      </svg>
+    </div>
+    <div class="status-badge">
+      <span>●</span> Offline Mode Active
+    </div>
+    <h1>You are currently offline</h1>
+    <p>
+      FlagForge cached data is active! You can still explore previously viewed countries and play offline quizzes using our embedded datasets.
+    </p>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="window.location.reload()">
+        Try Reconnecting
+      </button>
+      <a href="/" class="btn btn-secondary">
+        Return to Home Atlas
+      </a>
+    </div>
+  </main>
+</body>
+</html>

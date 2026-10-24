@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FlagForge - Project Report</title>
+<style>
+  @page { size: A4; margin: 20mm 18mm 20mm 18mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Times New Roman", Georgia, serif; font-size: 11.5pt; line-height: 1.5; color: #111; margin: 0; }
+  h1 { font-size: 20pt; margin: 0 0 10pt; page-break-before: always; border-bottom: 2px solid #1f3a5f; padding-bottom: 4pt; color: #1f3a5f; }
+  h2 { font-size: 15pt; margin: 18pt 0 6pt; color: #1f3a5f; }
+  h3 { font-size: 12.5pt; margin: 12pt 0 4pt; }
+  p { margin: 0 0 7pt; text-align: justify; }
+  ul, ol { margin: 0 0 8pt 18pt; padding: 0; } li { margin-bottom: 3pt; }
+  table { border-collapse: collapse; width: 100%; margin: 6pt 0 10pt; font-size: 10pt; page-break-inside: avoid; }
+  th, td { border: 1px solid #555; padding: 3pt 6pt; vertical-align: top; text-align: left; }
+  th { background: #e6ecf5; }
+  code, pre { font-family: Consolas, "Courier New", monospace; font-size: 9pt; }
+  pre { background: #f5f5f5; border: 1px solid #ccc; padding: 7pt; white-space: pre-wrap; page-break-inside: avoid; }
+  figure { margin: 8pt 0 12pt; text-align: center; page-break-inside: avoid; }
+  figure img, figure svg { max-width: 100%; height: auto; border: 1px solid #ccc; }
+  figcaption { font-size: 10pt; font-style: italic; margin-top: 3pt; }
+  .cover, .center { text-align: center; }
+  .cover { page-break-after: always; padding-top: 30mm; }
+  .cover h1 { border: 0; page-break-before: avoid; font-size: 30pt; margin-bottom: 4pt; }
+  .page { page-break-before: always; }
+  .sig { display: flex; justify-content: space-between; margin-top: 40pt; }
+  .note { font-size: 10pt; font-style: italic; }
+  .toc td { border: 0; padding: 2pt 4pt; } .toc table { border: 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <h1>FlagForge</h1>
+  <h2>Interactive World Atlas &amp; Vexillology Quiz Arena</h2>
+  <p class="center"><strong>A Project Report</strong></p>
+  <p class="center">Submitted in partial fulfillment of the requirement for the award of the Degree of</p>
+  <p class="center"><strong>BACHELOR OF SCIENCE (COMPUTER SCIENCE)</strong></p>
+  <p class="center">By</p>
+  <p class="center" style="font-size:15pt"><strong>Kaushal Rajput</strong></p>
+  <p class="center">Under the esteemed guidance of<br>____________________</p>
+  <p class="center" style="margin-top:30pt"><strong>DEPARTMENT OF COMPUTER SCIENCE</strong><br>____________________ COLLEGE<br>(Affiliated to ____________________ University)</p>
+  <p class="center" style="margin-top:30pt">2026 - 2027</p>
+</div>
+
+<!-- CERTIFICATE -->
+<div class="center" style="padding-top:20mm">
+  <h2 style="text-align:center">CERTIFICATE</h2>
+  <p class="center">This is to certify that</p>
+  <p class="center"><strong>Kaushal Rajput</strong></p>
+  <p class="center">has satisfactorily completed the project report entitled</p>
+  <p class="center"><strong>FlagForge - Interactive World Atlas &amp; Vexillology Quiz Arena</strong></p>
+  <p class="center">in partial fulfilment of the requirements for the Bachelor of Science (Computer Science) during the academic year 2026 - 2027.</p>
+  <p class="center">Date of Submission: ____________</p>
+  <div class="sig"><span>Project Guide</span><span>Co-ordinator</span><span>Examiner</span></div>
+  <div class="sig"><span>Head of Department</span><span>Principal</span><span>College Seal</span></div>
+</div>
+
+<!-- DECLARATION -->
+<h1>Declaration</h1>
+<p>I hereby declare that the project entitled <strong>"FlagForge - Interactive World Atlas &amp; Vexillology Quiz Arena"</strong>, submitted in partial fulfilment for the award of Bachelor of Science in Computer Science during the academic year 2026 - 2027, represents my project work. Sources and third-party services used in the implementation are acknowledged in the references.</p>
+<p style="margin-top:40pt">Signature of the Student: ____________________</p>
+<p>Place: ____________________</p>
+<p>Date: ____________________</p>
+
+<!-- ACK -->
+<h1>Acknowledgement</h1>
+<p>I would like to express my sincere gratitude to everyone who contributed to the successful creation and development of the "FlagForge" project.</p>
+<p>I extend my deepest gratitude to the faculty members and the project guide of the Department of Computer Science for their guidance and support during the development of this project. Their insights greatly enhanced its quality.</p>
+<p>I also thank my friends and classmates for providing feedback on the quiz, explorer and comparison experiences. Their diverse perspectives helped me refine the functionality and the user experience of the application.</p>
+<p>Building FlagForge helped me understand how a real-world application combines external information services, a responsive user interface, typed data validation, client-side state, accessibility and software testing. It was a rewarding and insightful experience.</p>
+<p>Finally, I thank my family for their encouragement throughout the project.</p>
+<p>Thank you all.</p>
+<p><strong>Kaushal Rajput</strong></p>
+
+<!-- ABSTRACT -->
+<h1>Abstract</h1>
+<p>FlagForge is a web-based interactive world atlas and geography quiz platform. It helps learners explore every country and territory in the world, practise recognising flags, capitals and borders through timed quizzes, take a shared daily challenge, and compare countries side by side using demographic data and charts.</p>
+<p>Country data is aggregated from the REST Countries API, Wikipedia and Open-Meteo, validated with Zod schemas and normalized into one internal <code>Country</code> model. If the network is unavailable, an embedded dataset of 30 countries keeps the application usable. The application is a Progressive Web App: a service worker caches flags, API responses and visited pages so that previously loaded content works offline.</p>
+<p>The application is built with Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS 4, TanStack Query and Zustand. All user data (progress, streaks, achievements, favorites and settings) is stored locally in the browser with versioned persistence, so no account is required and no personal data leaves the device. A pure, seeded quiz engine generates six question types at three difficulty levels and a deterministic "Daily Challenge" that is identical for every player on the same UTC date.</p>
+<p>The project emphasizes keyboard accessibility (WCAG 2.2 AA target), graceful handling of API failures, a strict Content-Security-Policy, and automated verification with Vitest (58 unit and component tests) and Playwright with axe-core (end-to-end and accessibility specs).</p>
+<p><strong>Keywords:</strong> world atlas, geography quiz, flags, Next.js, React, PWA, offline-first, Zustand, TanStack Query, accessibility.</p>
+<table>
+<tr><th>Aspect</th><th>Summary</th></tr>
+<tr><td>Users</td><td>Students, geography enthusiasts and casual players (no account needed)</td></tr>
+<tr><td>Platform</td><td>Responsive, installable Progressive Web App (desktop and mobile browsers)</td></tr>
+<tr><td>Data sources</td><td>REST Countries v3.1, Wikipedia REST summary API, Open-Meteo, FlagCDN images</td></tr>
+<tr><td>Storage</td><td>Browser localStorage (versioned Zustand stores), TanStack Query cache, service-worker caches</td></tr>
+<tr><td>Verification</td><td>Vitest + Testing Library, Playwright, axe-core, TypeScript strict mode, ESLint</td></tr>
+</table>
+
+<!-- LIST OF FIGURES + INDEX -->
+<h1>List of Figures</h1>
+<table>
+<tr><th>No.</th><th>Figure</th></tr>
+<tr><td>1</td><td>FlagForge between the learner and three external services</td></tr>
+<tr><td>2</td><td>Development process model</td></tr>
+<tr><td>3</td><td>Flow of the project</td></tr>
+<tr><td>4</td><td>DFD Level 0 (context diagram)</td></tr>
+<tr><td>5</td><td>DFD Level 1</td></tr>
+<tr><td>6</td><td>Use case diagram</td></tr>
+<tr><td>7</td><td>Class diagram</td></tr>
+<tr><td>8</td><td>Activity diagram (quiz session)</td></tr>
+<tr><td>9</td><td>Sequence diagram (loading countries)</td></tr>
+<tr><td>10</td><td>Data model / local storage diagram (ER equivalent)</td></tr>
+<tr><td>11</td><td>Component diagram</td></tr>
+<tr><td>12</td><td>Gantt chart</td></tr>
+<tr><td>13</td><td>Layered system architecture</td></tr>
+<tr><td>14 - 20</td><td>Graphical user interface screens</td></tr>
+</table>
+
+<h1>Index</h1>
+<table class="toc">
+<tr><th>Chapter</th><th>Title</th></tr>
+<tr><td>1</td><td>Project Overview</td></tr>
+<tr><td>2</td><td>Introduction &amp; Motivation; 2.1 Theory Behind the Project; 2.2 Problem Definition; 2.3 Need for the Project</td></tr>
+<tr><td>3</td><td>Literature Survey</td></tr>
+<tr><td>4</td><td>Analysis &amp; Design: 4.1 Process Model; 4.2 Flow of Project; 4.3 Feasibility Study; 4.4 Cost Analysis; 4.5 Data Flow Diagrams; 4.6 UML Diagrams (use case, class, activity, sequence, data model, component); 4.7 Gantt Chart; 4.8 Technologies Used; 4.9 System Architecture</td></tr>
+<tr><td>5</td><td>Implementation: 5.1 Code; 5.2 Graphical User Interface; 5.3 Test Cases</td></tr>
+<tr><td>6</td><td>Conclusion &amp; Future Scope</td></tr>
+<tr><td>7</td><td>References</td></tr>
+<tr><td>8</td><td>Synopsis</td></tr>
+</table>
+
+<!-- 1 OVERVIEW -->
+<h1>1. Project Overview</h1>
+<p>FlagForge is a fast, offline-capable interactive world atlas, flag and geography quiz arena, and country comparison tool. All content is presented through a single responsive interface that works on phones as well as desktops.</p>
+<h3>Key Features</h3>
+<ol>
+<li><strong>World Atlas Explorer:</strong> Browse every country and territory. Instant fuzzy search (Fuse.js) by name or capital, filters for region and subregion, population range, landlocked and UN-member status, grid or list view, and favorites.</li>
+<li><strong>Quiz Arena:</strong> Six quiz modes (flag to country, country to capital, capital to country, higher or lower, which country borders, map location) at three difficulty levels (easy, medium, hard) plus "all". Timed questions, speed bonuses, streak multipliers up to 3.0x and an end-of-game review.</li>
+<li><strong>Daily Global Challenge:</strong> A 10-question quiz generated from a seed derived from the UTC date, so every player receives identical questions each day. Results can be shared as an emoji grid.</li>
+<li><strong>Compare:</strong> Select up to three countries and compare population, area, borders, languages and currencies in a matrix and in Recharts bar and radar charts.</li>
+<li><strong>Stats Dashboard:</strong> Streaks, accuracy by region (radar chart), an activity heatmap calendar, weakest countries and unlockable achievements.</li>
+<li><strong>Country Profiles:</strong> A page per country with key facts, borders, a map card, live capital-city weather (Open-Meteo) and a Wikipedia summary.</li>
+<li><strong>Productivity and Accessibility Extras:</strong> Command palette (Ctrl/Cmd + K), keyboard answers (1-4), pause with Esc, light/dark/system theme, high-contrast and reduced-motion settings, installable PWA with offline fallback.</li>
+</ol>
+<p>The scope of the system is geography learning and exploration. User accounts, multiplayer leaderboards and server-side storage are outside the scope of this project.</p>
+<table>
+<tr><th>Feature</th><th>Implemented in</th><th>Route</th></tr>
+<tr><td>Atlas explorer</td><td>src/components/features/explorer; use-explorer-filter.ts</td><td>/explore</td></tr>
+<tr><td>Quiz arena</td><td>src/lib/quiz; src/components/features/quiz</td><td>/play</td></tr>
+<tr><td>Daily challenge</td><td>src/lib/quiz/rng.ts; DailyModal</td><td>/daily</td></tr>
+<tr><td>Compare</td><td>src/components/features/compare</td><td>/compare</td></tr>
+<tr><td>Statistics</td><td>src/components/features/stats; useProgressStore</td><td>/stats</td></tr>
+<tr><td>Country profile</td><td>src/components/features/country; src/lib/api</td><td>/country/[code]</td></tr>
+<tr><td>Design reference</td><td>src/app/design/page.tsx</td><td>/design</td></tr>
+</table>
+
+<!-- 2 -->
+<h1>2. Introduction &amp; Motivation</h1>
+<p>Learning geography from textbooks and atlases is often passive. Learners may be able to look up a country but have little way to test themselves, track improvement, or compare nations quickly. Existing quiz sites often require registration, hide data behind advertising, or stop working without a connection.</p>
+<p>FlagForge provides one interface for exploration, practice and comparison. It gathers country data from public APIs, offers six kinds of quiz, a shared daily challenge, a side-by-side comparison view and a personal statistics dashboard. The design emphasizes a clean, search-first interface, accessible controls and fast loading.</p>
+<p>The system uses modern web technologies: Next.js 15 and React 19 with TypeScript for the application, Tailwind CSS 4 for styling, TanStack Query for server-state caching and Zustand for persisted client state. The same codebase renders fast pre-built pages and interactive client components.</p>
+<p>The main motivation is practical. A learner may want a five-minute daily practice routine, may want to revise only a single region, or may want to know how two countries differ. Filters, difficulty levels and persistent progress support these needs, while streaks and achievements encourage regular practice.</p>
+<p>Another motivation is low friction. No account is needed; progress is stored on the device. Because the app is installable and caches data, it remains useful on slow or unreliable connections.</p>
+<p>Finally, building FlagForge is a realistic software-engineering exercise: it combines external APIs, schema validation, state management, offline caching, accessibility and automated testing in one project.</p>
+<figure>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="12">
+  <rect x="250" y="80" width="140" height="60" rx="10" fill="#dbe8f8" stroke="#1f3a5f"/><text x="320" y="106" text-anchor="middle" font-weight="bold">FlagForge</text><text x="320" y="124" text-anchor="middle">web application</text>
+  <rect x="20" y="85" width="110" height="50" rx="8" fill="#fff" stroke="#555"/><text x="75" y="115" text-anchor="middle">Learner</text>
+  <rect x="500" y="10" width="125" height="45" rx="8" fill="#fff" stroke="#555"/><text x="562" y="37" text-anchor="middle">REST Countries</text>
+  <rect x="500" y="87" width="125" height="45" rx="8" fill="#fff" stroke="#555"/><text x="562" y="114" text-anchor="middle">Wikipedia</text>
+  <rect x="500" y="165" width="125" height="45" rx="8" fill="#fff" stroke="#555"/><text x="562" y="192" text-anchor="middle">Open-Meteo</text>
+  <path d="M130 110 H250 M390 95 L500 35 M390 110 H500 M390 125 L500 185" stroke="#333" fill="none" marker-end="url(#a)"/>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Figure 1: FlagForge between the learner and three external services</figcaption>
+</figure>
+
+<h2>2.1 Theory Behind the Project</h2>
+<p>FlagForge is based on the principles of modern web application architecture, schema-validated data aggregation, deterministic pseudo-random generation, offline-first caching and accessible interface design.</p>
+<h3>1. Web Application Architecture</h3>
+<p>The Next.js App Router organizes pages; React renders interactive elements; TypeScript's strict typing catches incorrect data shapes before deployment. Pages such as country profiles are pre-rendered statically for speed.</p>
+<h3>2. Validation and Normalization</h3>
+<p>The REST Countries API limits requests to 10 fields, so data is fetched in two parallel batches (identity and demographics; geography and borders). Each response is validated by a Zod schema and then merged by <code>normalizeCountry()</code> into one <code>Country</code> model used everywhere in the UI.</p>
+<h3>3. Deterministic Pseudo-Random Generation</h3>
+<p>The daily challenge must be identical for all players. The date string (for example 2026-10-24) is converted to a 32-bit integer seed, and a Mulberry32 pseudo-random number generator drives a Fisher-Yates shuffle and question selection. The same seed always produces the same quiz, without any server.</p>
+<h3>4. Gamified Scoring</h3>
+<p>Points for a correct answer are <code>(100 + remaining seconds x 10) x multiplier</code>. The multiplier rises with consecutive correct answers: 1.0x, 1.5x, 2.0x, 2.5x and a cap of 3.0x from a streak of five. A wrong answer scores zero and resets the streak.</p>
+<h3>5. Offline-First Caching</h3>
+<p>A service worker applies a strategy per resource type: cache-first for flag images, stale-while-revalidate for API data and network-first with cache fallback for pages. TanStack Query keeps fetched data fresh for 24 hours in memory.</p>
+<h3>6. Fault Tolerance</h3>
+<p>External services can be slow or fail. Every request has a timeout, failed requests are retried with exponential backoff, results are cached, and an embedded dataset provides a last-resort fallback.</p>
+
+<h2>2.2 Problem Definition</h2>
+<p>Country information is spread across many websites, and most learning tools either test or inform but rarely both. Learners who want to practise flags, capitals and borders, track their progress and compare countries must switch between several sites, many of which need an account or a constant connection.</p>
+<p>External APIs also behave unpredictably: they return inconsistent fields, impose request limits and sometimes fail. A simple client that calls them directly would show errors or empty pages whenever one service has a problem.</p>
+<p>The main problem this project addresses is: <em>to provide one coherent, accessible, offline-capable application that lets learners explore, practise and compare world geography while keeping their progress private on their own device.</em></p>
+<p>To be successful, the solution must:</p>
+<ul>
+<li>cover all countries with correct flags, capitals, borders and demographic data;</li>
+<li>offer several quiz types with adjustable difficulty and meaningful scoring;</li>
+<li>work without registration and keep progress between sessions;</li>
+<li>handle API failures gracefully and keep working offline;</li>
+<li>be usable by keyboard and screen reader, and on phones as well as desktops.</li>
+</ul>
+<table>
+<tr><th>Difficulty</th><th>Design response</th><th>Where</th></tr>
+<tr><td>Data split across services</td><td>Typed API clients, Zod validation, one Country model</td><td>src/lib/api</td></tr>
+<tr><td>Inconsistent or failing APIs</td><td>Timeout, retry with backoff, cache, embedded fallback</td><td>restcountries.ts, fallback-countries.ts</td></tr>
+<tr><td>Same quiz for everyone each day</td><td>Seeded PRNG from UTC date</td><td>quiz/rng.ts</td></tr>
+<tr><td>Progress lost between visits</td><td>Persisted Zustand stores with versions</td><td>src/store</td></tr>
+<tr><td>No connection</td><td>Service worker and offline page</td><td>public/sw.js</td></tr>
+<tr><td>Hard to use without a mouse</td><td>Keyboard shortcuts, skip link, focus rings, axe tests</td><td>e2e/accessibility.spec.ts</td></tr>
+</table>
+
+<h2>2.3 Need for the Project</h2>
+<p>Students increasingly learn on mobile devices and expect fast, clear navigation. A browser-based atlas and quiz needs no installation and replaces printed atlases for quick revision.</p>
+<p><strong>Active learning.</strong> Retrieval practice, such as answering questions under mild time pressure, improves memory more than re-reading. Timed quizzes, streaks and the daily challenge make such practice a routine.</p>
+<p><strong>Targeted revision.</strong> Difficulty levels and the weakest-countries list let the learner concentrate on what they miss most.</p>
+<p><strong>Comparison.</strong> Seeing population, area, languages and currencies of up to three countries together makes differences obvious.</p>
+<p><strong>Privacy and optional accounts.</strong> Progress, favorites and settings are stored only in the browser; no registration or tracking is required.</p>
+<p><strong>Accessibility.</strong> Full keyboard operation, skip links, high-contrast and reduced-motion settings allow more learners to use the application.</p>
+<table>
+<tr><th>User group</th><th>What it gains</th></tr>
+<tr><td>Student</td><td>Revision tool, daily practice, progress tracking</td></tr>
+<tr><td>Teacher</td><td>Classroom-friendly daily challenge; identical questions for everyone</td></tr>
+<tr><td>Casual player</td><td>Quick games, achievements and country facts</td></tr>
+<tr><td>Maintainer</td><td>Small, typed modules with unit tests</td></tr>
+</table>
+
+<!-- 3 LITERATURE -->
+<h1>3. Literature Survey</h1>
+<p>Geography learning applications commonly combine country reference data, quiz mechanics and progress tracking. FlagForge builds on three public services, each with a distinct role.</p>
+<p><strong>REST Countries</strong> (v3.1) supplies structured data for sovereign states and territories: names, ISO codes, capitals, region and subregion, population, area, languages, currencies, borders, coordinates and flag image links. It is the primary data source.</p>
+<p><strong>Wikipedia REST API</strong> provides short article summaries, thumbnails and canonical links, used to enrich country profile pages.</p>
+<p><strong>Open-Meteo</strong> is a free weather forecast API that requires no key. FlagForge requests current conditions at a capital city's coordinates and translates the WMO weather code into a readable label.</p>
+<p>A central challenge in aggregating public APIs is that responses differ in shape, may omit fields and can fail independently. FlagForge answers this with schema validation (Zod), normalization into one type, retries with exponential backoff, caching and an embedded dataset.</p>
+<p>Gamification research suggests that streaks, short feedback loops and visible progress encourage regular practice. FlagForge applies streak multipliers, speed bonuses, achievements and a calendar heatmap. Interface design follows the Web Content Accessibility Guidelines (WCAG 2.2) and is checked with the axe-core engine.</p>
+<table>
+<tr><th>Service</th><th>Main role</th><th>Data used</th><th>Module</th></tr>
+<tr><td>REST Countries</td><td>Country reference data</td><td>Names, codes, capitals, borders, population, area, languages, currencies, flags</td><td>restcountries.ts</td></tr>
+<tr><td>Wikipedia</td><td>Descriptive extract</td><td>Summary text, thumbnail, page URL</td><td>wikipedia.ts</td></tr>
+<tr><td>Open-Meteo</td><td>Capital weather</td><td>Temperature, wind, WMO weather code, day/night</td><td>weather.ts</td></tr>
+<tr><td>FlagCDN</td><td>Flag images</td><td>PNG/SVG flags (cached by service worker)</td><td>FlagImage component</td></tr>
+</table>
+
+<!-- 4 ANALYSIS & DESIGN -->
+<h1>4. Analysis &amp; Design</h1>
+<p>The analysis phase identifies the learners who use the system, the problems they face, and the functional and non-functional requirements.</p>
+<p><strong>Functional analysis.</strong> The system must provide searchable and filterable country exploration; six quiz modes with difficulty, timer, scoring and review; a daily challenge; a three-country comparison; a statistics dashboard; and country profile pages with weather and encyclopedia content.</p>
+<p><strong>Non-functional analysis.</strong> The system must be responsive, keyboard accessible, privacy-preserving, installable and resilient to unavailable external APIs. It must communicate errors instead of silently hiding them.</p>
+<p><strong>Requirement gathering.</strong> Requirements follow learner journeys, such as finding a country, practising for five minutes, comparing two nations, and checking progress over a week.</p>
+<p><strong>System architecture.</strong> A modular, layered web architecture. Route files, API clients, the quiz engine, hooks, persisted stores and presentational components are kept in separate folders, which supports testing and maintainability.</p>
+<p><strong>Data design.</strong> No server database is used. Country data is fetched and cached; the user's progress, favorites and settings live in three versioned localStorage stores.</p>
+<p><strong>User interface design.</strong> A hero page with direct actions, a sticky navigation bar with command palette, a mobile tab bar, card and list layouts, light, dark and high-contrast themes.</p>
+<p><strong>Security and validation design.</strong> A strict Content-Security-Policy, <code>X-Frame-Options: DENY</code>, <code>X-Content-Type-Options: nosniff</code>, Zod validation of all external data and no storage of personal information.</p>
+<table>
+<tr><th>ID</th><th>Requirement</th><th>Type</th></tr>
+<tr><td>R1</td><td>Search and filter all countries by name, capital, region, population</td><td>Functional</td></tr>
+<tr><td>R2</td><td>Play quizzes with six modes, three difficulty levels, scoring and review</td><td>Functional</td></tr>
+<tr><td>R3</td><td>Provide a deterministic daily challenge</td><td>Functional</td></tr>
+<tr><td>R4</td><td>Compare up to three countries with charts</td><td>Functional</td></tr>
+<tr><td>R5</td><td>Persist progress, favorites and settings locally</td><td>Functional</td></tr>
+<tr><td>R6</td><td>Survive slow, failing or absent network</td><td>Non-functional</td></tr>
+<tr><td>R7</td><td>Be accessible by keyboard and meet WCAG 2.2 AA</td><td>Non-functional</td></tr>
+<tr><td>R8</td><td>Protect users with strict security headers and local-only data</td><td>Non-functional</td></tr>
+</table>
+
+<h2>4.1 Process Model</h2>
+<p>The project follows a phased software-development process in which each phase feeds the next and findings flow back when needed.</p>
+<ul>
+<li><strong>Requirement analysis:</strong> identify learner journeys; list functional and non-functional requirements.</li>
+<li><strong>System design:</strong> define routes, the Country model, API clients, store schemas and the quiz engine interface.</li>
+<li><strong>Implementation:</strong> build Next.js pages, reusable React components and small TypeScript modules.</li>
+<li><strong>Testing:</strong> unit and component tests with Vitest; browser and accessibility tests with Playwright and axe-core.</li>
+<li><strong>Deployment and maintenance:</strong> production build, CI pipeline, deployment to a static/Node host or Docker, monitoring of upstream APIs.</li>
+</ul>
+<figure>
+<svg viewBox="0 0 700 110" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="12">
+  <g fill="#dbe8f8" stroke="#1f3a5f">
+  <rect x="5" y="30" width="120" height="50" rx="8"/><rect x="145" y="30" width="120" height="50" rx="8"/><rect x="285" y="30" width="120" height="50" rx="8"/><rect x="425" y="30" width="120" height="50" rx="8"/><rect x="565" y="30" width="130" height="50" rx="8"/></g>
+  <g text-anchor="middle"><text x="65" y="60">Requirements</text><text x="205" y="60">Design</text><text x="345" y="60">Implementation</text><text x="485" y="60">Testing</text><text x="630" y="60">Deploy &amp; maintain</text></g>
+  <path d="M125 55H145M265 55H285M405 55H425M545 55H565" stroke="#333" marker-end="url(#b)"/>
+  <path d="M485 30 Q345 -5 205 30" stroke="#777" fill="none" stroke-dasharray="4" marker-end="url(#b)"/>
+  <defs><marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Figure 2: Development process model (dashed arrow: feedback to design)</figcaption>
+</figure>
+<table>
+<tr><th>Phase</th><th>Main output</th><th>Checked by</th></tr>
+<tr><td>Requirement analysis</td><td>Journeys, requirement list</td><td>Review</td></tr>
+<tr><td>System design</td><td>Types, diagrams, store schemas</td><td>Design walkthrough</td></tr>
+<tr><td>Implementation</td><td>Next.js modules</td><td>tsc (strict), ESLint</td></tr>
+<tr><td>Testing</td><td>Unit, browser and a11y tests</td><td>Vitest, Playwright, axe-core</td></tr>
+<tr><td>Deployment</td><td>Production build, CI workflow</td><td>next build, GitHub Actions</td></tr>
+</table>
+
+<h2>4.2 Flow of Project</h2>
+<p>The flow follows the learner's journey. On the home page the learner picks Play Quiz, Explore Countries or Compare Nations. The data layer loads countries (cached for 24 hours in memory and by the service worker). In the explorer the learner filters and opens a country profile; in the arena the learner picks a mode and difficulty, answers questions and sees a review; results update the persisted progress store, which feeds the stats dashboard and achievements.</p>
+<figure>
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="12">
+  <g fill="#fff" stroke="#1f3a5f"><rect x="10" y="75" width="90" height="45" rx="8"/><rect x="140" y="20" width="120" height="45" rx="8"/><rect x="140" y="80" width="120" height="45" rx="8"/><rect x="140" y="140" width="120" height="45" rx="8"/>
+  <rect x="310" y="20" width="130" height="45" rx="8"/><rect x="310" y="80" width="130" height="45" rx="8"/><rect x="310" y="140" width="130" height="45" rx="8"/><rect x="500" y="75" width="190" height="50" rx="8" fill="#dbe8f8"/></g>
+  <g text-anchor="middle"><text x="55" y="102">Home</text><text x="200" y="47">Explore</text><text x="200" y="107">Play / Daily</text><text x="200" y="167">Compare</text><text x="375" y="47">Country profile</text><text x="375" y="107">Answer &amp; review</text><text x="375" y="167">Matrix &amp; charts</text><text x="595" y="97">Progress store</text><text x="595" y="113">(streak, stats, badges)</text></g>
+  <path d="M100 97L140 42M100 97H140M100 100L140 160M260 42H310M260 102H310M260 162H310M440 102H500" stroke="#333" fill="none" marker-end="url(#c)"/>
+  <defs><marker id="c" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Figure 3: Flow of the project</figcaption>
+</figure>
+<p><strong>Quiz path:</strong> configure mode, difficulty, number of questions and timer; the engine builds the questions; each answer is scored; the game-over screen shows the review; the progress store records answers, game end and streak.</p>
+<p><strong>Daily path:</strong> the UTC date becomes the seed; ten flag questions are generated; one result per day is recorded and can be shared as an emoji grid.</p>
+<p><strong>Offline path:</strong> if the network fails, cached responses or the embedded 30-country dataset are used, and visited pages open from the service-worker cache, with <code>/offline.html</code> as a last resort.</p>
+
+<h2>4.3 Feasibility Study</h2>
+<p><strong>Technical feasibility.</strong> The application relies on well-documented technologies (Next.js, React, TypeScript, Tailwind CSS) and keyless public APIs. It runs in any modern browser. API limits and availability are the main constraints and are handled by timeouts, retries, caching and fallback data.</p>
+<p><strong>Economic feasibility.</strong> All development tools and packages are free and open source. A static or small Node deployment fits free hosting tiers. No database or paid API key is needed.</p>
+<p><strong>Operational feasibility.</strong> Learners can use the application immediately without registering. The interface is responsive and keyboard accessible.</p>
+<p><strong>Schedule feasibility.</strong> Modules (data layer, quiz engine, explorer, compare, stats) can be built and tested incrementally.</p>
+<table>
+<tr><th>Risk</th><th>Effect</th><th>Response in the design</th></tr>
+<tr><td>API downtime</td><td>Missing data</td><td>Retry with backoff; embedded 30-country fallback</td></tr>
+<tr><td>Changed API shape</td><td>Runtime errors</td><td>Zod validation at the boundary; typed AppError</td></tr>
+<tr><td>Slow network</td><td>Poor experience</td><td>Timeouts, caches, skeleton loaders</td></tr>
+<tr><td>Browser storage cleared</td><td>Progress lost</td><td>Documented; versioned stores with safe defaults</td></tr>
+<tr><td>Accessibility regressions</td><td>Excluded users</td><td>axe-core checks in Playwright and CI</td></tr>
+</table>
+<table>
+<tr><th>Dimension</th><th>Verdict</th><th>Basis</th></tr>
+<tr><td>Technical</td><td>Feasible</td><td>Documented frameworks and public APIs</td></tr>
+<tr><td>Economic</td><td>Feasible</td><td>Free tools and hosting tier; no keys</td></tr>
+<tr><td>Operational</td><td>Feasible</td><td>No account needed; responsive UI</td></tr>
+<tr><td>Schedule</td><td>Feasible</td><td>Incremental modules over eight weeks</td></tr>
+</table>
+
+<h2>4.4 Cost Analysis</h2>
+<p>The following figures are qualitative planning estimates, not actual project expenses.</p>
+<table>
+<tr><th>Cost item</th><th>Development</th><th>Demo deployment</th><th>Larger service</th></tr>
+<tr><td>Tools (VS Code, Node.js, pnpm, packages)</td><td>No licence fees</td><td>No licence fees</td><td>No licence fees</td></tr>
+<tr><td>Hosting</td><td>Local machine</td><td>Free tier, within limits</td><td>Paid plan as traffic grows</td></tr>
+<tr><td>Database</td><td>Not needed</td><td>Not needed</td><td>Needed only if accounts are added</td></tr>
+<tr><td>API requests</td><td>Free, keyless</td><td>Free, keyless</td><td>Fair-use limits; possible self-hosted mirror</td></tr>
+<tr><td>Domain name</td><td>Not needed</td><td>Optional</td><td>Yearly fee</td></tr>
+<tr><td>Effort</td><td colspan="3">Main cost: student time for design, coding, testing and documentation</td></tr>
+</table>
+<p>Because all user data stays in the browser, the system has almost no operating cost per user. The benefits are mostly qualitative: easier revision, a regular practice routine and quick country comparisons. A formal return-on-investment calculation would require measured usage, which is not available.</p>
+<table>
+<tr><th>Cost driver</th><th>Why it can grow</th><th>How the design limits it</th></tr>
+<tr><td>API requests</td><td>Every visitor loads country data</td><td>24 h query cache, 10-minute client cache, service-worker cache</td></tr>
+<tr><td>Hosting traffic</td><td>More page views</td><td>Static pre-rendering, immutable assets</td></tr>
+<tr><td>Maintenance</td><td>APIs change</td><td>Isolated clients, one per service; Zod catches changes early</td></tr>
+<tr><td>Testing effort</td><td>Many browsers and screens</td><td>Automated unit, E2E and accessibility tests</td></tr>
+</table>
+
+<h2>4.5 Data Flow Diagram (Level 0)</h2>
+<p>A data flow diagram (DFD) shows how data moves between external actors, processes and data stores. The context diagram treats FlagForge as a single process.</p>
+<figure>
+<svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="12">
+  <rect x="20" y="95" width="110" height="45" fill="#fff" stroke="#333"/><text x="75" y="122" text-anchor="middle">Learner</text>
+  <circle cx="340" cy="117" r="65" fill="#dbe8f8" stroke="#1f3a5f"/><text x="340" y="115" text-anchor="middle" font-weight="bold">FlagForge</text><text x="340" y="131" text-anchor="middle">(0)</text>
+  <rect x="540" y="10" width="120" height="40" fill="#fff" stroke="#333"/><text x="600" y="35" text-anchor="middle">REST Countries</text>
+  <rect x="540" y="95" width="120" height="40" fill="#fff" stroke="#333"/><text x="600" y="120" text-anchor="middle">Wikipedia</text>
+  <rect x="540" y="180" width="120" height="40" fill="#fff" stroke="#333"/><text x="600" y="205" text-anchor="middle">Open-Meteo</text>
+  <path d="M130 110H275M275 125H130M400 95L540 32M400 117H540M400 140L540 195" stroke="#333" fill="none" marker-end="url(#d)"/>
+  <text x="200" y="104" text-anchor="middle" font-size="10">actions, filters</text><text x="200" y="140" text-anchor="middle" font-size="10">pages, results</text>
+  <defs><marker id="d" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Figure 4: DFD Level 0 (context diagram)</figcaption>
+</figure>
+<table>
+<tr><th>Data flow</th><th>Source</th><th>Destination</th><th>Content</th></tr>
+<tr><td>Action</td><td>Learner</td><td>Web app</td><td>Search, filter, answers, settings</td></tr>
+<tr><td>Pages and results</td><td>Web app</td><td>Learner</td><td>Country lists, questions, scores, charts</td></tr>
+<tr><td>Country request</td><td>Web app</td><td>REST Countries</td><td>Two field batches</td></tr>
+<tr><td>Summary request</td><td>Web app</td><td>Wikipedia</td><td>Article title</td></tr>
+<tr><td>Weather request</td><td>Web app</td><td>Open-Meteo</td><td>Capital latitude and longitude</td></tr>
+</table>
+<table>
+<tr><th>Data store</th><th>Holds</th><th>Lifetime</th></tr>
+<tr><td>localStorage: flagforge-progress (v2)</td><td>Streak, accuracy, history, daily results, achievements</td><td>Until browser data is cleared</td></tr>
+<tr><td>localStorage: flagforge-favorites (v1)</td><td>Favorite country codes</td><td>Until cleared</td></tr>
+<tr><td>localStorage: flagforge-settings (v2)</td><td>Theme, sound, motion, units, contrast</td><td>Until cleared</td></tr>
+<tr><td>Query cache and service-worker caches</td><td>Country, Wikipedia, weather data; flags; pages</td><td>24 h stale time; entry limits</td></tr>
+</table>
+
+<h2>4.5.1 Data Flow Diagram (Level 1)</h2>
+<p>At Level 1 the application is split into four processes: data loading (fetch, validate, normalize), exploration (search and filter), quiz handling (generate, score, review) and progress handling (update persisted stores).</p>
+<figure>
+<svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="12">
+  <g fill="#dbe8f8" stroke="#1f3a5f"><ellipse cx="120" cy="60" rx="85" ry="32"/><ellipse cx="350" cy="60" rx="85" ry="32"/><ellipse cx="350" cy="190" rx="85" ry="32"/><ellipse cx="590" cy="190" rx="85" ry="32"/></g>
+  <g text-anchor="middle"><text x="120" y="57">1. Load &amp; normalize</text><text x="120" y="72">country data</text><text x="350" y="57">2. Explore &amp; filter</text><text x="350" y="72">country list</text><text x="350" y="187">3. Generate &amp; score</text><text x="350" y="202">quiz</text><text x="590" y="187">4. Update progress</text><text x="590" y="202">and achievements</text></g>
+  <g fill="#fff" stroke="#333"><rect x="30" y="140" width="180" height="28"/><rect x="520" y="45" width="165" height="28"/></g>
+  <text x="120" y="159" text-anchor="middle">D1 Query + SW cache</text><text x="602" y="64" text-anchor="middle">D2 localStorage stores</text>
+  <path d="M205 60H265M120 92V140M210 154L270 180M435 190H505M590 158V73M435 60H520" stroke="#333" fill="none" marker-end="url(#e)"/>
+  <defs><marker id="e" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Figure 5: DFD Level 1</figcaption>
+</figure>
+<table>
+<tr><th>Process</th><th>Input</th><th>Output</th><th>Data store</th></tr>
+<tr><td>1. Load and normalize</td><td>API responses</td><td>Country[]</td><td>Query cache, SW cache</td></tr>
+<tr><td>2. Explore and filter</td><td>Query, filters</td><td>Filtered list</td><td>Favorites store</td></tr>
+<tr><td>3. Generate and score</td><td>Mode, difficulty, seed</td><td>Questions, points</td><td>None (pure functions)</td></tr>
+<tr><td>4. Update progress</td><td>Answers, game end</td><td>Streaks, stats, badges</td><td>Progress store</td></tr>
+</table>
+<h3>Failure paths</h3>
+<table>
+<tr><th>Situation</th><th>Reaction</th></tr>
+<tr><td>Request times out (8 s countries, 6 s weather/wiki)</td><td>Up to 2 retries with exponential backoff</td></tr>
+<tr><td>404 or validation error</td><td>Not retried; typed AppError shown in an error state</td></tr>
+<tr><td>Country API unreachable</td><td>Embedded 30-country dataset is used</td></tr>
+<tr><td>Weather or Wikipedia unavailable</td><td>The card shows an error state; the rest of the page still works</td></tr>
+<tr><td>Browser offline</td><td>Service worker serves cached pages or /offline.html</td></tr>
+</table>
+
+<h2>4.6 UML Diagrams</h2>
+<p>The Unified Modeling Language (UML) provides standard diagrams for describing structure and behavior. The diagrams below are conceptual models; exact fields should be checked against the TypeScript types in <code>src/types</code>.</p>
+<table>
+<tr><th>Diagram</th><th>What it shows in FlagForge</th></tr>
+<tr><td>4.6.1 Use case</td><td>The learner's functions</td></tr>
+<tr><td>4.6.2 Class</td><td>Country, Question, store state types</td></tr>
+<tr><td>4.6.3 Activity</td><td>A quiz session from configuration to review</td></tr>
+<tr><td>4.6.4 Sequence</td><td>Messages while loading countries</td></tr>
+<tr><td>4.6.5 Data model</td><td>Persisted stores and their contents (no server database)</td></tr>
+<tr><td>4.6.6 Component</td><td>UI, hooks, stores, API clients and services</td></tr>
+</table>
+
+<h3>4.6.1 Use Case Diagram</h3>
+<p>The system has one principal actor, the learner, supported by external services. All functions are available without signing in.</p>
+<figure>
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="11.5">
+  <rect x="150" y="5" width="320" height="290" fill="none" stroke="#1f3a5f"/><text x="310" y="22" text-anchor="middle" font-weight="bold">FlagForge</text>
+  <circle cx="50" cy="130" r="14" fill="none" stroke="#333"/><path d="M50 144V190M25 160H75M50 190L30 225M50 190L70 225" stroke="#333" fill="none"/><text x="50" y="245" text-anchor="middle">Learner</text>
+  <g fill="#dbe8f8" stroke="#1f3a5f"><ellipse cx="310" cy="50" rx="110" ry="17"/><ellipse cx="310" cy="95" rx="110" ry="17"/><ellipse cx="310" cy="140" rx="110" ry="17"/><ellipse cx="310" cy="185" rx="110" ry="17"/><ellipse cx="310" cy="230" rx="110" ry="17"/><ellipse cx="310" cy="272" rx="110" ry="14"/></g>
+  <g text-anchor="middle"><text x="310" y="54">Search &amp; filter countries</text><text x="310" y="99">View country profile</text><text x="310" y="144">Play quiz (6 modes)</text><text x="310" y="189">Take daily challenge</text><text x="310" y="234">Compare countries</text><text x="310" y="276">View stats &amp; change settings</text></g>
+  <path d="M64 150L200 50M64 150L200 95M64 150L200 140M64 155L200 185M64 160L200 230M64 165L205 272" stroke="#333" fill="none"/>
+</svg>
+<figcaption>Figure 6: Use case diagram</figcaption>
+</figure>
+<table>
+<tr><th>ID</th><th>Use case</th><th>Outcome</th></tr>
+<tr><td>UC1</td><td>Search and filter countries</td><td>Filtered grid or list; favorites</td></tr>
+<tr><td>UC2</td><td>View country profile</td><td>Facts, borders, map, weather, Wikipedia summary</td></tr>
+<tr><td>UC3</td><td>Play a quiz</td><td>Score, streak, review screen</td></tr>
+<tr><td>UC4</td><td>Take the daily challenge</td><td>Shared 10-question result; shareable grid</td></tr>
+<tr><td>UC5</td><td>Compare countries</td><td>Matrix and charts for up to 3 countries</td></tr>
+<tr><td>UC6</td><td>View stats</td><td>Heatmap, radar, weakest countries, badges</td></tr>
+<tr><td>UC7</td><td>Change settings</td><td>Theme, sound, motion, contrast, units</td></tr>
+</table>
+
+<h3>4.6.2 Class Diagram</h3>
+<p>A <code>Country</code> carries normalized descriptive fields. A <code>Question</code> references a target country and a list of options; exactly one option is correct. The progress store aggregates answers into accuracy and streak data.</p>
+<figure>
+<svg viewBox="0 0 700 270" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="11">
+  <g fill="#fff" stroke="#1f3a5f">
+  <rect x="10" y="10" width="200" height="150"/><rect x="250" y="10" width="200" height="110"/><rect x="490" y="10" width="200" height="90"/><rect x="250" y="150" width="200" height="105"/><rect x="490" y="130" width="200" height="125"/></g>
+  <g font-weight="bold" text-anchor="middle"><text x="110" y="27">Country</text><text x="350" y="27">Question</text><text x="590" y="27">QuestionOption</text><text x="350" y="167">ProgressState</text><text x="590" y="147">AchievementItem / Daily</text></g>
+  <g><text x="18" y="48">cca3, cca2 : string</text><text x="18" y="63">name : {common, official}</text><text x="18" y="78">capital : string[]</text><text x="18" y="93">region, subregion : string</text><text x="18" y="108">languages, currencies</text><text x="18" y="123">borders : string[]</text><text x="18" y="138">population, area : number</text><text x="18" y="153">flags {png, svg, alt}</text>
+  <text x="258" y="48">id, mode : QuizMode</text><text x="258" y="63">prompt, explanation</text><text x="258" y="78">targetCountry : Country</text><text x="258" y="93">options : QuestionOption[]</text><text x="258" y="108">comparisonCountry?</text>
+  <text x="498" y="48">id, label : string</text><text x="498" y="63">isCorrect : boolean</text><text x="498" y="78">flag? metadata?</text>
+  <text x="258" y="188">streak {current,best,last}</text><text x="258" y="203">regionAccuracy, modeAccuracy</text><text x="258" y="218">questionHistory[]</text><text x="258" y="233">dailyChallenges, achievements</text>
+  <text x="498" y="168">id, name, description, icon</text><text x="498" y="183">unlockedAt?</text><text x="498" y="203">date, score, total</text><text x="498" y="218">answers : boolean[]</text><text x="498" y="233">completedAt</text></g>
+  <path d="M250 80H210M450 60H490M350 120V150M450 200H490" stroke="#333" fill="none"/>
+  <text x="228" y="74" font-size="9">1</text><text x="455" y="54" font-size="9">4</text>
+</svg>
+<figcaption>Figure 7: Class diagram</figcaption>
+</figure>
+<p>Example object: a question of mode <code>flag_to_country</code> whose target is France has four options (France plus three distractors from the same region where possible), and exactly one option has <code>isCorrect = true</code>.</p>
+<table>
+<tr><th>Type</th><th>Attribute</th><th>Description</th></tr>
+<tr><td>Country</td><td>cca3 / cca2</td><td>ISO 3166-1 alpha-3 and alpha-2 codes</td></tr>
+<tr><td>Country</td><td>region, subregion, borders</td><td>Used by filters, difficulty and border questions</td></tr>
+<tr><td>Question</td><td>mode</td><td>flag_to_country, country_to_capital, capital_to_country, higher_lower, which_borders or map_location</td></tr>
+<tr><td>Question</td><td>metadata</td><td>Metric (population or area) and values for higher/lower; border country codes</td></tr>
+<tr><td>StreakData</td><td>current, best, lastActiveDate</td><td>Day streak of activity</td></tr>
+</table>
+
+<h3>4.6.3 Activity Diagram</h3>
+<p>The primary activity begins when the learner opens the Quiz Arena. The learner chooses mode, difficulty and options; the engine generates questions; for every question the learner answers (or the timer expires), the score is calculated and feedback is shown; at the end the review is displayed and progress is saved.</p>
+<figure>
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="11.5">
+  <circle cx="20" cy="100" r="8" fill="#333"/>
+  <g fill="#dbe8f8" stroke="#1f3a5f"><rect x="50" y="78" width="100" height="44" rx="10"/><rect x="180" y="78" width="100" height="44" rx="10"/><rect x="310" y="78" width="110" height="44" rx="10"/><rect x="460" y="78" width="100" height="44" rx="10"/><rect x="590" y="78" width="100" height="44" rx="10"/></g>
+  <g text-anchor="middle"><text x="100" y="97">Choose mode,</text><text x="100" y="112">difficulty</text><text x="230" y="97">Generate</text><text x="230" y="112">questions</text><text x="365" y="97">Answer before</text><text x="365" y="112">timer ends</text><text x="510" y="97">Score + feedback</text><text x="510" y="112">(streak update)</text><text x="640" y="97">Review &amp; save</text><text x="640" y="112">progress</text></g>
+  <path d="M28 100H50M150 100H180M280 100H310M420 100H460M560 100H590" stroke="#333" marker-end="url(#f)"/>
+  <path d="M510 78V40H365V78" stroke="#333" fill="none" marker-end="url(#f)"/><text x="440" y="34" text-anchor="middle" font-size="10">more questions? yes</text>
+  <path d="M640 122V160" stroke="#333" marker-end="url(#f)"/><circle cx="640" cy="172" r="8" fill="none" stroke="#333" stroke-width="2"/><circle cx="640" cy="172" r="4" fill="#333"/>
+  <defs><marker id="f" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Figure 8: Activity diagram of a quiz session</figcaption>
+</figure>
+<p>The quiz can be paused with Esc; unlimited-time mode removes the timer for learners who need more time (WCAG 2.2.2).</p>
+
+<h3>4.6.4 Sequence Diagram</h3>
+<p>When a view needs countries, a hook asks TanStack Query. On a cache miss the REST Countries client requests the two field batches in parallel, validates and merges them, and returns the typed result. If the request fails after retries, the embedded dataset is returned.</p>
+<figure>
+<svg viewBox="0 0 700 270" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="11.5">
+  <g fill="#dbe8f8" stroke="#1f3a5f"><rect x="10" y="5" width="110" height="28"/><rect x="170" y="5" width="120" height="28"/><rect x="340" y="5" width="130" height="28"/><rect x="520" y="5" width="130" height="28"/></g>
+  <g text-anchor="middle"><text x="65" y="24">View / hook</text><text x="230" y="24">Query cache</text><text x="405" y="24">restcountries.ts</text><text x="585" y="24">REST Countries</text></g>
+  <g stroke="#999" stroke-dasharray="4"><path d="M65 33V265M230 33V265M405 33V265M585 33V265"/></g>
+  <g stroke="#333" fill="none" marker-end="url(#g)"><path d="M65 60H230"/><path d="M230 90H405"/><path d="M405 120H585"/><path d="M585 150H410" stroke-dasharray="5"/><path d="M405 190H405" /><path d="M405 215H235" stroke-dasharray="5"/><path d="M230 245H70" stroke-dasharray="5"/></g>
+  <g font-size="10.5"><text x="147" y="55" text-anchor="middle">useCountries()</text><text x="318" y="85" text-anchor="middle">miss: getAllCountries()</text><text x="495" y="115" text-anchor="middle">batch 1 + batch 2 (parallel)</text><text x="495" y="145" text-anchor="middle">JSON</text><text x="480" y="187" text-anchor="middle">Zod validate, normalizeCountry()</text><text x="320" y="210" text-anchor="middle">Country[]  (on failure: fallback)</text><text x="150" y="240" text-anchor="middle">data (cached 24 h)</text></g>
+  <defs><marker id="g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Figure 9: Sequence diagram for loading countries</figcaption>
+</figure>
+<table>
+<tr><th>No.</th><th>From to</th><th>Message</th></tr>
+<tr><td>1</td><td>Hook to query cache</td><td>useCountries() requests the list</td></tr>
+<tr><td>2</td><td>Cache to client</td><td>On a miss, getAllCountries()</td></tr>
+<tr><td>3</td><td>Client to API</td><td>Two parallel requests with 8 s timeout and up to 2 retries</td></tr>
+<tr><td>4</td><td>Client</td><td>Validate with Zod, merge, normalize</td></tr>
+<tr><td>5</td><td>Client to cache</td><td>Typed Country[] (or the embedded fallback)</td></tr>
+<tr><td>6</td><td>Cache to view</td><td>Render with data; stays fresh for 24 hours</td></tr>
+</table>
+
+<h3>4.6.5 Data Model (ER-equivalent)</h3>
+<p>FlagForge has no server database. Its persistent entities are three versioned localStorage documents managed by Zustand's <code>persist</code> middleware. If the stored version is older, a migration step fills in new fields with defaults.</p>
+<figure>
+<svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="11">
+  <g fill="#fff" stroke="#1f3a5f"><rect x="10" y="10" width="210" height="200"/><rect x="245" y="10" width="210" height="110"/><rect x="480" y="10" width="210" height="150"/></g>
+  <g font-weight="bold" text-anchor="middle"><text x="115" y="28">flagforge-progress (v2)</text><text x="350" y="28">flagforge-favorites (v1)</text><text x="585" y="28">flagforge-settings (v2)</text></g>
+  <g><text x="18" y="50">streak {current,best,last}</text><text x="18" y="68">totalGamesPlayed</text><text x="18" y="86">totalQuestionsAnswered</text><text x="18" y="104">totalCorrectAnswers</text><text x="18" y="122">regionAccuracy, modeAccuracy</text><text x="18" y="140">questionHistory[]</text><text x="18" y="158">dailyChallenges (by date)</text><text x="18" y="176">_version : 2</text><text x="18" y="194">achievements[]</text>
+  <text x="253" y="50">favorites : string[] (cca3)</text><text x="253" y="68">_version : 1</text><text x="253" y="100">add / remove / toggle</text>
+  <text x="488" y="50">theme : system|light|dark</text><text x="488" y="68">sound : boolean</text><text x="488" y="86">reducedMotion : boolean</text><text x="488" y="104">units : metric|imperial</text><text x="488" y="122">highContrast : boolean</text><text x="488" y="140">_version : 2</text></g>
+</svg>
+<figcaption>Figure 10: Persisted data model (three localStorage stores)</figcaption>
+</figure>
+<p>Entries in the progress and favorites stores refer to countries by their <code>cca3</code> code, so no country data is duplicated in storage. The exact field list of the progress store is defined in <code>src/types/store.ts</code>.</p>
+
+<h3>4.6.6 Component Diagram</h3>
+<p>React components call hooks; hooks read the TanStack Query cache and Zustand stores; the data layer talks to the external services. Dependencies run in one direction, which keeps the quiz engine and API clients testable without a browser.</p>
+<figure>
+<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="11.5">
+  <g fill="#dbe8f8" stroke="#1f3a5f"><rect x="10" y="10" width="680" height="45"/><rect x="10" y="75" width="680" height="45"/><rect x="10" y="140" width="330" height="45"/><rect x="360" y="140" width="330" height="45"/><rect x="10" y="205" width="680" height="35"/></g>
+  <g text-anchor="middle"><text x="350" y="30" font-weight="bold">UI components</text><text x="350" y="46" font-size="10.5">layout · common · ui · features: explorer, quiz, compare, stats, country</text>
+  <text x="350" y="95" font-weight="bold">Hooks (src/hooks)</text><text x="350" y="111" font-size="10.5">useCountries · useCountry · useWikiSummary · useCapitalWeather · useProgress · useSettings · useFavorites</text>
+  <text x="175" y="160" font-weight="bold">Query cache + Zustand stores</text><text x="175" y="176" font-size="10.5">progress · favorites · settings</text>
+  <text x="525" y="160" font-weight="bold">Quiz engine (src/lib/quiz)</text><text x="525" y="176" font-size="10.5">generator · distractors · scoring · rng · difficulty</text>
+  <text x="350" y="226" font-weight="bold">API clients: restcountries · wikipedia · weather · fallback dataset  →  external services</text></g>
+</svg>
+<figcaption>Figure 11: Component diagram</figcaption>
+</figure>
+<p>The code base is divided into folders with clear responsibilities (counts from the repository at the time of writing).</p>
+<table>
+<tr><th>Folder</th><th>Files</th><th>Lines</th><th>Responsibility</th></tr>
+<tr><td>src/app</td><td>16</td><td>3,443</td><td>Pages, metadata, manifest, sitemap, OG image</td></tr>
+<tr><td>src/components</td><td>70</td><td>7,210</td><td>UI primitives, layout and feature components</td></tr>
+<tr><td>src/lib</td><td>17</td><td>3,029</td><td>API clients, quiz engine, utilities, query client</td></tr>
+<tr><td>src/hooks</td><td>8</td><td>391</td><td>Public hooks API</td></tr>
+<tr><td>src/store</td><td>4</td><td>487</td><td>Persisted Zustand stores</td></tr>
+<tr><td>src/tests</td><td>5</td><td>1,345</td><td>Vitest unit and component tests</td></tr>
+<tr><td>e2e</td><td>4</td><td>270</td><td>Playwright specifications</td></tr>
+</table>
+<p>Three rules keep the structure clean: components may import hooks and libraries but never the reverse; one client per external service; one place per decision (scoring rules only in <code>scoring.ts</code>, difficulty only in <code>difficulty.ts</code>).</p>
+
+<h2>4.7 Gantt Chart</h2>
+<p>A Gantt chart is a bar chart used in project management to show the timeline of tasks. The proposed eight-week academic plan is shown below; it is a plan, not a verified log of actual hours.</p>
+<figure>
+<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="11">
+  <g stroke="#ccc"><path d="M200 20V240M265 20V240M330 20V240M395 20V240M460 20V240M525 20V240M590 20V240M655 20V240M200 20H655"/></g>
+  <g text-anchor="middle"><text x="232" y="14">W1</text><text x="297" y="14">W2</text><text x="362" y="14">W3</text><text x="427" y="14">W4</text><text x="492" y="14">W5</text><text x="557" y="14">W6</text><text x="622" y="14">W7</text></g>
+  <text x="680" y="14">W8</text>
+  <g><text x="10" y="45">Requirements &amp; design</text><text x="10" y="75">Data layer &amp; validation</text><text x="10" y="105">Quiz engine</text><text x="10" y="135">Explorer &amp; country pages</text><text x="10" y="165">Compare, stats, PWA</text><text x="10" y="195">Testing &amp; accessibility</text><text x="10" y="225">Documentation &amp; deploy</text></g>
+  <g fill="#1f3a5f"><rect x="200" y="32" width="130" height="18"/><rect x="265" y="62" width="130" height="18"/><rect x="330" y="92" width="130" height="18"/><rect x="395" y="122" width="130" height="18"/><rect x="460" y="152" width="130" height="18"/><rect x="525" y="182" width="130" height="18"/><rect x="590" y="212" width="130" height="18"/></g>
+</svg>
+<figcaption>Figure 12: Project development schedule (proposed)</figcaption>
+</figure>
+<table>
+<tr><th>Weeks</th><th>Phase</th><th>Deliverable</th></tr>
+<tr><td>1 - 2</td><td>Requirements and design</td><td>Requirement list, diagrams, types</td></tr>
+<tr><td>2 - 3</td><td>Data layer</td><td>API clients, Zod schemas, fallback dataset</td></tr>
+<tr><td>3 - 4</td><td>Quiz engine</td><td>Generators, scoring, seeded daily challenge</td></tr>
+<tr><td>4 - 5</td><td>Explorer and country pages</td><td>Filters, search, profiles</td></tr>
+<tr><td>5 - 6</td><td>Compare, stats and PWA</td><td>Charts, achievements, service worker</td></tr>
+<tr><td>6 - 7</td><td>Testing and accessibility</td><td>Vitest, Playwright, axe-core</td></tr>
+<tr><td>7 - 8</td><td>Documentation and deployment</td><td>Report, CI, production build</td></tr>
+</table>
+
+<h2>4.8 Technologies Used</h2>
+<p>Versions are taken from the project's <code>package.json</code>.</p>
+<table>
+<tr><th>Area</th><th>Technology</th><th>Usage in the project</th></tr>
+<tr><td>Framework</td><td>Next.js 15.2 (App Router), React 19</td><td>Routing, pre-rendering, interactive components</td></tr>
+<tr><td>Language</td><td>TypeScript (strict)</td><td>Shared Country, Question and store types</td></tr>
+<tr><td>Styling</td><td>Tailwind CSS 4, class-variance-authority, tailwind-merge</td><td>Responsive layout, themes, variants</td></tr>
+<tr><td>UI primitives</td><td>Radix UI (dialog, dropdown, select, slider, tabs, tooltip, progress)</td><td>Accessible dialogs, menus and controls</td></tr>
+<tr><td>Server state</td><td>TanStack Query 5 (+ persist client)</td><td>Fetching, caching, retries</td></tr>
+<tr><td>Client state</td><td>Zustand 5 with persist middleware</td><td>Progress, favorites, settings</td></tr>
+<tr><td>Validation</td><td>Zod 3</td><td>API response schemas</td></tr>
+<tr><td>Search</td><td>Fuse.js 7</td><td>Fuzzy country search</td></tr>
+<tr><td>Charts and motion</td><td>Recharts 2, Framer Motion 12, canvas-confetti, lucide-react</td><td>Compare and stats charts, transitions, effects, icons</td></tr>
+<tr><td>Unit testing</td><td>Vitest, Testing Library, jsdom</td><td>Data layer, stores, quiz engine, explorer</td></tr>
+<tr><td>Browser testing</td><td>Playwright, @axe-core/playwright</td><td>End-to-end and accessibility checks</td></tr>
+<tr><td>Quality tooling</td><td>ESLint 9, Prettier, tsc, GitHub Actions, pnpm</td><td>Linting, formatting, type checking, CI</td></tr>
+</table>
+<p>The stack keeps the application a single TypeScript codebase: pages, data access, quiz logic and tests share one set of types.</p>
+
+<h2>4.9 System Architecture</h2>
+<p>The browser communicates with Next.js pages; typed API clients fetch and validate external data; the TanStack Query cache and persisted stores hold state; a service worker adds offline capability; feature components render the result.</p>
+<figure>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="11.5">
+  <g fill="#fff" stroke="#1f3a5f"><rect x="10" y="10" width="680" height="50"/><rect x="10" y="75" width="680" height="45"/><rect x="10" y="135" width="680" height="45"/><rect x="10" y="195" width="680" height="45"/><rect x="10" y="255" width="680" height="38"/></g>
+  <g text-anchor="middle"><text x="350" y="30" font-weight="bold">Presentation</text><text x="350" y="47" font-size="10.5">Next.js App Router pages · layout shell · command palette · feature views</text>
+  <text x="350" y="95" font-weight="bold">Application logic</text><text x="350" y="111" font-size="10.5">hooks · quiz engine (seeded RNG, scoring) · explorer filter</text>
+  <text x="350" y="155" font-weight="bold">State</text><text x="350" y="171" font-size="10.5">TanStack Query (24 h stale) · Zustand persisted stores (localStorage)</text>
+  <text x="350" y="215" font-weight="bold">Data access &amp; offline</text><text x="350" y="231" font-size="10.5">REST Countries · Wikipedia · Open-Meteo clients (Zod) · embedded fallback · service worker</text>
+  <text x="350" y="278" font-weight="bold">External services &amp; CDN images</text></g>
+</svg>
+<figcaption>Figure 13: Layered system architecture</figcaption>
+</figure>
+<table>
+<tr><th>Setting</th><th>Value</th></tr>
+<tr><td>Country request timeout / retries</td><td>8 s / 2 retries with exponential backoff</td></tr>
+<tr><td>Weather and Wikipedia timeout / retries</td><td>6 s / 2 retries</td></tr>
+<tr><td>In-memory client cache (countries)</td><td>10 minutes</td></tr>
+<tr><td>Weather cache</td><td>15 minutes</td></tr>
+<tr><td>TanStack Query staleTime / gcTime</td><td>24 hours / 48 hours</td></tr>
+<tr><td>Service worker caches</td><td>static, flags (max 300), data (max 100), pages</td></tr>
+<tr><td>Offline dataset</td><td>30 countries embedded</td></tr>
+</table>
+<h3>Security headers (next.config.ts)</h3>
+<ul>
+<li>Content-Security-Policy restricting scripts, images (FlagCDN, Wikimedia) and connections (REST Countries, Wikipedia, Open-Meteo) to known origins; <code>frame-ancestors 'none'</code> and <code>object-src 'none'</code>.</li>
+<li><code>X-Frame-Options: DENY</code> and <code>X-Content-Type-Options: nosniff</code>.</li>
+</ul>
+<p>This is a resilience measure and not a guarantee of uninterrupted service.</p>
+
+<!-- 5 IMPLEMENTATION -->
+<h1>5. Implementation</h1>
+<p>FlagForge is implemented as a single Next.js project. Routes live under <code>src/app</code>, UI components under <code>src/components</code>, and logic under <code>src/lib</code>, <code>src/hooks</code> and <code>src/store</code>.</p>
+<table>
+<tr><th>Folder</th><th>Responsibility</th></tr>
+<tr><td>src/app</td><td>Pages: home, explore, play, daily, compare, stats, country/[code], design; error and not-found pages; manifest, robots, sitemap, Open Graph image</td></tr>
+<tr><td>src/components</td><td>ui (primitives), common (flag image, chips, stat card), layout (navbar, tab bar, command palette, PWA prompt), features (explorer, quiz, compare, stats, country)</td></tr>
+<tr><td>src/lib/api</td><td>REST Countries, Wikipedia and Open-Meteo clients; embedded fallback dataset</td></tr>
+<tr><td>src/lib/quiz</td><td>Question generators, distractors, difficulty, scoring, seeded RNG</td></tr>
+<tr><td>src/hooks</td><td>Public hooks that combine queries and stores</td></tr>
+<tr><td>src/store</td><td>Versioned, persisted Zustand stores</td></tr>
+<tr><td>public</td><td>Service worker (sw.js), offline page, icons</td></tr>
+<tr><td>src/tests, e2e</td><td>Vitest and Playwright tests</td></tr>
+</table>
+<p><strong>Key design decisions.</strong> All external data is validated at the boundary and normalized once. The quiz engine consists of pure functions that take countries and a random function, so the daily challenge is reproducible and unit-testable. Scoring and difficulty rules each live in a single file. Stores are versioned so that future changes can migrate old data. A service worker is used instead of a heavy PWA plugin to keep caching rules explicit.</p>
+
+<h2>5.1 Code</h2>
+<p>The listings below are taken from the repository (github.com/KAUSHALCODER123/geo-guess).</p>
+
+<h3>src/lib/quiz/scoring.ts - streak multiplier and score</h3>
+<pre>export function calculateStreakMultiplier(streak: number): number {
+  if (streak &lt;= 1) return 1.0;
+  if (streak === 2) return 1.5;
+  if (streak === 3) return 2.0;
+  if (streak === 4) return 2.5;
+  return 3.0; // 5 or higher capped at 3.0x
+}
+
+export function calculateScore(input: ScoreCalculationInput): ScoreResult {
+  const { isCorrect, timeRemaining, streak, basePoints = 100 } = input;
+  if (!isCorrect) {
+    return { pointsEarned: 0, speedBonus: 0, multiplier: 1.0, newStreak: 0 };
+  }
+  const newStreak = streak + 1;
+  const multiplier = calculateStreakMultiplier(newStreak);
+  const remainingSeconds = Math.max(0, Math.floor(timeRemaining));
+  const speedBonus = remainingSeconds * 10;
+  const pointsEarned = Math.round((basePoints + speedBonus) * multiplier);
+  return { pointsEarned, speedBonus, multiplier, newStreak };
+}</pre>
+
+<h3>src/lib/quiz/rng.ts - seeded generator for the daily challenge</h3>
+<pre>export function mulberry32(seed: number): () =&gt; number {
+  let s = seed | 0;
+  return function (): number {
+    s = (s + 0x6d2b79f5) | 0;
+    let t = Math.imul(s ^ (s &gt;&gt;&gt; 15), 1 | s);
+    t = (t + Math.imul(t ^ (t &gt;&gt;&gt; 7), 61 | t)) ^ t;
+    return ((t ^ (t &gt;&gt;&gt; 14)) &gt;&gt;&gt; 0) / 4294967296;
+  };
+}
+
+export function stringToSeed(str: string): number {   // e.g. "2026-10-24"
+  let hash = 0;
+  for (let i = 0; i &lt; str.length; i++) {
+    hash = (hash &lt;&lt; 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash;
+}
+
+export function shuffle&lt;T&gt;(array: readonly T[], rng: () =&gt; number = Math.random): T[] {
+  const result = [...array];
+  for (let i = result.length - 1; i &gt; 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}</pre>
+
+<h3>src/lib/quiz/difficulty.ts - difficulty classification</h3>
+<pre>export function getCountryDifficulty(country: Country): "easy" | "medium" | "hard" {
+  if (country.population &gt; 25_000_000 || ICONIC_CCA3.has(country.cca3)) return "easy";
+  if (country.population &gt;= 5_000_000 &amp;&amp; country.population &lt;= 25_000_000) return "medium";
+  return "hard";
+}
+
+export function filterByDifficulty(countries: Country[], difficulty: Difficulty): Country[] {
+  if (difficulty === "all") return countries;
+  const filtered = countries.filter((c) =&gt; getCountryDifficulty(c) === difficulty);
+  // too few countries for meaningful questions: fall back to all
+  return filtered.length &gt;= 4 ? filtered : countries;
+}</pre>
+
+<h3>src/lib/query-client.ts - cache and retry policy</h3>
+<pre>export function createQueryClient(): QueryClient {
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 24 * 60 * 60 * 1000,   // 24 hours
+        gcTime: 48 * 60 * 60 * 1000,      // 48 hours
+        retry: (failureCount, error) =&gt; {
+          if (error &amp;&amp; typeof error === "object" &amp;&amp; "isNotFound" in error &amp;&amp;
+              (error as { isNotFound: boolean }).isNotFound) return false; // never retry 404
+          return failureCount &lt; 2;
+        },
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: true,
+      },
+      mutations: { retry: 1 },
+    },
+  });
+}</pre>
+
+<h3>src/lib/api/restcountries.ts - constants of the HTTP layer</h3>
+<pre>const DEFAULT_TIMEOUT_MS = 8000;
+const MAX_RETRIES = 2;
+const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
+// fetchWithRetry(): AbortController timeout, exponential backoff between attempts,
+// 404 and other non-retryable errors are thrown immediately as a typed AppError.
+// getAllCountries(): batch 1 and batch 2 are fetched in parallel, validated with Zod,
+// merged by cca3, and the embedded fallback dataset is returned if the network fails.</pre>
+
+<h3>next.config.ts - Content-Security-Policy</h3>
+<pre>default-src 'self';
+img-src 'self' blob: data: https://flagcdn.com https://upload.wikimedia.org https://commons.wikimedia.org;
+connect-src 'self' https://restcountries.com https://en.wikipedia.org https://api.open-meteo.com;
+frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';</pre>
+
+<h2>5.2 Graphical User Interface</h2>
+<p>The following screens are captured from the running application.</p>
+<figure><img src="screens/home.png" alt="Home page"><figcaption>Figure 14: Home page - hero with Play, Explore and Compare actions</figcaption></figure>
+<figure><img src="screens/explore.png" alt="Explorer"><figcaption>Figure 15: World Atlas Explorer with search and filters</figcaption></figure>
+<figure><img src="screens/play.png" alt="Quiz arena"><figcaption>Figure 16: Quiz Arena configuration</figcaption></figure>
+<figure><img src="screens/compare.png" alt="Compare"><figcaption>Figure 17: Compare countries</figcaption></figure>
+<figure><img src="screens/stats.png" alt="Stats"><figcaption>Figure 18: Statistics dashboard</figcaption></figure>
+<figure><img src="screens/country.png" alt="Country profile"><figcaption>Figure 19: Country profile page</figcaption></figure>
+<figure><img src="screens/mobile.png" alt="Mobile home" style="max-width:190px"><figcaption>Figure 20: Home page on a phone</figcaption></figure>
+<table>
+<tr><th>Area</th><th>Behaviour on a phone</th></tr>
+<tr><td>Navigation</td><td>Bottom tab bar (MobileTabBar) and command palette</td></tr>
+<tr><td>Explorer</td><td>Card grid collapses to one column; filters in a sheet</td></tr>
+<tr><td>Quiz</td><td>Large touch-friendly answer buttons; keyboard shortcuts on desktop</td></tr>
+<tr><td>Theme</td><td>System, light or dark; optional high-contrast and reduced motion</td></tr>
+<tr><td>Install</td><td>PWA install prompt; offline page when disconnected</td></tr>
+</table>
+
+<h2>5.3 Test Cases</h2>
+<p>The repository contains Vitest tests for the data layer, stores, quiz engine and explorer, and Playwright specifications for the main journeys and accessibility. At the time of writing, running <code>vitest run</code> reported <strong>4 test files and 58 tests, all passing</strong>.</p>
+<table>
+<tr><th>ID</th><th>Test scenario</th><th>Expected result</th><th>Related tests</th></tr>
+<tr><td>TC01</td><td>Search countries by name or capital</td><td>Matching countries are listed</td><td>data-layer.test.ts; e2e/explorer</td></tr>
+<tr><td>TC02</td><td>Filter by region</td><td>Only countries of that region are shown</td><td>explore.test.tsx; e2e/explorer</td></tr>
+<tr><td>TC03</td><td>Toggle a favorite</td><td>The country is stored and displayed as a favorite</td><td>stores.test.ts; e2e/explorer</td></tr>
+<tr><td>TC04</td><td>Open a country profile</td><td>Profile page with facts and borders</td><td>e2e/explorer</td></tr>
+<tr><td>TC05</td><td>Generate quiz questions</td><td>Each question has 4 options, exactly one correct</td><td>quiz-engine.test.ts</td></tr>
+<tr><td>TC06</td><td>Score an answer</td><td>Points follow the formula; wrong answer resets streak</td><td>quiz-engine.test.ts</td></tr>
+<tr><td>TC07</td><td>Daily challenge determinism</td><td>The same date seed gives identical questions</td><td>quiz-engine.test.ts</td></tr>
+<tr><td>TC08</td><td>Play a quiz with keys 1-4</td><td>Answers register; game-over screen appears</td><td>e2e/quiz</td></tr>
+<tr><td>TC09</td><td>Network failure</td><td>Embedded dataset is returned</td><td>data-layer.test.ts</td></tr>
+<tr><td>TC10</td><td>Compare 2 or 3 countries; remove one</td><td>Matrix and charts update</td><td>e2e/compare</td></tr>
+<tr><td>TC11</td><td>Progress persists</td><td>Stores restore their state</td><td>stores.test.ts</td></tr>
+<tr><td>TC12</td><td>Accessibility audit of main routes</td><td>No axe-core violations</td><td>e2e/accessibility</td></tr>
+</table>
+<table>
+<tr><th>Test area</th><th>File</th><th>Tests</th></tr>
+<tr><td>Data layer and API clients</td><td>src/tests/data-layer.test.ts</td><td>14</td></tr>
+<tr><td>Explorer components</td><td>src/tests/explore.test.tsx</td><td>20</td></tr>
+<tr><td>Quiz engine</td><td>src/tests/quiz-engine.test.ts</td><td>15</td></tr>
+<tr><td>Stores</td><td>src/tests/stores.test.ts</td><td>9</td></tr>
+<tr><td colspan="2"><strong>Total (Vitest)</strong></td><td><strong>58</strong></td></tr>
+</table>
+<p>Commands: <code>pnpm run typecheck</code>, <code>pnpm run lint</code>, <code>pnpm run test</code>, <code>pnpm run e2e</code> and <code>pnpm run build</code>. The Vitest result above was observed when this report was prepared; Playwright and accessibility results were not re-run for this report.</p>
+
+<!-- 6 -->
+<h1>6. Conclusion &amp; Future Scope</h1>
+<h2>6.1 Conclusion</h2>
+<p>FlagForge demonstrates how public country data, quiz mechanics and personal progress tracking can be combined into one browser-based, offline-capable application. It fulfils its central goal: a convenient, accessible interface for exploring, practising and comparing world geography, built on a modular architecture that is practical to extend and maintain.</p>
+<p>The project illustrates practical engineering decisions:</p>
+<ul>
+<li>validating external data with Zod and normalizing it into one model;</li>
+<li>pure, seeded quiz generation that makes the daily challenge reproducible;</li>
+<li>graceful degradation through timeouts, retries, caching and an embedded dataset;</li>
+<li>local-first, versioned persistence with no account and no server database;</li>
+<li>a service worker with a strategy per resource type;</li>
+<li>a strict Content-Security-Policy and keyboard-first accessibility;</li>
+<li>automated unit, browser and accessibility tests.</li>
+</ul>
+<p><strong>Limitations.</strong> Progress is stored only in the current browser and is lost if site data is cleared; there is no cross-device sync or global leaderboard. The embedded offline dataset covers 30 countries, so full offline use depends on data cached earlier. The CSP currently permits inline scripts required by the framework. Data accuracy depends on third-party APIs.</p>
+<table>
+<tr><th>Objective</th><th>Outcome</th></tr>
+<tr><td>One interface for explore, practise, compare</td><td>Explorer, six-mode quiz, compare view, stats</td></tr>
+<tr><td>Reliable data from several services</td><td>Typed clients, Zod validation, one Country model</td></tr>
+<tr><td>Work without a connection</td><td>Service worker, caches, embedded fallback</td></tr>
+<tr><td>Keep progress private</td><td>Versioned localStorage stores</td></tr>
+<tr><td>Be accessible</td><td>Keyboard shortcuts, skip link, axe-core tests</td></tr>
+<tr><td>Verify behaviour</td><td>58 passing Vitest tests; Playwright specs</td></tr>
+</table>
+<p><strong>Lessons learned.</strong> External data must be treated as untrusted; small pure functions are easy to test and explain; accessibility is cheapest when designed in from the start.</p>
+
+<h2>6.2 Future Scope</h2>
+<p>The following enhancements are proposed extensions, not features claimed to be implemented.</p>
+<ul>
+<li>Optional accounts with cross-device synchronization of progress.</li>
+<li>Global or classroom leaderboards for the daily challenge.</li>
+<li>An interactive world map for the map-location quiz mode and region drills.</li>
+<li>More content: capitals' landmarks, currencies and languages quizzes, and flag-design trivia.</li>
+<li>Complete offline dataset for all countries via a build-time snapshot.</li>
+<li>Multilingual interface and country names.</li>
+<li>Spaced-repetition scheduling based on the weakest-countries data.</li>
+<li>Tightening the Content-Security-Policy with nonces instead of inline scripts.</li>
+</ul>
+<table>
+<tr><th>Extension</th><th>Module affected</th><th>Prerequisite</th></tr>
+<tr><td>Accounts and sync</td><td>Stores, new backend</td><td>Authentication and database design</td></tr>
+<tr><td>Leaderboards</td><td>Daily challenge, backend</td><td>Accounts, anti-cheat design</td></tr>
+<tr><td>Spaced repetition</td><td>Quiz engine, progress store</td><td>Per-country history (already stored)</td></tr>
+<tr><td>Full offline dataset</td><td>API layer, build scripts</td><td>Data licence check</td></tr>
+<tr><td>Translations</td><td>UI, content</td><td>String extraction</td></tr>
+</table>
+
+<!-- 7 REFERENCES -->
+<h1>7. References</h1>
+<ol>
+<li>FlagForge source repository: https://github.com/KAUSHALCODER123/geo-guess</li>
+<li>Next.js documentation: https://nextjs.org/docs</li>
+<li>React documentation: https://react.dev</li>
+<li>TypeScript documentation: https://www.typescriptlang.org/docs</li>
+<li>Tailwind CSS documentation: https://tailwindcss.com/docs</li>
+<li>REST Countries API: https://restcountries.com</li>
+<li>Wikipedia REST API: https://en.wikipedia.org/api/rest_v1/</li>
+<li>Open-Meteo: https://open-meteo.com/en/docs</li>
+<li>TanStack Query: https://tanstack.com/query/latest</li>
+<li>Zustand: https://zustand.docs.pmnd.rs</li>
+<li>Zod: https://zod.dev</li>
+<li>Fuse.js: https://www.fusejs.io</li>
+<li>Recharts: https://recharts.org</li>
+<li>Radix UI primitives: https://www.radix-ui.com</li>
+<li>Framer Motion: https://www.framer.com/motion</li>
+<li>Vitest: https://vitest.dev</li>
+<li>Playwright: https://playwright.dev</li>
+<li>axe-core accessibility engine: https://github.com/dequelabs/axe-core</li>
+<li>Web Content Accessibility Guidelines (WCAG) 2.2: https://www.w3.org/WAI/standards-guidelines/wcag/</li>
+<li>Service Worker API (MDN): https://developer.mozilla.org/docs/Web/API/Service_Worker_API</li>
+<li>Mulberry32 PRNG (public-domain algorithm by Tommy Ettinger), widely documented online.</li>
+</ol>
+<p class="note">A final bibliography should add access dates. Implementation claims in this report are limited to the repository source code.</p>
+
+<!-- 8 SYNOPSIS -->
+<h1>8. Synopsis</h1>
+<p><strong>Project title:</strong> FlagForge - Interactive World Atlas &amp; Vexillology Quiz Arena.</p>
+<p><strong>Purpose:</strong> To provide unified country exploration, gamified geography practice and side-by-side comparison, available offline and without registration.</p>
+<p><strong>Users:</strong> Students, teachers and geography enthusiasts.</p>
+<p><strong>Platform:</strong> Browser-based responsive Progressive Web App (desktop and mobile).</p>
+<p><strong>Core technologies:</strong> Next.js 15, React 19, TypeScript, Tailwind CSS 4, TanStack Query, Zustand, Zod, Recharts, REST Countries, Wikipedia and Open-Meteo APIs.</p>
+<p><strong>Core modules:</strong></p>
+<ul>
+<li>World Atlas Explorer with fuzzy search, filters and favorites</li>
+<li>Quiz Arena: six modes, three difficulty levels, scoring with streak multipliers</li>
+<li>Daily Global Challenge from a UTC-date seed</li>
+<li>Compare view with matrix and charts for up to three countries</li>
+<li>Stats dashboard: streaks, heatmap, region radar, weakest countries, achievements</li>
+<li>Country profiles with weather and Wikipedia summaries</li>
+<li>PWA: service worker, offline page, embedded fallback dataset</li>
+</ul>
+<p><strong>Outcome:</strong> An integrated, accessible and resilient geography learning application whose progress stays private on the learner's device.</p>
+<table>
+<tr><th>Item</th><th>Value</th></tr>
+<tr><td>Routes</td><td>8 page routes plus manifest, robots, sitemap and Open Graph image</td></tr>
+<tr><td>Source code</td><td>About 16,400 lines of TypeScript/TSX including tests</td></tr>
+<tr><td>Database</td><td>None (browser localStorage, 3 versioned stores)</td></tr>
+<tr><td>Packages</td><td>23 runtime and 22 development dependencies (package.json)</td></tr>
+<tr><td>Automated tests</td><td>4 Vitest files (58 tests) and 4 Playwright specs</td></tr>
+<tr><td>Data sources</td><td>REST Countries, Wikipedia, Open-Meteo</td></tr>
+</table>
+<div class="sig"><span>Signature of the Student<br>Date: ____________</span><span>Signature of the Guide<br>Place: ____________</span></div>
+
+</body>
+</html>
